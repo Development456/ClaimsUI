@@ -13,10 +13,10 @@
     </ul>
     <div class="login">
         <mat-card>
-            <div class="login-header">
+            <div class="login-header mt-3">
                 <h2>Claims Login</h2>
             </div>
-            <mat-card-content fxLayout="column wrap">
+            <mat-card-content fxLayout="column wrap"  style="margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 10px;">
                 <form [formGroup]="loginForm">
                     <mat-form-field appearance="outline" fxFlexFill color="primary">
                         <mat-label>Username</mat-label>
@@ -34,7 +34,8 @@
                 </form>
             </mat-card-content>
             <mat-error *ngIf="!loginFlag">Wrong Username or Password!!</mat-error>
-            <mat-card-actions fxLayoutAlign="end start">
+            <mat-card-actions fxLayoutAlign="end start" class="mb-3">
+                <button mat-flat-button (click)="userSignUp()">Sign-Up</button>
                 <button mat-button color="primary" (click)="userLogin()" type="button"
                     [disabled]="!(loginForm.valid && loginForm.dirty)">Login</button>
                 <button mat-flat-button (click)="onFormReset()">Reset</button>

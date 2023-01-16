@@ -1,0 +1,91 @@
+ <div class="area">
+    <ul class="circles">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+
+    <div class="signUp"> 
+
+        <mat-card>
+            <div class="signUp-header mt-3">
+                <h2>User Registration </h2>
+            </div>
+
+            <form [formGroup]="signUpForm" (ngSubmit)="userSignUp" style="margin-left: 30px; margin-right: 30px; margin-top: 10px; margin-bottom: 10px;">
+                <mat-card-content fxLayout="column wrap">
+                        <mat-form-field appearance="outline" fxFlexFill color="primary">
+                            <mat-label>Username</mat-label>
+                            <input matInput required formControlName="username" type="text" [ngClass]="{ 'is-invalid':registerFormControl['username'].errors }">
+                            <div *ngIf="submitted && registerFormControl['username'].errors" class="invalid-feedback">
+                                <div *ngIf="registerFormControl['username'].errors['required']">Username is required</div>
+                                <div *ngIf="registerFormControl['username'].errors['minlength']">
+                                  Username must be at least 6 characters
+                                </div>
+                                <div *ngIf="registerFormControl['username'].errors['maxlength']">
+                                  Username must not exceed 20 characters
+                                </div>
+                              </div>
+                        </mat-form-field>
+                
+                    <mat-form-field appearance="outline" fxFlexFill color="primary">
+                        <mat-label>Emial</mat-label>
+                        <input matInput placeholder="pat@example.com"formControlName="email" required [ngClass]="{'is-invalid' : submitted && registerFormControl['email'].errors }">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" fxFlexFill color="primary" required>
+                        <mat-label>Password</mat-label>
+                        <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" [ngClass]="{'is-invalid' : submitted && registerFormControl['password'].errors }">
+                        <div *ngIf="submitted && registerFormControl['password'].errors" class="invalid-feedback">
+                            <div *ngIf="registerFormControl['password'].errors['required']">Password is required</div>
+                            <div *ngIf="registerFormControl['password'].errors['minlength']">
+                              Password must be at least 6 characters
+                            </div>
+                            <div *ngIf="registerFormControl['password'].errors['maxlength']">
+                              Username must not exceed 40 characters
+                            </div>
+                          </div>
+                        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                            [attr.aria-pressed]="hide">
+                            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </button>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" fxFlexFill color="primary" required>
+                        <mat-label>Confirm Password</mat-label>
+                        <input matInput [type]="hide ? 'password' : 'text'" formControlName="confirmPassword" [ngClass]="{'is-invalid' : submitted && registerFormControl['confirmpassword'].errors }">
+                        <div
+                        *ngIf="submitted && registerFormControl['confirmPassword'].errors"
+                        class="invalid-feedback"
+                      >
+                        <div *ngIf="registerFormControl['confirmPassword'].errors['required']">
+                          Confirm Password is required
+                        </div>
+                        <div *ngIf="registerFormControl['confirmPassword'].errors['mustMatch']">
+                          Confirm Password does not match
+                        </div>
+                      </div>
+                        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                            [attr.aria-pressed]="hide">
+                            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </button>
+                    </mat-form-field>
+                </mat-card-content>
+            </form>
+            <!-- <mat-error *ngIf="!signUpFlag">Invalid Input!!</mat-error> -->
+           
+            <mat-card-actions fxLayoutAlign="end start">
+                <button class="mb-3" mat-button color="primary" type="button" (click)="userSignUp()"
+                    [disabled]="!(signUpForm.valid && signUpForm.dirty)">Submit</button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+   
+</div> 
