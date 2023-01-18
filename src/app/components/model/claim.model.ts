@@ -14,3 +14,12 @@ export interface  Claim {
     lastUpdateDate: string;
     _id: string;
 }
+
+export interface LoginDetails{
+    accessToken:string;
+    email:string;
+    id:string;
+    roles:string[];
+    tokenType:string;
+    username:string
+  }
