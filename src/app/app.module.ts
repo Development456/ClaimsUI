@@ -47,6 +47,8 @@ import { NgModule } from '@angular/core';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { NgxPrintModule } from 'ngx-print';
 import { ToastrModule } from 'ngx-toastr';
+import { SignUpComponent } from './components/login/sign-up/sign-up.component';
+
 
 @NgModule({
   declarations: [
@@ -59,6 +61,7 @@ import { ToastrModule } from 'ngx-toastr';
     HeaderComponent,
     AddClaimComponent,
     LoginComponent,
+    SignUpComponent,
     DetailsModalComponent,
     ClaimsDetailsComponent,
     DialogBoxComponent,
