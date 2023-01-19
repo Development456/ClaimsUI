@@ -47,7 +47,7 @@ import { NgModule } from '@angular/core';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { NgxPrintModule } from 'ngx-print';
 import { ToastrModule } from 'ngx-toastr';
-import { SignUpComponent } from './components/login/sign-up/sign-up.component';
+import { SignUpComponent } from './components/sign-up/sign-up.component';
 
 
 @NgModule({
