@@ -182,7 +182,7 @@ export class DataTableComponent implements OnInit {
 			}
 			this.storedRows = data.map((item: any, index: number) => {
 				if (!item.creationDate) {
-					item.creationDate = this.rows[index].date
+					item.creationDate = this.rows[index]?.date
 				}
 				item.claimedAmount = Number(item.claimedAmount ? item.claimedAmount : 0);
 
@@ -190,7 +190,7 @@ export class DataTableComponent implements OnInit {
 			});
 			this.filteredRows = data.map((item: any, index: number) => {
 				if (!item.creationDate) {
-					item.creationDate = this.rows[index].date
+					item.creationDate = this.rows[index]?.date
 				}
 				item.claimedAmount = '$' + Number(item.claimedAmount ? item.claimedAmount : 0);
 				return { ...this.rows[index], ...item }
