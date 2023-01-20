@@ -59,7 +59,6 @@ private initForm() {
     this.submitted = true;
     // const { username, email, password } = this.userDetails;
     this.authService.userRegister(this.signUpForm.value).subscribe( data => {
-        console.log(data);
         this.isSignedIn = true;
         this.isSignedUpFailed = false;
         alert("User Registered")
@@ -69,6 +68,10 @@ private initForm() {
         this.isSignedUpFailed = true;
         alert("User Not Registered");
       });
+  }
+
+  public userLogin(){
+    this.route.navigate(['/login']);
   }
 
 // custom validator to check that two fields match
