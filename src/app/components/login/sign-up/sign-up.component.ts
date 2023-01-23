@@ -59,14 +59,15 @@ private initForm() {
   public userSignUp(){
     this.submitted = true;
     // const { username, email, password } = this.userDetails;
-  
+  debugger
     this.authService.userRegister(this.signUpForm.value).subscribe( data => {
         console.log(data);
         this.isSignedIn = true;
         this.isSignedUpFailed = false;
         // this.success = true;
+        debugger
         console.log(data.message);
-        // alert();
+        alert(data.message);
         // this.route.navigate(['/login']);
       }, err => {
         // this.success = false;
