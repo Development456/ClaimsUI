@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AuthServiceService } from 'src/app/Services/auth-service.service';
 
@@ -31,8 +32,8 @@ export class SignUpComponent implements OnInit {
   isSignedIn = false;
   isSignedUpFailed = false;
   errorMessage = '';
-
-  constructor(private authService: AuthServiceService, private route: Router, private registerForm: FormBuilder ) { }
+  success = false;
+  constructor(private authService: AuthServiceService, private route: Router, private registerForm: FormBuilder, private dialog: MatDialog ) { }
 
   ngOnInit(): void {
     this.initForm(); 
@@ -58,21 +59,27 @@ private initForm() {
   public userSignUp(){
     this.submitted = true;
     // const { username, email, password } = this.userDetails;
+  
     this.authService.userRegister(this.signUpForm.value).subscribe( data => {
         console.log(data);
         this.isSignedIn = true;
         this.isSignedUpFailed = false;
-        alert("User Registered")
-        this.route.navigate(['/login']);
+        // this.success = true;
+        console.log(data.message);
+        // alert();
+        // this.route.navigate(['/login']);
       }, err => {
-        this.errorMessage = err.error.message;
+        // this.success = false;
+        console.log(err.message);
+        this.errorMessage = err.message;
         this.isSignedUpFailed = true;
-        alert("User Not Registered");
+        // console.log(this.errorMessage, 'error');
+        // alert(this.errorMessage);
       });
   }
 
 // custom validator to check that two fields match
-MustMatch(controlName: string, matchingControlName: string) {
+  MustMatch(controlName: string, matchingControlName: string) {
     return (formGroup: FormGroup) => {
         const control = formGroup.controls[controlName];
         const matchingControl = formGroup.controls[matchingControlName];
@@ -89,7 +96,21 @@ MustMatch(controlName: string, matchingControlName: string) {
             matchingControl.setErrors(null);
         }
     }
-}
+  }
+
+  errorDialog(){
+    const dialogRef = this.dialog.open(DialogContentExampleDialog);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    })
+  }
 
 }
+
+@Component({
+  selector: 'dialog-content-example-dialog',
+  template: '<p>Password should be minimum 6 character long</p>',
+})
+export class DialogContentExampleDialog {}
 

@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ClaimsApiService } from 'src/app/claims-api.service';
+import { ClaimsApiService } from 'src/app/Services/claims-api.service';
 
 @Component({
   selector: 'app-details-modal',
