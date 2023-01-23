@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
-import { ClaimsApiService } from 'src/app/claims-api.service';
+import { ClaimsApiService } from 'src/app/Services/claims-api.service';
 import { Notifier } from '../dashboard/dashboard.component';
 
 @Component({
