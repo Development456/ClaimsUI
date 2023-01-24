@@ -5,7 +5,7 @@ import { ColumnMode, SelectionType } from '@swimlane/ngx-datatable';
 import { FormBuilder, FormControl, FormGroup, ValidationErrors } from '@angular/forms';
 
 import { AddClaimColumns } from '../mock-data/add-claim-columns.constant';
-import { ClaimsApiService } from 'src/app/claims-api.service';
+import { ClaimsApiService } from 'src/app/Services/claims-api.service';
 import { ClaimsDetailsComponent } from '../claims-details/claims-details.component';
 import { ClaimsHomeTableColumns } from '../mock-data/claims-home-columns.constants';
 import { DatePipe } from '@angular/common'

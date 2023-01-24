@@ -8,6 +8,7 @@ import { AuthServiceService } from 'src/app/Services/auth-service.service';
 import { TokenStorageService } from 'src/app/Services/token-storage.service';
 import { LoginDetails } from '../model/claim.model';
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -19,10 +20,12 @@ export class LoginComponent implements OnInit {
   public hide = true;
   public loginForm!: FormGroup;
   public loginFlag: boolean = true;
+  isLoggedIn = false;
+  isLoginFailed = false;
   errorMessage = '';
   public userDetails = {
-    username: "admin",
-    password: "test"
+    username: '',
+    password: ''
   }
 
   public roles: string[] = [];
@@ -32,6 +35,7 @@ export class LoginComponent implements OnInit {
     this.initForm();
     this.jwToken();
   }
+  
 
   userLogin() {
     const { username, password } = this.loginForm.value;
@@ -39,29 +43,52 @@ export class LoginComponent implements OnInit {
     username: username,
     password: password
     }
-    this.loginService.loginValidation(loginDetails).subscribe(data => {
-    if (data) {
+    
+      this.loginService.loginValidation(loginDetails).subscribe(data => {
+        // console.log(data)
+        var stringObject:any;
+        stringObject=JSON.stringify(data);
+        stringObject=JSON.parse(stringObject);
+        let loginData:LoginDetails=<LoginDetails>stringObject;
 
-      var stringObject:any;
-      stringObject=JSON.stringify(data);
-      stringObject=JSON.parse(stringObject);
-      let loginData:LoginDetails=<LoginDetails>stringObject;
-      console.log('userDetails',loginData.accessToken)
-   
-      this.tokenStorage.saveToken(loginData.accessToken);
-      this.tokenStorage.saveUser(data);
-   
-      console.log('userDetails', data )
-      localStorage.setItem('userDetails', 'admin');
-      this.loginFlag = true;
-      this.roles = this.tokenStorage.getUser().roles;
-      this.router.navigate(['/home']);
+        if (loginDetails.username != loginData.username && loginDetails.password != loginData.accessToken){
+          this.loginFlag = false;
+          alert("Invalid User")
+          
 
-    }
-   }, err => {
-      this.errorMessage = err.error.message;
-      this.loginFlag = false;
-    });
+        } 
+        // else if(loginDetails.username == loginData.username && loginDetails.password != loginData.accessToken){
+        //         alert('Incorrect Password')
+        //         window.location.reload();
+        // } else  if (loginDetails.username != loginData.username && loginDetails.password == loginData.accessToken){
+        //   alert("Invalid Username")
+        //   window.location.reload();
+        // } 
+        else {
+
+          this.tokenStorage.saveToken(loginData.accessToken);
+          this.tokenStorage.saveUser(data);
+    
+          console.log('userDetails', data )
+    
+          this.isLoginFailed = false;
+          this.isLoggedIn = true
+          this.loginFlag = true;
+          this.roles = this.tokenStorage.getUser().roles;
+          console.log(loginData.accessToken, 'token')
+
+          console.log(this.roles, 'roles')
+
+          this.router.navigate(['/home']);
+        }
+       }, err => {
+          this.errorMessage = err.message;
+          console.log(this.errorMessage, 'error');
+          this.loginFlag = false;
+          // window.location.reload();
+        }); 
+  
+  
   }
     
 
@@ -72,7 +99,7 @@ export class LoginComponent implements OnInit {
   private initForm() {
     this.loginForm = new FormGroup({
       username: new FormControl('', Validators.required),
-      password: new FormControl('', Validators.required)
+      password: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(40)])
     })
   }
 
