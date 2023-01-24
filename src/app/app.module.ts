@@ -9,7 +9,7 @@ import { BarChartComponent } from './components/bar-chart/bar-chart.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { ChartsModule } from 'ng2-charts';
-import { ClaimsApiService } from './claims-api.service';
+import { ClaimsApiService } from './Services/claims-api.service';
 import { ClaimsDetailsComponent } from './components/claims-details/claims-details.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { DataCardsComponent } from './components/data-cards/data-cards.component';

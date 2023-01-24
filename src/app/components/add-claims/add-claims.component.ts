@@ -3,7 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { MatBottomSheet, MatBottomSheetRef } from '@angular/material/bottom-sheet';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ColumnMode } from '@swimlane/ngx-datatable';
-import { ClaimsApiService } from 'src/app/claims-api.service';
+import { ClaimsApiService } from 'src/app/Services/claims-api.service';
 import { ClaimsDetailsComponent } from '../claims-details/claims-details.component';
 import { DetailsModalComponent } from '../data-table/details-modal/details-modal.component';
 

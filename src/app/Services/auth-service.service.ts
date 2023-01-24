@@ -12,7 +12,7 @@ const httpOptions = {
 })
 export class AuthServiceService {
 
-  auth_URL = 'http://localhost:8300/api/auth/';
+  auth_URL = 'http://localhost:8300/user/';
   constructor(private http: HttpClient, private toastr: ToastrService) { }
 
   userRegister(data: any){

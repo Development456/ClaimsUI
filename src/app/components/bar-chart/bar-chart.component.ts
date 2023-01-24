@@ -1,7 +1,7 @@
 import { ChartOptions, ChartType } from 'chart.js';
 import { Component, Input, OnInit } from '@angular/core';
 
-import { ClaimsApiService } from 'src/app/claims-api.service';
+import { ClaimsApiService } from 'src/app/Services/claims-api.service';
 import { Color } from 'ng2-charts';
 
 @Component({

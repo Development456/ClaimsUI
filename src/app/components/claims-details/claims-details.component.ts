@@ -4,7 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ColumnMode, SelectionType } from '@swimlane/ngx-datatable';
 import { Subscription } from 'rxjs';
-import { ClaimsApiService } from 'src/app/claims-api.service';
+import { ClaimsApiService } from 'src/app/Services/claims-api.service';
 import { Claim } from '../model/claim.model';
 
 @Component({

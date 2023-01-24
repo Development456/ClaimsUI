@@ -1,7 +1,7 @@
 import { OrderList } from '../components/mock-data/order-list.constant';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment';
+import { environment} from 'src/environments/environment';
 import { catchError, Observable, of, throwError } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 
@@ -15,14 +15,14 @@ export class ClaimsApiService {
   constructor(private http: HttpClient, private toastr: ToastrService	) { }
 
   getFacility() {
-    return this.http.get(environment.URL + `/facility`).pipe(catchError((err:any ) => {
+    return this.http.get(environment.FACILITY + `/facility`).pipe(catchError((err:any ) => {
       this.toastr.error('Api Failure with status code : '+ err.status, 'Get Facility Failed');
       return of([]);
     }));
   }
 
   getCustomer() {
-    return this.http.get(`http://localhost:8400/customer`).pipe(catchError((err:any ) => {
+    return this.http.get(environment.CUSTOMER + `/customer`).pipe(catchError((err:any ) => {
       this.toastr.error('Api Failure with status code : '+ err.status, 'Get Customers Failed');
       return of([]);
     }));
@@ -43,14 +43,14 @@ export class ClaimsApiService {
   }
 
   getClaims() {
-    return this.http.get(environment.URL + '/claims').pipe(catchError((err:any ) => {
+    return this.http.get(environment.CLAIM + '/claims').pipe(catchError((err:any ) => {
       this.toastr.error('Api Failure with status code : '+ err.status, 'Get Claims Failed');
       return of([]);
     }));
   }
 
   getClaimsById(id: string) {
-    return this.http.get(environment.URL + `/claims/${id}`).pipe(catchError((err:any ) => {
+    return this.http.get(environment.CLAIM+ `/claims/${id}`).pipe(catchError((err:any ) => {
       this.toastr.error('Api Failure with status code : '+ err.status, 'Get Claims by ID Failed');
       return of([]);
     }));
@@ -58,7 +58,7 @@ export class ClaimsApiService {
 
   getClaimByFacility(id: string) {
     if (id) {
-      return this.http.get(environment.URL + `/claims/facility/${id}`).pipe(catchError((err:any ) => {
+      return this.http.get(environment.CLAIM + `/claims/facility/${id}`).pipe(catchError((err:any ) => {
         this.toastr.error('Api Failure with status code : '+ err.status, 'Get Facility by ID Failed');
         return of([]);
       }));
@@ -72,14 +72,14 @@ export class ClaimsApiService {
     .set('content-type', 'application/json')
     .set('Access-Control-Allow-Origin', '*');
 
-    return this.http.post('http://localhost:8100/claims', claim,{headers}).pipe(catchError((err:any ) => {
+    return this.http.post(environment.CLAIM + '/claims', claim,{headers}).pipe(catchError((err:any ) => {
       this.toastr.error('Api Failure with status code : '+ err.status, 'Post Claims Failed');
       return of([]);
     }));
   }
 
   updateClaim(editedCalimsBody: any, serviceProviderId: number) {
-    const url = `http://localhost:8100/claims/${serviceProviderId}`;
+    const url = environment.CLAIM + `/claims/${serviceProviderId}`;
     return this.http.put<any>(url, editedCalimsBody).pipe(catchError((err:any ) => {
       this.toastr.error('Api Failure with status code : '+ err.status, 'Update Claims by ID Failed');
       return of([]);
@@ -116,9 +116,11 @@ export class ClaimsApiService {
     headersParams = headersParams.set('createDate', date)
     }
     
-    const url = 'http://localhost:8100/claims/filter';
+    const url = environment.CLAIM + '/claims/filter';
     return this.http.get<any>(url, {headers: headersParams})
     }
 
 
 }
+
+
