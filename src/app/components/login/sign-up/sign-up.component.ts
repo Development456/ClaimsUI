@@ -79,6 +79,10 @@ private initForm() {
       });
   }
 
+  public userLogin(){
+    this.route.navigate(['/login']);
+  }
+
 // custom validator to check that two fields match
   MustMatch(controlName: string, matchingControlName: string) {
     return (formGroup: FormGroup) => {
