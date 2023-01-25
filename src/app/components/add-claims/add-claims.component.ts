@@ -176,6 +176,7 @@ export class AddClaimComponent implements OnInit,DoCheck {
 
   filteredColumns = [{ "name": "Item", "props": "item", width: 60 }, { "name": "Description", props: "des" }, { "name": "Date Code", props: "dateCode" }, { "name": "LOT", props: "lot" }, { "name": "Quantity", props: "quantity" }, { "name": "LPN", props: "LPN" }, { "name": "NET", props: "NET" }];
   ordersList:any = {row:[],formValues:{}};
+  
   listItems(items:any){
     this.ordersList = {row:[],formValues:{}};
     setTimeout(()=>{

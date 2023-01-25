@@ -13,13 +13,16 @@ export class BarChartComponent implements OnInit {
   @Input() claimData: any[] = [];
   @Input() barchartColor: any;
   @Input() barSize: any;
+
   @Input() set facilityId(id: string) {
     this.facilityChange = id;
     this.facilityCheck();
   };
+
   barchartFlag = true;
   facilityChange: string = '';
   public openClaims: any[] = [];
+  public closedClaims: any[] = [];
   public barChartOptions: ChartOptions = {
     responsive: true,
     // maintainAspectRatio: false,
@@ -127,6 +130,12 @@ export class BarChartComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.facilityCheck();
+    // this.facilityCheck();
+    
+    this.claimData.forEach((claim: any) => {
+      this.barChartLabels.push(claim.masterAccount);
+      this.barChartData[0].data.push(claim.claimedAmount);
+    })
+
   }
 }
