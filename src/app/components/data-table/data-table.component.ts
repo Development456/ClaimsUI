@@ -70,6 +70,7 @@ export class DataTableComponent implements OnInit {
 		 private cd: ChangeDetectorRef, 
 		 private _formBuilder: FormBuilder,
 		 public datepipe: DatePipe) {
+		this.filteredRows = this.rows;
 	}
 	ngOnInit(): void {
 		this.showGrid = false;

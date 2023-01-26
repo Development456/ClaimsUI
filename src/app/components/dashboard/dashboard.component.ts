@@ -43,12 +43,12 @@ export class DashboardComponent implements OnInit {
     this.claimsService.getClaims().subscribe((claimdata:any)=>{
       if(this.userRole == 'user'){
         this.claimsData = this.filterByUserId(claimdata,userId);
-        console.log(this.claimsData.length);
+        // console.log(this.claimsData.length);
       }else{
         this.claimsData = claimdata;
-        console.log("Admin",this.claimsData.length);
+        // console.log("Admin",this.claimsData.length);
       }
-      console.log(this.claimsData);
+      // console.log(this.claimsData);
       this.tempData = claimdata;
       this.openClaims = claimdata;
       this.closedClaims = claimdata;
