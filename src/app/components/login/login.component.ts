@@ -69,17 +69,15 @@ export class LoginComponent implements OnInit {
           this.tokenStorage.saveToken(loginData.accessToken);
           this.tokenStorage.saveUser(data);
     
-          console.log('userDetails', data )
-    
+          console.log('userDetails',data);
           this.isLoginFailed = false;
           this.isLoggedIn = true
           this.loginFlag = true;
           this.roles = this.tokenStorage.getUser().roles;
-          console.log(loginData.accessToken, 'token')
-
-          console.log(this.roles, 'roles')
-
+          console.log(loginData.accessToken, 'token');
+          // console.log(this.roles, 'roles');
           this.router.navigate(['/home']);
+          
         }
        }, err => {
           this.errorMessage = err.message;
@@ -87,11 +85,8 @@ export class LoginComponent implements OnInit {
           this.loginFlag = false;
           // window.location.reload();
         }); 
-  
-  
   }
     
-
   public userSignUp(){
     this.router.navigate(['/signUp']);
   }

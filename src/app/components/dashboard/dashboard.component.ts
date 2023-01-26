@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { ClaimsMockData } from '../mock-data/claims-list-constant';
 import { MatDrawer } from '@angular/material/sidenav';
+import { AuthServiceService } from 'src/app/Services/auth-service.service';
+import { ClaimsApiService } from 'src/app/Services/claims-api.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,7 +15,7 @@ export class DashboardComponent implements OnInit {
   @ViewChild(MatDrawer) drawer: any;
   navOptions = "home";
   years: any
-  public claims: any = [];
+  public claimsData: any = [];
   public openClaims: any[] = [];
   public closedClaims: any[] = [];
   public statusData: any = {};
@@ -24,17 +26,39 @@ export class DashboardComponent implements OnInit {
   selectedDataItems = [];
   tempData: any = []
   show = true;
+  roles: string = "";
   selectedDay: any;
   notifyObj = new Notifier();
   facilityId:string='';
-  constructor() { }
+  userRole:string='';
+  constructor(private loginService: AuthServiceService,private claimsService: ClaimsApiService) { }
 
   ngOnInit(): void {
-    this.claims = ClaimsMockData;
-    this.tempData = this.claims
-    this.openClaims = this.claims;
-    this.closedClaims = this.claims;
+    this.loginService.user_Role.subscribe((role:any)=>{
+      this.userRole = role;
+    })
+    var userDetails = window.sessionStorage.getItem('auth-user');
+    var details = JSON.parse(userDetails || '{}');
+    var userId = details.id;
+    this.claimsService.getClaims().subscribe((claimdata:any)=>{
+      if(this.userRole == 'user'){
+        this.claimsData = this.filterByUserId(claimdata,userId);
+        // console.log(this.claimsData.length);
+      }else{
+        this.claimsData = claimdata;
+        // console.log("Admin",this.claimsData.length);
+      }
+      // console.log(this.claimsData);
+      this.tempData = claimdata;
+      this.openClaims = claimdata;
+      this.closedClaims = claimdata;
+    })
+  }
 
+  filterByUserId(claims:any[], userId:any) {
+    return claims.filter(function(claim) {
+      return claim.userId==userId
+    })
   }
 
   facilityChange(facilityId: string) {
@@ -46,7 +70,7 @@ export class DashboardComponent implements OnInit {
       value: event.value,
       text: event.source.triggerValue
     };
-    this.claims = [].concat(this.tempData.filter((x: any) => {
+    this.claimsData = [].concat(this.tempData.filter((x: any) => {
       let event12 = new Date(x.date);
       if (event12.getFullYear() == this.selectedDay.text) {
         return true;
@@ -54,7 +78,7 @@ export class DashboardComponent implements OnInit {
         return false;
       }
     }))
-    this.notifyObj.valueChanged(this.claims);
+    this.notifyObj.valueChanged(this.claimsData);
   }
   selectedData(e: any) {
     this.selectedDataItems = e;
@@ -66,7 +90,7 @@ export class DashboardComponent implements OnInit {
     this.ngOnInit();
 
     setTimeout(() => {
-      this.claims = this.claims.filter((data: any) => {
+      this.claimsData = this.claimsData.filter((data: any) => {
         let event = new Date(data.date);
         if (event.getFullYear() == this.years) {
           return true;
