@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, of } from 'rxjs';
+import { catchError, of, BehaviorSubject } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 
 const httpOptions = {
@@ -13,6 +13,7 @@ const httpOptions = {
 export class AuthServiceService {
 
   auth_URL = 'http://localhost:8300/user/';
+  user_Role = new BehaviorSubject("");
   constructor(private http: HttpClient, private toastr: ToastrService) { }
 
   userRegister(data: any){

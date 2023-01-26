@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { environment} from 'src/environments/environment';
 import { catchError, Observable, of, throwError } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
+import { AuthServiceService } from './auth-service.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +12,12 @@ import { ToastrService } from 'ngx-toastr';
 export class ClaimsApiService {
 
   ordersList = OrderList;
-
-  constructor(private http: HttpClient, private toastr: ToastrService	) { }
+  userRole:string = "";
+  constructor(private http: HttpClient, private toastr: ToastrService, private loginService: AuthServiceService	) { 
+    this.loginService.user_Role.subscribe(role=>{
+      this.userRole = role;
+    })
+  }
 
   getFacility() {
     return this.http.get(environment.FACILITY + `/facility`).pipe(catchError((err:any ) => {
@@ -92,28 +97,28 @@ export class ClaimsApiService {
     .set('Access-Control-Allow-Origin', '*');
     
     if( filterMap.get('facilityId')?.value ){
-    headersParams = headersParams.set('facilityId', filterMap.get('facilityId')?.value)
+      headersParams = headersParams.set('facilityId', filterMap.get('facilityId')?.value)
     }
     if( filterMap.get('palletQuantity')?.value ) {
-    headersParams = headersParams.set('palletQuantity', filterMap.get('palletQuantity')?.value.toString())
+      headersParams = headersParams.set('palletQuantity', filterMap.get('palletQuantity')?.value.toString())
     }
     if( filterMap.get('documentType')?.value ) {
-    headersParams = headersParams.set('documentType', filterMap.get('documentType')?.value)
+      headersParams = headersParams.set('documentType', filterMap.get('documentType')?.value)
     }
     if( filterMap.get('claimedAmount')?.value ) {
-    headersParams = headersParams.set('claimedAmount', filterMap.get('claimedAmount')?.value)
+      headersParams = headersParams.set('claimedAmount', filterMap.get('claimedAmount')?.value)
     }
     if( filterMap.get('serviceProviderClaimId')?.value ) {
-    headersParams = headersParams.set('serviceProviderClaimId', filterMap.get('serviceProviderClaimId')?.value)
+      headersParams = headersParams.set('serviceProviderClaimId', filterMap.get('serviceProviderClaimId')?.value)
     }
     if( filterMap.get('claimStatus')?.value ) {
-    headersParams = headersParams.set('claimStatus', filterMap.get('claimStatus')?.value)
+      headersParams = headersParams.set('claimStatus', filterMap.get('claimStatus')?.value)
     }
     if( filterMap.get('claimType')?.value ) {
-    headersParams = headersParams.set('claimType', filterMap.get('claimType')?.value)
+      headersParams = headersParams.set('claimType', filterMap.get('claimType')?.value)
     }
     if( date ) {
-    headersParams = headersParams.set('createDate', date)
+      headersParams = headersParams.set('createDate', date)
     }
     
     const url = environment.CLAIM + '/claims/filter';
