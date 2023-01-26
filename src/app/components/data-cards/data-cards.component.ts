@@ -167,7 +167,7 @@ export class DataCardsComponent implements OnInit {
     let b = this.rowData.filter((res: any) => {
       return res.facilityId == e.value
     })
-
+//git
     b = (e.value == undefined) ? this.rowData : b;
     this.initFilter(b);
     this.claimsByFacility = b;
