@@ -13,6 +13,7 @@ import { DetailsModalComponent } from "./details-modal/details-modal.component"
 import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { zip } from 'rxjs';
+import { AuthServiceService } from 'src/app/Services/auth-service.service';
 
 const today = new Date();
 const month = today.getMonth();
@@ -28,6 +29,7 @@ export class DataTableComponent implements OnInit {
 	@Input() rows: any[] = [];
 	@Output() newItemEvent: any = new EventEmitter();
 	@Input() showActions: boolean = true;
+	@Input() userRole: string = "";
 	@Input() set facilityId(id: string) {
 		this.facilityChange = id;
 		// this.facilityCheck();
@@ -232,9 +234,10 @@ export class DataTableComponent implements OnInit {
 	changeDetection: ChangeDetectionStrategy.Default
 })
 export class DataTableOrdersComponent implements OnInit {
-	@Input() rows: any[] = [];
 	@Output() newItemEvent: any = new EventEmitter();
 	@Input() showActions: boolean = true;
+	@Input() userRole: string = "";
+	@Input() rows: any[] = [];
 	sortingfilters = false;
 	campaignOne = new FormGroup({
 		start: new FormControl(),
@@ -267,7 +270,7 @@ export class DataTableOrdersComponent implements OnInit {
 	filterForm!: FormGroup;
 
 	constructor(public dialog: MatDialog, private http: ClaimsApiService, private _formBuilder: FormBuilder,
-		private cd: ChangeDetectorRef, private toastr: ToastrService) {
+		private cd: ChangeDetectorRef, private toastr: ToastrService,private loginService: AuthServiceService) {	
 	}
 
 	ngOnInit(): void {
@@ -279,7 +282,6 @@ export class DataTableOrdersComponent implements OnInit {
 			this.isLoading = false;
 			this.facilityList = facility;
 			this.customerList = Customer;
-
 		})
 	}
 	public togglecolumnCheckbox(column: any) {
