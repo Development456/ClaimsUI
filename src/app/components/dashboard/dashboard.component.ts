@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { ClaimsMockData } from '../mock-data/claims-list-constant';
 import { MatDrawer } from '@angular/material/sidenav';
-import { ClaimsApiService } from 'src/app/Services/claims-api.service';
+import { AuthServiceService } from 'src/app/Services/auth-service.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,7 +14,7 @@ export class DashboardComponent implements OnInit {
   @ViewChild(MatDrawer) drawer: any;
   navOptions = "home";
   years: any
-  public claims: any = [];
+  public claimsData: any = [];
   public openClaims: any[] = [];
   public closedClaims: any[] = [];
   public statusData: any = {};
@@ -25,6 +25,7 @@ export class DashboardComponent implements OnInit {
   selectedDataItems = [];
   tempData: any = []
   show = true;
+  roles: string = "";
   selectedDay: any;
   notifyObj = new Notifier();
   facilityId:string='';
@@ -51,6 +52,7 @@ export class DashboardComponent implements OnInit {
           this.customer = data;
           this.tempData2 = this.customer
         })
+
   }
 
   facilityChange(facilityId: string) {
@@ -89,6 +91,7 @@ export class DashboardComponent implements OnInit {
     this.facilities = [...b]
     this.customer = [...c]
     this.notifyObj.valueChanged(this.claims);
+
   }
   selectedData(e: any) {
     this.selectedDataItems = e;
@@ -100,7 +103,7 @@ export class DashboardComponent implements OnInit {
     this.ngOnInit();
 
     setTimeout(() => {
-      this.claims = this.claims.filter((data: any) => {
+      this.claimsData = this.claimsData.filter((data: any) => {
         let event = new Date(data.date);
         if (event.getFullYear() == this.years) {
           return true;

@@ -1,7 +1,6 @@
 <app-header [dashboard]="drawer"></app-header>
 <mat-drawer-container class="example-container" autosize>
     <mat-drawer #drawer class="example-sidenav" mode="side">
-
         <mat-list>
             <mat-list-item class="headerOption" (click)="navOptions = 'home'">
                 <mat-icon>home</mat-icon> &nbsp; Claims Home
@@ -30,6 +29,7 @@
         <div fxFlexFill fxLayout="column" fxLayoutGap="20px" fxFlexFill class="dashboard" *ngIf="show">
             <div>
                 <app-data-cards [selectedDay]="selectedDay" [rowData]="claims" (year)="getYear($event)" (facilityChange)="facilityChange($event)" [notify]="notifyObj" [facilities]="facilities" [customersDropdown]="customer"></app-data-cards>
+
             </div>
             <div fxFlexFill fxLayoutGap="20px" fxLayout="row">
                 <mat-card fxFlex="50%">
@@ -54,7 +54,7 @@
             </div>
             <div fxFlexFill fxLayoutGap="100%">
                 <mat-card>
-                    <app-data-table [rows]="claims" (newItemEvent)="selectedData($event)" [facilityId]="facilityId" [showActions]="true"></app-data-table>
+                    <app-data-table [rows]="claimsData" (newItemEvent)="selectedData($event)" [facilityId]="facilityId" [userRole]="userRole" [showActions]="true"></app-data-table>
                 </mat-card>
             </div>
         </div>

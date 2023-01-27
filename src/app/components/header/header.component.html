@@ -3,11 +3,12 @@
         <span>
             <mat-icon (click)="toggleMenu()">menu</mat-icon>
             &nbsp;
-    
-            <span>Claims Application</span>
+            <span *ngIf="userRole !== 'user'">Claims Application</span>
+            <span *ngIf="userRole == 'user'">My Claims Application</span>
         </span>
         <span>
-          <span>Hello, Admin!</span>
+          <span *ngIf="userRole !== 'user'">Hello, Admin!</span>
+          <span *ngIf="userRole == 'user'">Hello, {{userName}}!</span>
         <span><button mat-button (click)="onLogOut()"><mat-icon>logout</mat-icon></button></span>
         </span>
 
