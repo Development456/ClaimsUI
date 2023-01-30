@@ -131,9 +131,12 @@ export class BarChartComponent implements OnChanges {
 
   ngOnChanges(): void {
     // this.facilityCheck();
+    
     this.barChartData[0].data = [];
     this.barChartLabels = [];
+
     this.claimData.forEach((claim: any) => {
+
       this.barChartLabels.push(claim.masterAccount);
       this.barChartData[0].data.push(claim.claimedAmount);
     })

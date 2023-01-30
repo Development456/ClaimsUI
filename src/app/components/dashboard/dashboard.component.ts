@@ -43,6 +43,8 @@ export class DashboardComponent implements OnInit {
     // this.tempData = this.claims
     // this.openClaims = this.claims;
     // this.closedClaims = this.claims;
+
+    
     this.http.getClaims().subscribe((data)=>{
       this.totalClaims = data;
       this.initFilter(this.totalClaims)
