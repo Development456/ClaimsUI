@@ -28,7 +28,8 @@
 
         <div fxFlexFill fxLayout="column" fxLayoutGap="20px" fxFlexFill class="dashboard" *ngIf="show">
             <div>
-                <app-data-cards [rowData]="claimsData" (year)="getYear($event)" (facilityChange)="facilityChange($event)" [notify]="notifyObj"></app-data-cards>
+                <app-data-cards [selectedDay]="selectedDay" [rowData]="claims" (year)="getYear($event)" (facilityChange)="facilityChange($event)" [notify]="notifyObj" [facilities]="facilities" [customersDropdown]="customer"></app-data-cards>
+
             </div>
             <div fxFlexFill fxLayoutGap="20px" fxLayout="row">
                 <mat-card fxFlex="50%">
