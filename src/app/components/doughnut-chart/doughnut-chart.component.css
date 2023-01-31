@@ -1,8 +1,18 @@
 .snippet {
-    margin-top: 25%;
-    height:200px !important;
-    max-width: 100%;
-    justify-content: center;
-    position: relative;
-    z-index: 1000;
-  }
+  margin-top: 25%;
+  height: 200px !important;
+  max-width: 100%;
+  justify-content: center;
+  position: relative;
+  z-index: 1000;
+}
+
+.doughnutrange {
+  margin-top: -3.7vh;
+}
+
+
+.doughnutheader {
+  /* margin-top: 1vh; */
+  font-weight: 600;
+}

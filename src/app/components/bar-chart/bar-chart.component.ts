@@ -1,5 +1,5 @@
 import { ChartOptions, ChartType } from 'chart.js';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 
 import { ClaimsApiService } from 'src/app/Services/claims-api.service';
 import { Color } from 'ng2-charts';
@@ -9,17 +9,20 @@ import { Color } from 'ng2-charts';
   templateUrl: './bar-chart.component.html',
   styleUrls: ['./bar-chart.component.css']
 })
-export class BarChartComponent implements OnInit {
+export class BarChartComponent implements OnChanges {
   @Input() claimData: any[] = [];
   @Input() barchartColor: any;
   @Input() barSize: any;
+
   @Input() set facilityId(id: string) {
     this.facilityChange = id;
     this.facilityCheck();
   };
+
   barchartFlag = true;
   facilityChange: string = '';
   public openClaims: any[] = [];
+  public closedClaims: any[] = [];
   public barChartOptions: ChartOptions = {
     responsive: true,
     // maintainAspectRatio: false,
@@ -126,7 +129,14 @@ export class BarChartComponent implements OnInit {
     })
   }
 
-  ngOnInit(): void {
-    this.facilityCheck();
+  ngOnChanges(): void {
+    // this.facilityCheck();
+    this.barChartData[0].data = [];
+    this.barChartLabels = [];
+    this.claimData.forEach((claim: any) => {
+      this.barChartLabels.push(claim.masterAccount);
+      this.barChartData[0].data.push(claim.claimedAmount);
+    })
+
   }
 }

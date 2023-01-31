@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { ClaimsMockData } from '../mock-data/claims-list-constant';
 import { MatDrawer } from '@angular/material/sidenav';
+import { ClaimsApiService } from 'src/app/Services/claims-api.service';
+import * as moment from 'moment';
 import { AuthServiceService } from 'src/app/Services/auth-service.service';
 
 @Component({
@@ -29,16 +31,21 @@ export class DashboardComponent implements OnInit {
   selectedDay: any;
   notifyObj = new Notifier();
   facilityId:string='';
-  facilities: any;
-  tempData1: any;
-  tempData2: any;
-  customer: any;
-  constructor(private http: ClaimsApiService) { }
+  totalClaims: any=[];
+  barclaims: any=[];
+
+  isLoading:boolean = false;
+
+
+  constructor(private http : ClaimsApiService) { }
 
   ngOnInit(): void {
-    this.openClaims = this.claims;
-    this.closedClaims = this.claims;
-
+    this.http.getClaims().subscribe((data)=>{
+      this.totalClaims = data;
+      this.initFilter(this.totalClaims)
+    })
+    // this.openClaims = this.claims;
+    // this.closedClaims = this.claims;
     this.http.getClaims().subscribe((data) => {
           this.claims = data;
           this.tempData = this.claims
@@ -54,6 +61,77 @@ export class DashboardComponent implements OnInit {
         })
 
   }
+
+  public initFilter(barclaims:any): void {
+ 
+    this.openClaims = barclaims.filter((claim:any)=> claim.claimStatus === 'Open');
+
+    this.openClaims.forEach((elem: any) => {
+      elem.claimedAmount = +elem.claimedAmount.toString().substring(1).replace(',','');
+    })
+
+    this.openClaims = this.openClaims.sort((a: any, b: any) => b.claimedAmount - a.claimedAmount).slice(0,5);
+
+
+
+    this.closedClaims = barclaims.filter((claim: any) => claim.claimStatus === 'Closed');
+
+    this.closedClaims.forEach((elem: any) => {
+      elem.claimedAmount = +elem.claimedAmount.toString().substring(1).replace(',','');
+    })
+
+    this.closedClaims = this.closedClaims.sort((a: any, b: any) => b.claimedAmount - a.claimedAmount).slice(0,5);
+
+
+    
+    this.totalClaims.forEach((element: any) => {
+      if (this.statusData.hasOwnProperty(element.status)) {
+        this.statusData[element.status] += 1;
+      }
+      else {
+        this.statusData[element.status] = 1;
+      }
+      }
+    )
+  
+  }
+
+  dateRangeChange(dateRangeStart : HTMLInputElement, dateRangeEnd: HTMLInputElement){
+
+    this.barclaims = []
+    this.openClaims = []
+    this.closedClaims = []
+    
+    // this.isLoading = true;
+
+    let start = dateRangeStart.value;
+
+    let end = dateRangeEnd.value;
+
+    this.totalClaims.map((element: any) => {
+      (element.createdDate = moment(element.createdDate).format("YYYY-MM-DD"))
+
+    })    
+    
+    this.isLoading = false;
+
+    this.barclaims = this.totalClaims.filter((m: any) => new Date(m.createdDate) >= new Date(start) && new Date(m.createdDate) <= new Date(end));
+        
+    this.openClaims = this.barclaims;
+    this.closedClaims = this.barclaims
+
+
+    this.initFilter(this.barclaims);
+
+    setTimeout(() => {
+      this.show = true;
+    }, 0)
+    
+  facilities: any;
+  tempData1: any;
+  tempData2: any;
+  customer: any;
+  constructor(private http: ClaimsApiService) { }
 
   facilityChange(facilityId: string) {
     this.facilityId = facilityId;
