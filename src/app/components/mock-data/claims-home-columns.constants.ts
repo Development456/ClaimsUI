@@ -1,16 +1,6 @@
 export const ClaimsHomeTableColumns =[{
-    name: "Date",
-    props: "creationDate",
-    type: "Date",
-    show: true
-}, {
     name: "Status",
     props: "claimStatus",
-    type: "text",
-    show: true
-}, {
-    name: "Master Acct",
-    props: "masterAcct",
     type: "text",
     show: true
 }, {
@@ -18,20 +8,14 @@ export const ClaimsHomeTableColumns =[{
     props: "documentType",
     type: "text",
     show: true
-},
-{
-    name: "Facility",
-    props: "facilityId",
-    type: "text",
-    show: true
 }, {
-    name: "Account",
-    props: "account",
-    type: "text",
+    name: "Facility ID",
+    props: "facilityId",
+    type: "number",
     show: true
 }, {
     name: "Amc Claim",
-    props: "serviceProviderClaimId",
+    props: "claimId",
     type: "text",
     show: true
 }, {
@@ -40,39 +24,13 @@ export const ClaimsHomeTableColumns =[{
     type: "text",
     show: true
 }, {
-    name: "Category",
-    props: "category",
-    type: "text",
-    show: true
-}, {
-    name: "Pallet Quantity",
-    props: "palletQuantity",
-    type: "number",
-    show: false
-}, {
     name: "Claimed Amount",
     props: "claimedAmount",
     type: "text",
-    show: false
-},
-{
+    show: true
+}, {
     name: "Paid Amount",
     props: "paidAmount",
-    type: "number",
-    show: false
-}, {
-    name: "Date Closed",
-    props: "dateClosed",
-    type: "Date",
-    show: false
-}, {
-    name: "Carrier",
-    props: "carrier",
     type: "text",
-    show: false
-}, {
-    name: "Load Number",
-    props: "loadNumber",
-    type: "number",
-    show: false
+    show: true
 }];

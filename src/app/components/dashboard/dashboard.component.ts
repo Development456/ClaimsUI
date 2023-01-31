@@ -4,6 +4,7 @@ import { ClaimsMockData } from '../mock-data/claims-list-constant';
 import { MatDrawer } from '@angular/material/sidenav';
 import { ClaimsApiService } from 'src/app/Services/claims-api.service';
 import * as moment from 'moment';
+import { AuthServiceService } from 'src/app/Services/auth-service.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,7 +16,7 @@ export class DashboardComponent implements OnInit {
   @ViewChild(MatDrawer) drawer: any;
   navOptions = "home";
   years: any
-  public claims: any = [];
+  public claimsData: any = [];
   public openClaims: any[] = [];
   public closedClaims: any[] = [];
   public statusData: any = {};
@@ -26,6 +27,7 @@ export class DashboardComponent implements OnInit {
   selectedDataItems = [];
   tempData: any = []
   show = true;
+  roles: string = "";
   selectedDay: any;
   notifyObj = new Notifier();
   facilityId:string='';
@@ -38,16 +40,25 @@ export class DashboardComponent implements OnInit {
   constructor(private http : ClaimsApiService) { }
 
   ngOnInit(): void {
-
-    // this.claims = ClaimsMockData;
-    // this.tempData = this.claims
-    // this.openClaims = this.claims;
-    // this.closedClaims = this.claims;
     this.http.getClaims().subscribe((data)=>{
       this.totalClaims = data;
       this.initFilter(this.totalClaims)
-      
-    }) 
+    })
+    // this.openClaims = this.claims;
+    // this.closedClaims = this.claims;
+    this.http.getClaims().subscribe((data) => {
+          this.claims = data;
+          this.tempData = this.claims
+        })
+        this.http.getFacility().subscribe((data) => {
+          this.facilities = data;
+          this.tempData1 = this.facilities
+        })
+
+        this.http.getCustomer().subscribe((data) => {
+          this.customer = data;
+          this.tempData2 = this.customer
+        })
 
   }
 
@@ -115,9 +126,12 @@ export class DashboardComponent implements OnInit {
     setTimeout(() => {
       this.show = true;
     }, 0)
-  
-
-  }
+    
+  facilities: any;
+  tempData1: any;
+  tempData2: any;
+  customer: any;
+  constructor(private http: ClaimsApiService) { }
 
   facilityChange(facilityId: string) {
     this.facilityId = facilityId;
@@ -128,15 +142,34 @@ export class DashboardComponent implements OnInit {
       value: event.value,
       text: event.source.triggerValue
     };
-    this.claims = [].concat(this.tempData.filter((x: any) => {
-      let event12 = new Date(x.date);
+    let b;
+    let c;
+  if (this.selectedDay.text!=''){
+     b = this.tempData1.filter((x: any) => {
+      let event12 = new Date(x.createdDate);
       if (event12.getFullYear() == this.selectedDay.text) {
         return true;
       } else {
         return false;
       }
-    }))
+    })
+     c = this.tempData2.filter((x: any) => {
+      let event12 = new Date(x.createDate);
+      if (event12.getFullYear() == this.selectedDay.text) {
+        return true;
+      } else {
+        return false;
+      }
+    })
+  }
+  else{
+     b=this.tempData1;
+    c=this.tempData2
+  }
+    this.facilities = [...b]
+    this.customer = [...c]
     this.notifyObj.valueChanged(this.claims);
+
   }
   selectedData(e: any) {
     this.selectedDataItems = e;
@@ -148,7 +181,7 @@ export class DashboardComponent implements OnInit {
     this.ngOnInit();
 
     setTimeout(() => {
-      this.claims = this.claims.filter((data: any) => {
+      this.claimsData = this.claimsData.filter((data: any) => {
         let event = new Date(data.date);
         if (event.getFullYear() == this.years) {
           return true;

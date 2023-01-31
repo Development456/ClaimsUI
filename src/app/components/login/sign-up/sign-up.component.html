@@ -88,11 +88,15 @@
               </mat-card-content>
           </form>
          <mat-error *ngIf="success">{{errorMessage}}</mat-error>
-          <mat-card-actions fxLayoutAlign="end start">
-              <button class="mb-3" mat-button color="primary" type="button" (click)="userSignUp()"
-                  [disabled]="!(signUpForm.valid && signUpForm.dirty)">Submit</button>
-                  <p *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade show">{{errorMessage}}</p>
-          </mat-card-actions>
+         <div fxLayout="row" fxLayoutAlign="end" fxLayoutGap="10px" style="margin-right:20px;">
+           <mat-card-actions>
+             <button class="mb-3" mat-button color="primary" type="button" (click)="userLogin()">Login</button>
+           </mat-card-actions>
+           <mat-card-actions>
+             <button class="mb-3" mat-button color="primary" type="button" (click)="userSignUp()"
+               [disabled]="!(signUpForm.valid && signUpForm.dirty)">Submit</button>
+           </mat-card-actions>
+         </div>
       </mat-card>
   </div>
  

@@ -1,7 +1,6 @@
 import { AddClaimComponent, BottomSheetOverviewExampleSheet, DialogBoxComponent } from './components/add-claims/add-claims.component';
 import { DataTableComponent, DataTableOrdersComponent } from './components/data-table/data-table.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthGuard } from './auth.guard';
