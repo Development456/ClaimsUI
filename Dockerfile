@@ -1,4 +1,5 @@
 FROM node:14 as build
+LABEL maintainer = "Apurva Bansode"
 WORKDIR /usr/src/app
 COPY package*.json ./
 RUN npm install
