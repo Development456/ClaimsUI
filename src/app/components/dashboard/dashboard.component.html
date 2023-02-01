@@ -68,7 +68,7 @@
             </div>
             <div fxFlexFill fxLayoutGap="100%">
                 <mat-card>
-                    <app-data-table [rows]="claimsData" (newItemEvent)="selectedData($event)" [facilityId]="facilityId" [userRole]="userRole" [showActions]="true"></app-data-table>
+                    <app-data-table [rows]="claims" (newItemEvent)="selectedData($event)" [facilityId]="facilityId" [userRole]="userRole" [showActions]="true"></app-data-table>
                 </mat-card>
             </div>
         </div>
