@@ -65,12 +65,16 @@ export class DataTableComponent implements OnInit {
 	customerList: any = [];
 	filtersOption: any = {};
 	resetValue = new FormControl();
+	userId = "";
 
-	constructor(public dialog: MatDialog, private http: ClaimsApiService,
+	constructor(public dialog: MatDialog, private http: ClaimsApiService,private loginService: AuthServiceService,
 		 private cd: ChangeDetectorRef, 
 		 private _formBuilder: FormBuilder,
 		 public datepipe: DatePipe) {
 		this.filteredRows = this.rows;
+		loginService.userId.subscribe(id=>{
+			this.userId = id;
+		})
 	}
 	ngOnInit(): void {
 		this.showGrid = false;
@@ -95,6 +99,11 @@ export class DataTableComponent implements OnInit {
 				})
 			}
 		})
+		if(this.userRole == 'user'){
+			this.filteredRows = this.filteredRows.filter(data=>{
+				return data.userId == this.userId;
+			})
+		}
 	}
 	
 	filterColumnsForm() {
@@ -196,6 +205,7 @@ export class DataTableComponent implements OnInit {
 					item.creationDate = this.rows[index]?.date
 				}
 				item.claimedAmount = '$' + Number(item.claimedAmount ? item.claimedAmount : 0);
+				item.paidAmount = '$' + Number(item.paidAmount? item.paidAmount : 0);
 				return { ...this.rows[index], ...item }
 			});
 			this.showGrid = true;
@@ -219,6 +229,7 @@ export class DataTableComponent implements OnInit {
 						item.creationDate = this.rows[index].date
 					}
 					item.claimedAmount = '$' + Number(item.claimedAmount ? item.claimedAmount : 0);
+					item.paidAmount = '$' + Number(item.paidAmount ? item.paidAmount : 0);
 					return { ...this.rows[index], ...item }
 				});
 			});
@@ -263,6 +274,7 @@ export class DataTableOrdersComponent implements OnInit {
 	addedClaims: any = [];
 	facilityList: any = [];
 	customerList: any = [];
+	userId = "";
 	filteredObject = this._formBuilder.group({
 		facility: [''],
 		customer: ['']
@@ -271,7 +283,10 @@ export class DataTableOrdersComponent implements OnInit {
 	filterForm!: FormGroup;
 
 	constructor(public dialog: MatDialog, private http: ClaimsApiService, private _formBuilder: FormBuilder,
-		private cd: ChangeDetectorRef, private toastr: ToastrService,private loginService: AuthServiceService) {	
+		private cd: ChangeDetectorRef, private toastr: ToastrService,private loginService: AuthServiceService) {
+			loginService.userId.subscribe(id=>{
+				this.userId = id;
+			}) 
 	}
 
 	ngOnInit(): void {
@@ -284,6 +299,11 @@ export class DataTableOrdersComponent implements OnInit {
 			this.facilityList = facility;
 			this.customerList = Customer;
 		})
+		if(this.userRole == 'user'){
+			this.filteredRows = this.filteredRows.filter(data=>{
+				return data.userId == this.userId;
+			})
+		}
 	}
 	public togglecolumnCheckbox(column: any) {
 		const isChecked = column.show;
