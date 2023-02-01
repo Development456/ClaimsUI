@@ -47,6 +47,7 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { NgxPrintModule } from 'ngx-print';
 import { ToastrModule } from 'ngx-toastr';
 import { SignUpComponent } from './components/login/sign-up/sign-up.component';
+import { authInterceptorProviders } from './Services/auth.interceptor';
 
 
 @NgModule({
@@ -121,7 +122,7 @@ import { SignUpComponent } from './components/login/sign-up/sign-up.component';
     MatGridListModule,
     MatSelectModule
   ],
-  providers: [ClaimsApiService, AuthGuard, DatePipe],
+  providers: [ClaimsApiService, AuthGuard, DatePipe, authInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
