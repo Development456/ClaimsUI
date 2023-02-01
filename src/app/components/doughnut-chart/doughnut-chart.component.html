@@ -1,15 +1,48 @@
 <div>
-    <mat-card-header class="absolute-center text-center">
+    <mat-card-header class="absolute-center text-center doughnutheader">
         <mat-card-subtitle class="mb-0">Claims Breakdown by Status</mat-card-subtitle>
     </mat-card-header>
+
+    <div>
+        <mat-form-field fxLayoutAlign="end start" class="doughnutrange">
+            <mat-label style="font-weight:500">Select a date range</mat-label>
+            <mat-date-range-input [rangePicker]="picker">
+                <input matStartDate placeholder="Start date" #dateRangeStart>
+                <input matEndDate placeholder="End date" #dateRangeEnd
+                    (dateChange)="dateRangeChange(dateRangeStart, dateRangeEnd)">
+            </mat-date-range-input>
+            <!-- <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint> -->
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+        </mat-form-field>
+    </div>
+
     <div *ngIf="isLoading" class="snippet" data-title="dot-revolution">
         <div class="stage">
-          <div class="dot-revolution"></div>
+            <div class="dot-revolution"></div>
         </div>
     </div>
     <div *ngIf="!isLoading">
+
         <div style="position: relative; height:auto">
-            <canvas baseChart [data]="doughnutChartData" [labels]="doughnutChartLabels" [chartType]="doughnutChartType" [options]="doughnutOptions" [colors]="doughnutChartColor" height="150px"></canvas>
+
+            <div *ngIf="doughnutChartData.length > 0">
+
+                <canvas baseChart [data]="doughnutChartData" [labels]="doughnutChartLabels"
+                    [chartType]="doughnutChartType" [options]="doughnutOptions" [colors]="doughnutChartColor"
+                    height="150px">
+                </canvas>
+
+            </div>
+            <div *ngIf="doughnutChartData.length === 0">
+
+                <div style="text-align:center;margin-top:3vh">
+
+                    <img src="assets/images/nodata.PNG" alt="" width="38%">
+
+                </div>
+
+            </div>
         </div>
     </div>
 </div>

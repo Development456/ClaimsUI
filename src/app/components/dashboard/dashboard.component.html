@@ -29,7 +29,6 @@
         <div fxFlexFill fxLayout="column" fxLayoutGap="20px" fxFlexFill class="dashboard" *ngIf="show">
             <div>
                 <app-data-cards [selectedDay]="selectedDay" [rowData]="claims" (year)="getYear($event)" (facilityChange)="facilityChange($event)" [notify]="notifyObj" [facilities]="facilities" [customersDropdown]="customer"></app-data-cards>
-
             </div>
             <div fxFlexFill fxLayoutGap="20px" fxLayout="row">
                 <mat-card fxFlex="50%">
@@ -37,24 +36,39 @@
                 </mat-card>
                 <mat-card fxFlex="50%" fxFlexFill fxLayout="column">
                     <div fxFlex fxLayoutAlign="end start">
+
+                        <mat-form-field class="barrange">
+                            <mat-label style="font-weight:500">Select a date range</mat-label>
+                            <mat-date-range-input [rangePicker]="picker">
+                                <input matStartDate placeholder="Start date" #dateRangeStart>
+                                <input matEndDate placeholder="End date" #dateRangeEnd
+                                    (dateChange)="dateRangeChange(dateRangeStart, dateRangeEnd)">
+
+                            </mat-date-range-input>
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-date-range-picker #picker></mat-date-range-picker>
+                        </mat-form-field>&nbsp;&nbsp;&nbsp;
+
                         <div class="pt-1"> Open Claims &nbsp;</div>
                         <mat-slide-toggle #slider color="primary">Closed Claims</mat-slide-toggle>
                     </div>
-                    <mat-card-header>
+                    <mat-card-header class="title">
                         <mat-card-subtitle *ngIf="!slider.checked">Top 5 Open Claims Claimed Amount</mat-card-subtitle>
                         <mat-card-subtitle *ngIf="slider.checked">Top 5 Closed Claims Claimed Amount</mat-card-subtitle>
 
                     </mat-card-header>
-                    <app-bar-chart *ngIf="!slider.checked" [claimData]="openClaims" [facilityId]="facilityId" [barchartColor]="openBarChartColor" [barSize]="openSize">
+                    <app-bar-chart *ngIf="!slider.checked" [claimData]="openClaims" [barchartColor]="openBarChartColor"
+                        [barSize]="openSize">
                     </app-bar-chart>
 
-                    <app-bar-chart *ngIf="slider.checked" [claimData]="closedClaims" [facilityId]="facilityId" [barchartColor]="closedBarChartColor" [barSize]="closedSize"></app-bar-chart>
+                    <app-bar-chart *ngIf="slider.checked" [claimData]="closedClaims"
+                        [barchartColor]="closedBarChartColor" [barSize]="closedSize"></app-bar-chart>
 
                 </mat-card>
             </div>
             <div fxFlexFill fxLayoutGap="100%">
                 <mat-card>
-                    <app-data-table [rows]="claimsData" (newItemEvent)="selectedData($event)" [facilityId]="facilityId" [userRole]="userRole" [showActions]="true"></app-data-table>
+                    <app-data-table [rows]="claims" (newItemEvent)="selectedData($event)" [facilityId]="facilityId" [userRole]="userRole" [showActions]="true"></app-data-table>
                 </mat-card>
             </div>
         </div>
