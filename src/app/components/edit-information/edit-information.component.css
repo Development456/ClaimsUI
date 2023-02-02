@@ -1,0 +1,49 @@
+.frame {
+    border-radius: 50%;
+    height: 13rem;
+    width: 13rem;
+    margin-left: 62%;
+  }
+
+.dialog-title {
+    float: right;
+    margin-top: -11px;
+  }
+
+  .wrapper{
+    /* height: 14rem; */
+    /* width: 14rem; */
+    position: relative;
+    /* border:5px solid black; */
+    border-radius:50%;
+    /* background: url('user.png'); */
+    background-size: 100% 100%;
+    /* margin: 100px auto; */
+    overflow: hidden;
+  }
+  
+  .my_file{
+    position: absolute;
+    bottom: 0;
+    outline: none;
+    color: transparent;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 15px 73px;
+    cursor: pointer;
+    transition: 0.5s;
+    background: rgba(238, 231, 231, 0.5);
+  }
+  
+  .my_file::-webkit-file-upload-button{
+    visibility: hidden;
+  }
+  
+  .my_file::before{
+    content:'Upload';
+    font-family:Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    color:black;
+    display: inline-block;
+    -webkit-user-select: none;
+  }

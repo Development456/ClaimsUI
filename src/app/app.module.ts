@@ -48,6 +48,8 @@ import { NgxPrintModule } from 'ngx-print';
 import { ToastrModule } from 'ngx-toastr';
 import { SignUpComponent } from './components/login/sign-up/sign-up.component';
 import { authInterceptorProviders } from './Services/auth.interceptor';
+import { ProfileComponent } from './components/profile/profile.component';
+import { EditInformationComponent } from './components/edit-information/edit-information.component';
 import { ChangePasswordComponent } from './components/profile/change-password/change-password.component';
 
 
@@ -68,6 +70,8 @@ import { ChangePasswordComponent } from './components/profile/change-password/ch
     DialogBoxComponent,
     DataTableOrdersComponent,
     BottomSheetOverviewExampleSheet,
+    ProfileComponent,
+    EditInformationComponent,
     ChangePasswordComponent
   ],
   imports: [

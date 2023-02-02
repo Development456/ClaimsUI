@@ -57,12 +57,15 @@
                         <mat-card-subtitle *ngIf="slider.checked">Top 5 Closed Claims Claimed Amount</mat-card-subtitle>
 
                     </mat-card-header>
-                    <app-bar-chart *ngIf="!slider.checked" [claimData]="openClaims" [barchartColor]="openBarChartColor"
-                        [barSize]="openSize">
-                    </app-bar-chart>
 
-                    <app-bar-chart *ngIf="slider.checked" [claimData]="closedClaims"
-                        [barchartColor]="closedBarChartColor" [barSize]="closedSize"></app-bar-chart>
+                    <div style="margin-top:1.2vh">
+                        <app-bar-chart *ngIf="!slider.checked" [claimData]="openClaims"
+                            [barchartColor]="openBarChartColor" [barSize]="openSize">
+                        </app-bar-chart>
+
+                        <app-bar-chart *ngIf="slider.checked" [claimData]="closedClaims"
+                            [barchartColor]="closedBarChartColor" [barSize]="closedSize"></app-bar-chart>
+                    </div>
 
                 </mat-card>
             </div>
