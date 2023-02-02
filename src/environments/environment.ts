@@ -14,7 +14,8 @@ export const environment = {
   CLAIM: 'http://localhost:8100',
   FACILITY: 'http://localhost:8200',
   CUSTOMER: 'http://localhost:8400',
-  LOGIN: 'http://localhost:8300'
+  LOGIN: 'http://localhost:8300',
+  AUTH_URL: 'http://172.174.113.233:9002'
 };
 
 /*
