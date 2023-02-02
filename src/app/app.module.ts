@@ -1,7 +1,6 @@
 import { AddClaimComponent, BottomSheetOverviewExampleSheet, DialogBoxComponent } from './components/add-claims/add-claims.component';
 import { DataTableComponent, DataTableOrdersComponent } from './components/data-table/data-table.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthGuard } from './auth.guard';
@@ -48,6 +47,9 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { NgxPrintModule } from 'ngx-print';
 import { ToastrModule } from 'ngx-toastr';
 import { SignUpComponent } from './components/login/sign-up/sign-up.component';
+import { authInterceptorProviders } from './Services/auth.interceptor';
+import { ProfileComponent } from './components/profile/profile.component';
+import { EditInformationComponent } from './components/edit-information/edit-information.component';
 
 
 @NgModule({
@@ -66,7 +68,9 @@ import { SignUpComponent } from './components/login/sign-up/sign-up.component';
     ClaimsDetailsComponent,
     DialogBoxComponent,
     DataTableOrdersComponent,
-    BottomSheetOverviewExampleSheet
+    BottomSheetOverviewExampleSheet,
+    ProfileComponent,
+    EditInformationComponent
   ],
   imports: [
     BrowserModule,
@@ -122,7 +126,7 @@ import { SignUpComponent } from './components/login/sign-up/sign-up.component';
     MatGridListModule,
     MatSelectModule
   ],
-  providers: [ClaimsApiService, AuthGuard, DatePipe],
+  providers: [ClaimsApiService, AuthGuard, DatePipe, authInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

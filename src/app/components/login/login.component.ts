@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {MatDialog} from '@angular/material/dialog';
-import { SignUpComponent } from './sign-up/sign-up.component';
-import { ClaimsApiService } from 'src/app/Services/claims-api.service';
 import { AuthServiceService } from 'src/app/Services/auth-service.service';
 import { TokenStorageService } from 'src/app/Services/token-storage.service';
 import { LoginDetails } from '../model/claim.model';
@@ -45,7 +43,7 @@ export class LoginComponent implements OnInit {
     }
     
       this.loginService.loginValidation(loginDetails).subscribe(data => {
-        // console.log(data)
+        
         var stringObject:any;
         stringObject=JSON.stringify(data);
         stringObject=JSON.parse(stringObject);
@@ -53,39 +51,20 @@ export class LoginComponent implements OnInit {
 
         if (loginDetails.username != loginData.username && loginDetails.password != loginData.accessToken){
           this.loginFlag = false;
-          alert("Invalid User")
-          
-
-        } 
-        // else if(loginDetails.username == loginData.username && loginDetails.password != loginData.accessToken){
-        //         alert('Incorrect Password')
-        //         window.location.reload();
-        // } else  if (loginDetails.username != loginData.username && loginDetails.password == loginData.accessToken){
-        //   alert("Invalid Username")
-        //   window.location.reload();
-        // } 
-        else {
+        } else {
 
           this.tokenStorage.saveToken(loginData.accessToken);
           this.tokenStorage.saveUser(data);
-    
-          console.log('userDetails', data )
-    
           this.isLoginFailed = false;
           this.isLoggedIn = true
           this.loginFlag = true;
           this.roles = this.tokenStorage.getUser().roles;
-          console.log(loginData.accessToken, 'token')
-
-          console.log(this.roles, 'roles')
-
           this.router.navigate(['/home']);
         }
        }, err => {
           this.errorMessage = err.message;
           console.log(this.errorMessage, 'error');
           this.loginFlag = false;
-          // window.location.reload();
         }); 
   
   

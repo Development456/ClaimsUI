@@ -14,7 +14,7 @@
 
   <div class="signUp"> 
 
-      <mat-card>
+      <mat-card style="width: 400px;">
           <div class="signUp-header mt-3">
               <h2>User Registration </h2>
           </div>
@@ -26,70 +26,57 @@
                       <mat-form-field appearance="outline" fxFlexFill color="primary">
                           <mat-label>Username</mat-label>
                           <input matInput required formControlName="username" type="text">
-                          <div *ngIf="submitted && registerFormControl['username'].errors" class="invalid-feedback">
-                              <div *ngIf="registerFormControl['username'].errors['required']">Username is required</div>
-                              <div *ngIf="registerFormControl['username'].errors['minlength']">
-                                Username must be at least 6 characters
-                              </div>
-                              <div *ngIf="registerFormControl['username'].errors['maxlength']">
-                                Username must not exceed 20 characters
-                              </div>
-                            </div>
                       </mat-form-field>
+                      <span *ngIf="registerFormControl['username'].invalid && registerFormControl['username'].touched">
+                        <span class="text-danger" *ngIf="signUpForm.controls['username']?.errors?.['required']">Username is required</span>
+                      </span>
+                      
+
               
                   <mat-form-field appearance="outline" fxFlexFill color="primary">
                       <mat-label>Email</mat-label>
                       <input matInput placeholder="pat@example.com"formControlName="email" required>
                   </mat-form-field>
+                  <span *ngIf="registerFormControl['email'].invalid && registerFormControl['email'].touched">
+                    <span class="text-danger" *ngIf="signUpForm.controls['email']?.errors?.['required']">Email is required</span>
+                    <span class="text-danger" *ngIf="signUpForm.controls['email']?.errors?.['email']">Email Invalid</span>
+                  </span>
 
                   <mat-form-field appearance="outline" fxFlexFill color="primary" required>
                       <mat-label>Password</mat-label>
                       <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
-                      <div *ngIf="success && registerFormControl['password'].errors" class="invalid-feedback">
-                          <div *ngIf="registerFormControl['password'].errors['required']">Password is required</div>
-                          <div *ngIf="registerFormControl['password'].errors['minlength']">
-                            Password must be at least 6 characters
-                          </div>
-                          <div *ngIf="registerFormControl['password'].errors['maxlength']">
-                            Username must not exceed 40 characters
-                          </div>
-                        </div>
                       <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
                           [attr.aria-pressed]="hide">
                           <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                       </button>
-                      <button mat-icon-button matSuffix (click)="errorDialog()">
+                      <button mat-icon-button matSuffix (click)="infoDialog()">
                       <mat-icon>info</mat-icon>
                       </button>   
                   </mat-form-field> 
-                  <!-- <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="Disabled popover">
-                    <button class="btn btn-primary" type="button" disabled>Disabled button</button>
-                  </span> -->
+                  <span *ngIf="registerFormControl['password'].invalid && registerFormControl['password'].touched">
+                    <span class="text-danger" *ngIf="signUpForm.controls['password']?.errors?.['required']">Password is required</span>
+                    <span class="text-danger" *ngIf="signUpForm.controls['password']?.errors?.['minlength'] ||
+                    signUpForm.controls['password']?.errors?.['maxlength'] || signUpForm.controls['password']?.errors?.['pattern']">Please match the requested format.</span>
+                  </span>
 
                   <mat-form-field appearance="outline" fxFlexFill color="primary" required>
                       <mat-label>Confirm Password</mat-label>
                       <input matInput [type]="hide ? 'password' : 'text'" formControlName="confirmPassword">
-                      <div
-                      *ngIf="submitted && registerFormControl['confirmPassword'].errors"
-                      class="invalid-feedback"
-                    >
-                      <div *ngIf="registerFormControl['confirmPassword'].errors['required']">
-                        Confirm Password is required
-                      </div>
-                      <div *ngIf="registerFormControl['confirmPassword'].errors['mustMatch']">
-                        Confirm Password does not match
-                      </div>
-                    </div>
-                      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide confirmPassword'"
                           [attr.aria-pressed]="hide">
                           <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                       </button>
                   </mat-form-field>
+                  <span *ngIf="registerFormControl['confirmPassword'].invalid && registerFormControl['confirmPassword'].touched">
+                    <span class="text-danger" *ngIf="signUpForm.controls['confirmPassword']?.errors?.['required']">Please confirm your password</span>
+                    <span class="text-danger" *ngIf="signUpForm.controls['confirmPassword']?.errors?.['mustMatch']">Passwords does not match</span>
+                  </span>
               </mat-card-content>
           </form>
-         <mat-error *ngIf="success">{{errorMessage}}</mat-error>
-          <mat-card-actions fxLayoutAlign="end start">
-              <button class="mb-3" mat-button color="primary" type="button" (click)="userSignUp()"
+
+          <mat-card-actions>
+            <button class="float-end" mat-button type="reset" (click)="resetForm()">Reset</button>
+              <button class="mb-3 float-end" mat-button color="primary" type="button" (click)="userSignUp()"
                   [disabled]="!(signUpForm.valid && signUpForm.dirty)">Submit</button>
                   <p *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade show">{{errorMessage}}</p>
           </mat-card-actions>

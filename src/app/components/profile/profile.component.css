@@ -1,0 +1,11 @@
+.frame {
+    border-radius: 50%;
+    height: 13rem;
+    width: 13rem;
+    margin-left: 62%;
+}
+
+.dialog-title {
+    float: right;
+    margin-top: -11px;
+  }
