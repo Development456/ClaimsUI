@@ -106,12 +106,12 @@ private initForm() {
 
 @Component({
   selector: 'dialog-content-example-dialog',
-  template: `<span> 
-               <p class="text-danger">Password must contain minimum of 8 characters<p>
-               <p class="text-danger">including atleast 1 uppercase and lowercase letters.</p>
-               <p class="text-danger">one or more digits</p>
-               <p class="text-danger"> and a special character [!@#$%^&*_=+-]</p>
-              </span>`,
+  template: ` <ul>
+                  <li class="text-danger">Password must contain minimum of 8 characters</li>
+                  <li class="text-danger">Atleast 1 uppercase and lowercase letters</li>
+                  <li class="text-danger">One or more numerical value.</li>
+                  <li class="text-danger">Atleast 1 special character [!@#$%^&*_=+-]</li>
+              </ul>`
   
 })
 export class DialogContentExampleDialog {}
