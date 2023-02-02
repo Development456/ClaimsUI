@@ -1,4 +1,11 @@
-export const ClaimsHomeTableColumns =[{
+export const ClaimsHomeTableColumns =[
+// {
+//     name: "Closed Date",
+//     props: "closedDate",
+//     type: "text",
+//     show: true
+// },
+{
     name: "Status",
     props: "claimStatus",
     type: "text",
@@ -31,6 +38,11 @@ export const ClaimsHomeTableColumns =[{
 }, {
     name: "Paid Amount",
     props: "paidAmount",
+    type: "text",
+    show: true
+},{
+    name: "Master Account",
+    props: "masterAccount",
     type: "text",
     show: true
 }];

@@ -50,6 +50,7 @@ import { SignUpComponent } from './components/login/sign-up/sign-up.component';
 import { authInterceptorProviders } from './Services/auth.interceptor';
 import { ProfileComponent } from './components/profile/profile.component';
 import { EditInformationComponent } from './components/edit-information/edit-information.component';
+import { ChangePasswordComponent } from './components/profile/change-password/change-password.component';
 
 
 @NgModule({
@@ -70,7 +71,8 @@ import { EditInformationComponent } from './components/edit-information/edit-inf
     DataTableOrdersComponent,
     BottomSheetOverviewExampleSheet,
     ProfileComponent,
-    EditInformationComponent
+    EditInformationComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,
