@@ -27,7 +27,7 @@ export class HeaderComponent implements OnInit {
   }
 
   public onLogOut() {
-    localStorage.removeItem('userDetails');
+    window.sessionStorage.removeItem('userDetails');
     this.router.navigate(['login']);
   }
 

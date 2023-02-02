@@ -50,7 +50,7 @@ export class DataTableComponent implements OnInit {
 	public columns = ClaimsHomeTableColumns;
 	public filteredColumns: any;
 	public ColumnMode = ColumnMode;
-	public rowHeight = 40;
+	public rowHeight = 50;
 	public show = false;
 	selected = [];
 	mySelection = [];
@@ -66,7 +66,7 @@ export class DataTableComponent implements OnInit {
 	filtersOption: any = {};
 	resetValue = new FormControl();
 	userId = "";
-
+	user_Role = "";
 	constructor(public dialog: MatDialog, private http: ClaimsApiService,private loginService: AuthServiceService,
 		 private cd: ChangeDetectorRef, 
 		 private _formBuilder: FormBuilder,
@@ -74,6 +74,9 @@ export class DataTableComponent implements OnInit {
 		this.filteredRows = this.rows;
 		loginService.userId.subscribe(id=>{
 			this.userId = id;
+		})
+		loginService.user_Role.subscribe(role=>{
+			this.user_Role = role;
 		})
 	}
 	ngOnInit(): void {
@@ -99,11 +102,11 @@ export class DataTableComponent implements OnInit {
 				})
 			}
 		})
-		if(this.userRole == 'user'){
-			this.filteredRows = this.filteredRows.filter(data=>{
-				return data.userId == this.userId;
-			})
-		}
+		// if(this.user_Role == 'user'){
+		// 	this.filteredRows = this.filteredRows.filter(data=>{
+		// 		return data.userId == this.userId;
+		// 	})
+		// }
 	}
 	
 	filterColumnsForm() {
@@ -189,6 +192,13 @@ export class DataTableComponent implements OnInit {
 		this.http.getClaimByFacility(this.facilityChange).subscribe((data: any) => {
 			this.isLoading = false;
 			 //this.rows = data;
+			if(this.user_Role == 'user'){
+				data = data.filter((value:any)=>{
+					if(value.userId == this.userId){
+						return value;
+					}
+				})
+			}
 			if (data.length > 0) {
 				data = data.reverse();
 			}
@@ -197,7 +207,6 @@ export class DataTableComponent implements OnInit {
 					item.creationDate = this.rows[index]?.date
 				}
 				item.claimedAmount = Number(item.claimedAmount ? item.claimedAmount : 0);
-
 				return { ...this.rows[index], ...item }
 			});
 			this.filteredRows = data.map((item: any, index: number) => {
@@ -265,7 +274,7 @@ export class DataTableOrdersComponent implements OnInit {
 	public columns = AddClaimColumns;
 	public filteredColumns: any;
 	public ColumnMode = ColumnMode;
-	public rowHeight = 40;
+	public rowHeight = 50;
 	public show = false;
 	selected = [];
 	mySelection = [];
@@ -275,6 +284,7 @@ export class DataTableOrdersComponent implements OnInit {
 	facilityList: any = [];
 	customerList: any = [];
 	userId = "";
+	user_Role = "";
 	filteredObject = this._formBuilder.group({
 		facility: [''],
 		customer: ['']
@@ -286,7 +296,10 @@ export class DataTableOrdersComponent implements OnInit {
 		private cd: ChangeDetectorRef, private toastr: ToastrService,private loginService: AuthServiceService) {
 			loginService.userId.subscribe(id=>{
 				this.userId = id;
-			}) 
+			})
+			loginService.user_Role.subscribe(role=>{
+				this.user_Role = role;
+			})
 	}
 
 	ngOnInit(): void {
