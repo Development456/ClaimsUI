@@ -50,7 +50,7 @@ export class DataTableComponent implements OnInit {
 	public columns = ClaimsHomeTableColumns;
 	public filteredColumns: any;
 	public ColumnMode = ColumnMode;
-	public rowHeight = 40;
+	public rowHeight = 50;
 	public show = false;
 	selected = [];
 	mySelection = [];
@@ -65,12 +65,19 @@ export class DataTableComponent implements OnInit {
 	customerList: any = [];
 	filtersOption: any = {};
 	resetValue = new FormControl();
-
-	constructor(public dialog: MatDialog, private http: ClaimsApiService,
+	userId = "";
+	user_Role = "";
+	constructor(public dialog: MatDialog, private http: ClaimsApiService,private loginService: AuthServiceService,
 		 private cd: ChangeDetectorRef, 
 		 private _formBuilder: FormBuilder,
 		 public datepipe: DatePipe) {
 		this.filteredRows = this.rows;
+		loginService.userId.subscribe(id=>{
+			this.userId = id;
+		})
+		loginService.user_Role.subscribe(role=>{
+			this.user_Role = role;
+		})
 	}
 	ngOnInit(): void {
 		this.showGrid = false;
@@ -95,6 +102,11 @@ export class DataTableComponent implements OnInit {
 				})
 			}
 		})
+		// if(this.user_Role == 'user'){
+		// 	this.filteredRows = this.filteredRows.filter(data=>{
+		// 		return data.userId == this.userId;
+		// 	})
+		// }
 	}
 	
 	filterColumnsForm() {
@@ -180,6 +192,13 @@ export class DataTableComponent implements OnInit {
 		this.http.getClaimByFacility(this.facilityChange).subscribe((data: any) => {
 			this.isLoading = false;
 			 //this.rows = data;
+			if(this.user_Role == 'user'){
+				data = data.filter((value:any)=>{
+					if(value.userId == this.userId){
+						return value;
+					}
+				})
+			}
 			if (data.length > 0) {
 				data = data.reverse();
 			}
@@ -188,7 +207,6 @@ export class DataTableComponent implements OnInit {
 					item.creationDate = this.rows[index]?.date
 				}
 				item.claimedAmount = Number(item.claimedAmount ? item.claimedAmount : 0);
-
 				return { ...this.rows[index], ...item }
 			});
 			this.filteredRows = data.map((item: any, index: number) => {
@@ -196,6 +214,7 @@ export class DataTableComponent implements OnInit {
 					item.creationDate = this.rows[index]?.date
 				}
 				item.claimedAmount = '$' + Number(item.claimedAmount ? item.claimedAmount : 0);
+				item.paidAmount = '$' + Number(item.paidAmount? item.paidAmount : 0);
 				return { ...this.rows[index], ...item }
 			});
 			this.showGrid = true;
@@ -219,6 +238,7 @@ export class DataTableComponent implements OnInit {
 						item.creationDate = this.rows[index].date
 					}
 					item.claimedAmount = '$' + Number(item.claimedAmount ? item.claimedAmount : 0);
+					item.paidAmount = '$' + Number(item.paidAmount ? item.paidAmount : 0);
 					return { ...this.rows[index], ...item }
 				});
 			});
@@ -254,7 +274,7 @@ export class DataTableOrdersComponent implements OnInit {
 	public columns = AddClaimColumns;
 	public filteredColumns: any;
 	public ColumnMode = ColumnMode;
-	public rowHeight = 40;
+	public rowHeight = 50;
 	public show = false;
 	selected = [];
 	mySelection = [];
@@ -263,6 +283,8 @@ export class DataTableOrdersComponent implements OnInit {
 	addedClaims: any = [];
 	facilityList: any = [];
 	customerList: any = [];
+	userId = "";
+	user_Role = "";
 	filteredObject = this._formBuilder.group({
 		facility: [''],
 		customer: ['']
@@ -271,7 +293,13 @@ export class DataTableOrdersComponent implements OnInit {
 	filterForm!: FormGroup;
 
 	constructor(public dialog: MatDialog, private http: ClaimsApiService, private _formBuilder: FormBuilder,
-		private cd: ChangeDetectorRef, private toastr: ToastrService,private loginService: AuthServiceService) {	
+		private cd: ChangeDetectorRef, private toastr: ToastrService,private loginService: AuthServiceService) {
+			loginService.userId.subscribe(id=>{
+				this.userId = id;
+			})
+			loginService.user_Role.subscribe(role=>{
+				this.user_Role = role;
+			})
 	}
 
 	ngOnInit(): void {
@@ -284,6 +312,11 @@ export class DataTableOrdersComponent implements OnInit {
 			this.facilityList = facility;
 			this.customerList = Customer;
 		})
+		if(this.userRole == 'user'){
+			this.filteredRows = this.filteredRows.filter(data=>{
+				return data.userId == this.userId;
+			})
+		}
 	}
 	public togglecolumnCheckbox(column: any) {
 		const isChecked = column.show;

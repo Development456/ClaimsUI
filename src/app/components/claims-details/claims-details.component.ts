@@ -35,7 +35,8 @@ export class ClaimsDetailsComponent implements OnInit, OnDestroy {
               @Inject(MAT_DIALOG_DATA) public data: any, 
               private _formBuilder: FormBuilder, 
               private http: ClaimsApiService, 
-              private _snackBar: MatSnackBar) { }
+              private _snackBar: MatSnackBar) {
+              }
 
   ngOnInit(): void {
     console.log('test', this.data.rowData)
@@ -58,7 +59,7 @@ export class ClaimsDetailsComponent implements OnInit, OnDestroy {
                             { "name": "LPN", props: "LPN" },
                             { "name": "NET", props: "NET" }];
 
-    this.firstFormGroup.controls['customerClaim'].disable()
+    this.firstFormGroup.controls['customerClaim'].disable();
   }
 
   initializeForm() {
@@ -175,9 +176,48 @@ export class ClaimsDetailsComponent implements OnInit, OnDestroy {
 
     if (month.length < 2) 
         month = '0' + month;
+        switch (month){
+          case '1':
+            month = 'JAN';
+            break;
+          case '2':
+            month = 'FEB';
+            break;
+          case '3':
+            month = 'MAR';
+            break;
+          case '4':
+            month = 'APR';
+            break;
+          case '5':
+            month = 'MAY';
+            break;
+          case '6':
+            month = 'JUN';
+            break;
+          case '7':
+            month = 'JUL';
+            break;
+          case '8':
+            month = 'AUG';
+            break;
+          case '9':
+            month = 'SEP';
+            break;
+          case '10':
+            month = 'OCT';
+            break;
+          case '11':
+            month = 'NOV';
+            break;
+          case '12':
+            month = 'DEC';
+            break;
+        }
     if (day.length < 2) 
         day = '0' + day;
 
-    return [month, day, year].join('/');
+    return [day, month, year].join('-');
   }
+
 }
