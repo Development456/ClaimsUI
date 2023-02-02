@@ -48,6 +48,7 @@ import { NgxPrintModule } from 'ngx-print';
 import { ToastrModule } from 'ngx-toastr';
 import { SignUpComponent } from './components/login/sign-up/sign-up.component';
 import { authInterceptorProviders } from './Services/auth.interceptor';
+import { ChangePasswordComponent } from './components/profile/change-password/change-password.component';
 
 
 @NgModule({
@@ -66,7 +67,8 @@ import { authInterceptorProviders } from './Services/auth.interceptor';
     ClaimsDetailsComponent,
     DialogBoxComponent,
     DataTableOrdersComponent,
-    BottomSheetOverviewExampleSheet
+    BottomSheetOverviewExampleSheet,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,
