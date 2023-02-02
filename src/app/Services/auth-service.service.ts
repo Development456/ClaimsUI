@@ -12,7 +12,10 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class AuthServiceService {
+  auth_URL = environment.AUTH_URL+'/user/';
+
   user_Role = new BehaviorSubject("");
+  userId = new BehaviorSubject("");
   constructor(private http: HttpClient, private toastr: ToastrService) { }
 
    userRegister(data: any){

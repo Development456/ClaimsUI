@@ -31,6 +31,7 @@ export class HeaderComponent implements OnInit {
   }
 
   public onLogOut() {
+    window.sessionStorage.removeItem('userDetails');
     this.tokenStorage.signOut();
     this.router.navigate(['login']);
   }

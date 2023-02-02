@@ -114,6 +114,9 @@ export class ClaimsApiService {
     if( filterMap.get('claimType')?.value ) {
     headersParams = headersParams.set('claimType', filterMap.get('claimType')?.value)
     }
+    if( filterMap.get('userId')?.value ){
+      headersParams = headersParams.set('userId', filterMap.get('userId')?.value)
+    }
     if( date ) {
     headersParams = headersParams.set('createDate', date)
     }
