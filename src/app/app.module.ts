@@ -47,6 +47,10 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { NgxPrintModule } from 'ngx-print';
 import { ToastrModule } from 'ngx-toastr';
 import { SignUpComponent } from './components/login/sign-up/sign-up.component';
+import { authInterceptorProviders } from './Services/auth.interceptor';
+import { ProfileComponent } from './components/profile/profile.component';
+import { EditInformationComponent } from './components/edit-information/edit-information.component';
+import { ChangePasswordComponent } from './components/profile/change-password/change-password.component';
 
 
 @NgModule({
@@ -65,7 +69,10 @@ import { SignUpComponent } from './components/login/sign-up/sign-up.component';
     ClaimsDetailsComponent,
     DialogBoxComponent,
     DataTableOrdersComponent,
-    BottomSheetOverviewExampleSheet
+    BottomSheetOverviewExampleSheet,
+    ProfileComponent,
+    EditInformationComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,
@@ -121,7 +128,7 @@ import { SignUpComponent } from './components/login/sign-up/sign-up.component';
     MatGridListModule,
     MatSelectModule
   ],
-  providers: [ClaimsApiService, AuthGuard, DatePipe],
+  providers: [ClaimsApiService, AuthGuard, DatePipe, authInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

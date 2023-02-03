@@ -1,11 +1,11 @@
 <div>
-    <mat-card-header *ngIf="userRole!=='user'" class="absolute-center text-center"
+    <mat-card-header *ngIf="user_Role!=='user'" class="absolute-center text-center"
         style="background-color: #efd087;border-radius:4px;">
         <mat-card-subtitle style="margin-top: 10%;">
             <h1>Claims Details</h1>
         </mat-card-subtitle>
     </mat-card-header>
-    <mat-card-header *ngIf="userRole=='user'" class="absolute-center text-center"
+    <mat-card-header *ngIf="user_Role=='user'" class="absolute-center text-center"
         style="background-color: #efd087;border-radius:4px;">
         <mat-card-subtitle style="margin-top: 10%;">
             <h1>My Claims Details</h1>
@@ -196,11 +196,11 @@
                 </button>
             </div>
         </mat-card>
-        <br />
+        <br/>
         <div id="print-section">
             <ngx-datatable class="material" [scrollbarH]="true" [rows]="filteredRows" [columns]="filteredColumns"
                 [selectionType]="SelectionType.checkbox" id="claims-table" [columnMode]="ColumnMode.force"
-                [headerHeight]="40" [footerHeight]="40" [rowHeight]="rowHeight" [limit]="10">
+                [headerHeight]="40" [footerHeight]="40" [rowHeight]="rowHeight" [limit]="10" [rowHeight]="'auto'">
                 <ngx-datatable-column *ngFor="let col of filteredColumns" [name]="col.name" [prop]="col.props">
                 </ngx-datatable-column>
                 <ngx-datatable-column *ngIf="showActions" [frozenRight]="true" name="Actions" [resizeable]="false"

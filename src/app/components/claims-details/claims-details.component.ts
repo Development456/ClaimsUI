@@ -37,7 +37,8 @@ export class ClaimsDetailsComponent implements OnInit, OnDestroy {
               @Inject(MAT_DIALOG_DATA) public data: any, 
               private _formBuilder: FormBuilder, 
               private http: ClaimsApiService, 
-              private _snackBar: MatSnackBar) { }
+              private _snackBar: MatSnackBar) {
+              }
 
   ngOnInit(): void {
     console.log('test', this.data.rowData)
@@ -79,7 +80,7 @@ export class ClaimsDetailsComponent implements OnInit, OnDestroy {
                             { "name": "LPN", props: "LPN" },
                             { "name": "NET", props: "NET" }];
 
-    this.firstFormGroup.controls['customerClaim'].disable()
+    this.firstFormGroup.controls['customerClaim'].disable();
   }
 
   initializeForm() {
@@ -137,8 +138,6 @@ export class ClaimsDetailsComponent implements OnInit, OnDestroy {
 
   saveClaimDetails() {
     this.editServiceCall(this.firstFormGroup.value, this.costDetails.value, this.paymentInformation.value);
-    // console.log(this.firstFormGroup.value,'f.f.g');
-    // console.log(this.costDetails.value);
     
     this.isLoading = true;
     this.updateCalims = this.http.updateClaim(this.claimsUpdatedData, this.data.rowData.serviceProviderClaimId).subscribe((data)=>{
@@ -155,10 +154,10 @@ export class ClaimsDetailsComponent implements OnInit, OnDestroy {
   }
 
   editServiceCall(firstFormGroup: any, costDetails: any, paymentInformation: any) {
-    console.log(firstFormGroup,"F.F.G",this.dateFormat(firstFormGroup.createdDate).toString(),paymentInformation,"P.I");
-    console.log(this.data);
+    //console.log(firstFormGroup,"F.F.G",this.dateFormat(firstFormGroup.createdDate).toString(),paymentInformation,"P.I");
+    //console.log(this.data);
     this.claimsUpdatedData._id = this.data.rowData._id;
-    this.claimsUpdatedData.createdDate = this.dateFormat(firstFormGroup.createdDate);
+    this.claimsUpdatedData.createdDate = this.formatDate(firstFormGroup.createdDate);
     this.claimsUpdatedData.closedDate = this.formatDate(firstFormGroup.closedDate);
     this.claimsUpdatedData.claimId= this.data.rowData.claimId.trim();
     this.claimsUpdatedData.facilityId = firstFormGroup.facility;
@@ -208,62 +207,48 @@ export class ClaimsDetailsComponent implements OnInit, OnDestroy {
 
     if (month.length < 2) 
         month = '0' + month;
+        switch (month){
+          case '1':
+            month = 'JAN';
+            break;
+          case '2':
+            month = 'FEB';
+            break;
+          case '3':
+            month = 'MAR';
+            break;
+          case '4':
+            month = 'APR';
+            break;
+          case '5':
+            month = 'MAY';
+            break;
+          case '6':
+            month = 'JUN';
+            break;
+          case '7':
+            month = 'JUL';
+            break;
+          case '8':
+            month = 'AUG';
+            break;
+          case '9':
+            month = 'SEP';
+            break;
+          case '10':
+            month = 'OCT';
+            break;
+          case '11':
+            month = 'NOV';
+            break;
+          case '12':
+            month = 'DEC';
+            break;
+        }
     if (day.length < 2) 
         day = '0' + day;
-
-    return [month, day, year].join('/');
-  } 
-  dateFormat(date: any) {
-    let d = new Date(date),
-    month = '' + (d.getMonth() + 1),
-    day = '' + d.getDate(),
-    year = d.getFullYear();
-    
-    if (month.length < 2)
-    month = '0' + month;
-    switch (month){
-    case '1':
-    month = 'JAN';
-    break;
-    case '2':
-    month = 'FEB';
-    break;
-    case '3':
-    month = 'MAR';
-    break;
-    case '4':
-    month = 'APR';
-    break;
-    case '5':
-    month = 'MAY';
-    break;
-    case '6':
-    month = 'JUN';
-    break;
-    case '7':
-    month = 'JUL';
-    break;
-    case '8':
-    month = 'AUG';
-    break;
-    case '9':
-    month = 'SEP';
-    break;
-    case '10':
-    month = 'OCT';
-    break;
-    case '11':
-    month = 'NOV';
-    break;
-    case '12':
-    month = 'DEC';
-    break;
-    }
-    if (day.length < 2)
-    day = '0' + day;
-    
-    console.log(month,day,year);
-    
+        
     return [day, month, year].join('-');
-    }
+  }
+
 }

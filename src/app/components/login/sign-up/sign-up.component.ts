@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { catchError } from 'rxjs/operators';
 import { AuthServiceService } from 'src/app/Services/auth-service.service';
 
 
@@ -20,66 +22,38 @@ export class SignUpComponent implements OnInit {
   });
   submitted = false;
 
-
-  // public userDetails = {
-  //   username: '',
-  //   email: '',
-  //   password: ''
-  // };
   public hide = true;
-  // public signUpForm!: FormGroup;
-  // public signUpFlag: boolean = true;
   isSignedIn = false;
   isSignedUpFailed = false;
   errorMessage = '';
-  success = false;
-  constructor(private authService: AuthServiceService, private route: Router, private registerForm: FormBuilder, private dialog: MatDialog ) { }
+
+  constructor(private authService: AuthServiceService, private toastr: ToastrService,
+    private route: Router, private registerForm: FormBuilder, private dialog: MatDialog ) { }
 
   ngOnInit(): void {
     this.initForm(); 
+    
   }
    
 private initForm() {
     this.signUpForm = this.registerForm.group({
-      username: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(20) ]],
+      username: ['', Validators.required],
       email: ['',[Validators.required, Validators.email]],
-      password: ['', [Validators.required,  Validators.minLength(6), Validators.maxLength(40)]],
+      password: ['', [Validators.required,  Validators.minLength(8), Validators.maxLength(12), Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$')]],
       confirmPassword: ['', Validators.required]
     }, {
       validators: this.MustMatch('password', 'confirmPassword')
-    }); 
+    });
+
+    
   }
 
   get registerFormControl() : { [key: string]: AbstractControl }{
     return this.signUpForm.controls;
   }
  
-  public userSignUp(){
-    this.submitted = true;
-    // const { username, email, password } = this.userDetails;
-    this.authService.userRegister(this.signUpForm.value).subscribe( data => {
-        console.log(data);
-        this.isSignedIn = true;
-        this.isSignedUpFailed = false;
-        // this.success = true;
-        alert(data.message);
-        // this.route.navigate(['/login']);
-      }, err => {
-        // this.success = false;
-        console.log(err.message);
-        this.errorMessage = err.message;
-        this.isSignedUpFailed = true;
-        // console.log(this.errorMessage, 'error');
-        // alert(this.errorMessage);
-      });
-  }
-
-  public userLogin(){
-    this.route.navigate(['/login']);
-  }
-
 // custom validator to check that two fields match
-  MustMatch(controlName: string, matchingControlName: string) {
+  public MustMatch(controlName: string, matchingControlName: string) {
     return (formGroup: FormGroup) => {
         const control = formGroup.controls[controlName];
         const matchingControl = formGroup.controls[matchingControlName];
@@ -98,7 +72,29 @@ private initForm() {
     }
   }
 
-  errorDialog(){
+  
+  public userSignUp(){
+    this.submitted = true;
+    this.authService.userRegister(this.signUpForm.value).subscribe( data => {
+        
+        this.isSignedIn = true;
+        this.isSignedUpFailed = false;
+        this.toastr.success(data.message, 'Registration Successfull');
+        this.route.navigate(['/login']);
+        
+      }, err =>{
+        this.isSignedUpFailed = true;
+        this.errorMessage = err.error.message;
+        
+      });
+  }
+
+  public resetForm(){
+    this.submitted = false;
+    this.signUpForm.reset();
+  }
+
+  public infoDialog(){
     const dialogRef = this.dialog.open(DialogContentExampleDialog);
 
     dialogRef.afterClosed().subscribe(result => {
@@ -110,7 +106,13 @@ private initForm() {
 
 @Component({
   selector: 'dialog-content-example-dialog',
-  template: '<p>Password should be minimum 6 character long</p>',
+  template: ` <ul>
+                  <li class="text-danger">Password must contain minimum of 8 characters</li>
+                  <li class="text-danger">Atleast 1 uppercase and lowercase letters</li>
+                  <li class="text-danger">One or more numerical value.</li>
+                  <li class="text-danger">Atleast 1 special character [!@#$%^&*_=+-]</li>
+              </ul>`
+  
 })
 export class DialogContentExampleDialog {}
 

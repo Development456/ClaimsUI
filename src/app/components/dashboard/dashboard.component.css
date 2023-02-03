@@ -28,3 +28,18 @@
 .material-icons {
     /* font-size: 50px; */
 }
+
+.title {
+    margin-top:-4.7vh;
+    font-weight: 600;
+}
+
+.barrange {
+    margin-top:-1.5vh;
+    /* width:25% */
+}
+
+.barheader {
+    margin-top:-5vh;
+    font-weight: 600; 
+}
