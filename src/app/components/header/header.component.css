@@ -1,4 +1,9 @@
 mat-toolbar {
     background: rgb(23, 23, 50);
     color: white;
-  }
+}
+
+/* ::ng-deep .mat-button, .mat-icon-button, .mat-stroked-button, .mat-flat-button{
+  min-width: 40px !important;
+  line-height: 0px !important;
+} */

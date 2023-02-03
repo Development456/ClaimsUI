@@ -38,9 +38,3 @@
   font-size: 16px !important;
   color: black !important;
 }
-
-::ng-deep .datatable-header-cell
-{
-   display: flex !important;
-   align-items: center !important;
-}
