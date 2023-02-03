@@ -64,10 +64,6 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-  public changePassword(){
-
-  }
-
   public role(){
     
   }
