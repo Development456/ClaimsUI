@@ -1,4 +1,10 @@
 export const ClaimsHomeTableColumns =[{
+    name: "Date",
+    props: "createdDate",
+    type: "text",
+    show: true
+},
+    {
     name: "Status",
     props: "claimStatus",
     type: "text",

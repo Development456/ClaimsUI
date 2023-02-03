@@ -27,9 +27,11 @@ export class ClaimsDetailsComponent implements OnInit, OnDestroy {
   additionalInfo!: FormGroup;
   claimsUpdatedData = {} as Claim ;
   facilityList: any = [];
-  customerList: string[] = [];
+  // customerList: string[] = [];
+  customerList: any = [];
   updateCalims: Subscription = new Subscription();
   isLoading: boolean = false;
+  editdata:any
 
   constructor(public dialogRef: MatDialogRef<ClaimsDetailsComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any, 
@@ -39,13 +41,32 @@ export class ClaimsDetailsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     console.log('test', this.data.rowData)
-    this.initializeForm();
+    // this.initializeForm();
     this.isLoading = true;
     this.userMode = localStorage.getItem('userDetails') ? localStorage.getItem('userDetails') : 'user';
     this.http.getFacility().subscribe((data: any) => {
+      console.log(data,'22222222');
       this.isLoading = false;
       this.facilityList = data;
+
+      this.http.getCustomer().subscribe((data:any)=>{
+        console.log(data,'111111111',this.data.rowData.createdDate);
+        this.isLoading = false;
+      this.customerList = data;
+      // console.log(this.customerList.filter((res:any)=>res.customerId==this.data.rowData.customerId)[0]?.lastUpdateDate)
+      this.editdata=this.customerList.filter((res:any)=>res.customerId==this.data.rowData.customerId)[0]
+      console.log(this.editdata,'lastupdated date');
+      this.initializeForm();
+      })
+
+      this.http.getClaimsById("999").subscribe((data:any)=>{
+        console.log(data,'33333'); 
+      }) 
     });
+
+
+  
+
 
     setTimeout(() => {
       this.ordersList = this.data.orders;
@@ -63,10 +84,11 @@ export class ClaimsDetailsComponent implements OnInit, OnDestroy {
 
   initializeForm() {
     this.firstFormGroup = this._formBuilder.group({
-      createdDate: [new Date(this.data.rowData.creationDate), Validators.required],
-      closedDate: [new Date(this.data.rowData.dateClosed), Validators.required],
+      createdDate: [new Date(this.data.rowData.createdDate), Validators.required],
+      closedDate: [new Date(this.editdata.lastUpdateDate), Validators.required],
       customerClaim: [this.data.rowData.serviceProviderClaimId],
-      customer: ['', Validators.required],
+      // customer: ['', Validators.required],
+      customer: [this.data.rowData.customerId, Validators.required],
       facility: [this.data.rowData.facilityId, Validators.required],
       wmsAccount: ['123', Validators.required],
       claimType: [this.data.rowData.claimType.toLowerCase().charAt(0).toUpperCase() + this.data.rowData.claimType.toLowerCase().slice(1), Validators.required],
@@ -78,9 +100,10 @@ export class ClaimsDetailsComponent implements OnInit, OnDestroy {
     });
 
     this.contactInformation = this._formBuilder.group({
-      name: ['admin', Validators.required],
-      phone: ['1111111111', Validators.required],
-      email: ['admin@miracle', Validators.required],
+      name: [this.editdata.name, Validators.required],
+      // phone: ['1111111111', Validators.required],
+      phone: [this.editdata.phone, Validators.required],
+      email: [this.editdata.email, Validators.required],
 
     });
 
@@ -93,7 +116,7 @@ export class ClaimsDetailsComponent implements OnInit, OnDestroy {
 
     this.paymentInformation = this._formBuilder.group({
       apVendor: ['Vendor', Validators.required], 
-      paidAmount: ['27', Validators.required],
+      paidAmount: [this.data.rowData.paidAmount, Validators.required],
       paymentReference: ['789Sd', Validators.required], 
       paymentDate: ['12/19/2022', Validators.required],
       invoiceNumber: ['123', Validators.required], 
@@ -101,7 +124,7 @@ export class ClaimsDetailsComponent implements OnInit, OnDestroy {
       glCode: ['78usd'], 
       accuralAmount: ['49', Validators.required],
       invoiceAmount: ['49'], 
-      claimedAmount: [27, Validators.required],
+      claimedAmount: [this.data.rowData.claimedAmount.slice(1), Validators.required],
       currencyType: ['USD', Validators.required],
 
     });
@@ -113,9 +136,13 @@ export class ClaimsDetailsComponent implements OnInit, OnDestroy {
   }
 
   saveClaimDetails() {
-    this.editServiceCall(this.firstFormGroup.value, this.costDetails.value);
+    this.editServiceCall(this.firstFormGroup.value, this.costDetails.value, this.paymentInformation.value);
+    // console.log(this.firstFormGroup.value,'f.f.g');
+    // console.log(this.costDetails.value);
+    
     this.isLoading = true;
     this.updateCalims = this.http.updateClaim(this.claimsUpdatedData, this.data.rowData.serviceProviderClaimId).subscribe((data)=>{
+      console.log(this.claimsUpdatedData,);
       console.log('Edit succesful!!')
       this.isLoading = false;
       this._snackBar.open("Progress Saved", "Close", {  duration: 5000 });
@@ -127,12 +154,15 @@ export class ClaimsDetailsComponent implements OnInit, OnDestroy {
     });
   }
 
-  editServiceCall(firstFormGroup: any, costDetails: any) {
+  editServiceCall(firstFormGroup: any, costDetails: any, paymentInformation: any) {
+    console.log(firstFormGroup,"F.F.G",this.dateFormat(firstFormGroup.createdDate).toString(),paymentInformation,"P.I");
+    console.log(this.data);
     this.claimsUpdatedData._id = this.data.rowData._id;
-    this.claimsUpdatedData.createDate = this.formatDate(firstFormGroup.createdDate);
+    this.claimsUpdatedData.createdDate = this.dateFormat(firstFormGroup.createdDate);
     this.claimsUpdatedData.closedDate = this.formatDate(firstFormGroup.closedDate);
     this.claimsUpdatedData.claimId= this.data.rowData.claimId.trim();
     this.claimsUpdatedData.facilityId = firstFormGroup.facility;
+    this.claimsUpdatedData.customerId = firstFormGroup.customer;
     this.claimsUpdatedData.palletQuantity = this.data.rowData.palletQuantity;
     this.claimsUpdatedData.documentType = this.data.rowData.documentType;
     this.claimsUpdatedData.claimedAmount = costDetails.cost.toString();
@@ -140,10 +170,13 @@ export class ClaimsDetailsComponent implements OnInit, OnDestroy {
     this.claimsUpdatedData.claimStatus = firstFormGroup.status;
     this.claimsUpdatedData.claimType = firstFormGroup.claimType.toUpperCase();
     this.claimsUpdatedData.creatorId = '';
-    this.claimsUpdatedData.lastUpdateId = this.data.rowData.lastUpdateId.trim();
-    this.claimsUpdatedData.lastUpdateDate = this.data.rowData.lastUpdateDate.trim();
+    this.claimsUpdatedData.paidAmount = paymentInformation.paidAmount.toString();
+    // this.claimsUpdatedData.lastUpdateId = this.data.rowData.lastUpdateId.trim();
+    // this.claimsUpdatedData.lastUpdateDate = this.data.rowData.lastUpdateDate.trim();
     return this.claimsUpdatedData;
   }
+
+  
 
   ngOnDestroy(): void {
     if(this.updateCalims) {
@@ -179,5 +212,58 @@ export class ClaimsDetailsComponent implements OnInit, OnDestroy {
         day = '0' + day;
 
     return [month, day, year].join('/');
-  }
+  } 
+  dateFormat(date: any) {
+    let d = new Date(date),
+    month = '' + (d.getMonth() + 1),
+    day = '' + d.getDate(),
+    year = d.getFullYear();
+    
+    if (month.length < 2)
+    month = '0' + month;
+    switch (month){
+    case '1':
+    month = 'JAN';
+    break;
+    case '2':
+    month = 'FEB';
+    break;
+    case '3':
+    month = 'MAR';
+    break;
+    case '4':
+    month = 'APR';
+    break;
+    case '5':
+    month = 'MAY';
+    break;
+    case '6':
+    month = 'JUN';
+    break;
+    case '7':
+    month = 'JUL';
+    break;
+    case '8':
+    month = 'AUG';
+    break;
+    case '9':
+    month = 'SEP';
+    break;
+    case '10':
+    month = 'OCT';
+    break;
+    case '11':
+    month = 'NOV';
+    break;
+    case '12':
+    month = 'DEC';
+    break;
+    }
+    if (day.length < 2)
+    day = '0' + day;
+    
+    console.log(month,day,year);
+    
+    return [day, month, year].join('-');
+    }
 }
