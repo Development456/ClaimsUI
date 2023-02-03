@@ -1,0 +1,53 @@
+<div>
+
+    <div style="background-color:#a9b3ed;border-radius:0.5vh">
+        <div
+            style="padding-top: 20px;padding-bottom: 20px;font-size: x-large;font-weight: 400;text-align: left;margin-left:1vh">
+            My Profile
+            <button class="dialog-title" mat-icon-button aria-label="close dialog" mat-dialog-close>
+                <mat-icon>close</mat-icon>
+              </button>
+        </div>
+    </div>
+    <br>
+
+    <div>
+        <img src="assets/images/user.png" alt="" class="frame">
+    </div>
+
+
+    <div>
+
+        <p style="margin-top: -6rem;">
+            <mat-form-field appearance=outline>
+                <mat-label> Name </mat-label>
+                <input matInput value="John Doe" [readonly]="true">
+                <!-- <mat-hint> Hint </mat-hint>   -->
+            </mat-form-field>
+        </p>
+
+        <p>
+            <mat-form-field appearance=outline>
+                <mat-label> Email </mat-label>
+                <input matInput value="johnd@gmail.com" [readonly]="true">
+                <!-- <mat-hint> Hint </mat-hint>   -->
+            </mat-form-field>
+        </p>
+
+        <p>
+            <mat-form-field appearance=outline>
+                <mat-label> Phone </mat-label>
+                <input matInput value="(123) 456 7890" [readonly]="true">
+                <!-- <mat-hint> Hint </mat-hint>   -->
+            </mat-form-field>
+        </p>
+
+        <p>
+            <mat-form-field appearance=outline>
+                <mat-label> Username </mat-label>
+                <input matInput value="johnd098" [readonly]="true">
+                <!-- <mat-hint> Hint </mat-hint>   -->
+            </mat-form-field>
+        </p>
+    </div>
+</div>

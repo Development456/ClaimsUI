@@ -1,0 +1,90 @@
+<div>
+    <div style="background-color:#8fb7f1;border-radius:0.5vh">
+        <div
+            style="padding-top: 20px;padding-bottom: 20px;font-size: x-large;font-weight: 400;text-align: left;margin-left:1vh">
+            Edit Information
+            <button class="dialog-title" mat-icon-button aria-label="close dialog" mat-dialog-close>
+                <mat-icon>close</mat-icon>
+              </button>
+        </div>
+    </div>
+    <br>
+
+    <div>
+        <div class="wrapper frame" style="background-image: url(assets/images/user.png);">
+            <input type="file" class="my_file" placeholder="Update Image"
+                accept="image/png, image/jpeg, image/jpg, image/img" (change)="selectImage($event)">
+        </div>
+    </div>
+
+    <form [formGroup]="registerForm">
+        <div fxLayout="column" style="margin-top:-6rem">
+
+            <div fxFlex="100%">
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Name</mat-label>
+                    <input matInput formControlName="name" name="name" required pattern="[a-zA-Z]*">
+                    <mat-error *ngIf="registerForm.get('name').hasError('required')">This field is
+                        required</mat-error>
+                    <mat-error *ngIf="registerForm.get('name').hasError('pattern')">Field must contain only
+                        alphabets</mat-error>
+                    <!-- <mat-error *ngIf="registerForm.get('name').hasError('minlength')">Enter minimum 3 characters</mat-error> -->
+                    <!-- <mat-error *ngIf="registerForm.get('name').hasError('maxlength')">Enter maximum 20 characters</mat-error> -->
+
+                </mat-form-field>
+            </div>
+
+            <div fxFlex="100%">
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Email</mat-label>
+                    <input matInput formControlName="email" name="email" required
+                        pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$">
+                    <mat-error *ngIf="registerForm.get('email').hasError('required')">This field is
+                        required</mat-error>
+                    <mat-error *ngIf="registerForm.get('email').hasError('pattern')">Invalid email
+                        address</mat-error>
+
+                </mat-form-field>
+            </div>
+
+
+            <div fxFlex="100%">
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Phone</mat-label>
+                    <input matInput formControlName="phone" name="phone" required pattern="[0-9]*">
+                    <mat-error *ngIf="registerForm.get('phone').hasError('required')">This field is
+                        required</mat-error>
+                    <mat-error *ngIf="registerForm.get('phone').hasError('pattern')">Invalid phone
+                        number</mat-error>
+                    <!-- <mat-error *ngIf="registerForm.get('phone').hasError('minlength')">Enter minimum 10 characters</mat-error> -->
+                    <!-- <mat-error *ngIf="registerForm.get('phone').hasError('maxlength')">Invalid phone number</mat-error> -->
+
+                </mat-form-field>
+            </div>
+
+
+            <div fxFlex="100%">
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Username</mat-label>
+                    <input matInput formControlName="username" name="username" required pattern="[a-z0-9]*">
+                    <mat-error *ngIf="registerForm.get('username').hasError('required')">This field is
+                        required</mat-error>
+                    <mat-error *ngIf="registerForm.get('username').hasError('pattern')">Invalid username</mat-error>
+                    <!-- <mat-error *ngIf="registerForm.get('phone').hasError('minlength')">Enter minimum 10 characters</mat-error> -->
+                    <!-- <mat-error *ngIf="registerForm.get('phone').hasError('maxlength')">Invalid phone number</mat-error> -->
+
+                </mat-form-field>
+            </div>
+
+
+            <div fxFlex="100%" style="margin-left:60%">
+                <button mat-stroked-button color="primary" type="submit" style="width:7rem"
+                    [disabled]="!registerForm.valid">Save<mat-icon
+                        style="margin-left:1rem">check_circle_outline</mat-icon></button>
+                <button mat-stroked-button color="primary" type="button" style="margin-left:1rem;width:7rem"
+                    (click)="cancel()">Reset<mat-icon style="margin-left:1rem">autorenew</mat-icon></button>
+            </div>
+        </div>
+    </form>
+
+</div>
