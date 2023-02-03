@@ -74,14 +74,14 @@ export class DataCardsComponent implements OnInit {
       })
       a.forEach((element: any) => {
         this.claimAmount += Number(element.claimedAmount.replace(',', ''));
-        this.paidAmount += Number(element.claimedAmount.replace(',', ''));
+        this.paidAmount += Number(element.paidAmount.replace(',', ''));
       });
       this.claims = a.length;
     }
     else {
       this.totalClaims.forEach((element: any) => {
         this.claimAmount += Number(element.claimedAmount.replace(',', ''));
-        this.paidAmount += Number(element.claimedAmount.replace(',', ''));
+        this.paidAmount += Number(element.paidAmount.replace(',', ''));
       });
       this.claims = this.totalClaims.length;
       
@@ -122,13 +122,13 @@ export class DataCardsComponent implements OnInit {
         this.customers = 1;
         this.claims = 1;
         this.claimAmount += Number(data?.claimedAmount?.replace(',', ''));
-        this.paidAmount += Number(data?.claimedAmount?.replace(',', ''));
+        this.paidAmount += Number(data?.paidAmount?.replace(',', ''));
       } else {
         this.claims = data.length;
         this.customers = data;
         data.forEach((element: any) => {
           this.claimAmount += Number(element.claimedAmount.replace(',', ''));
-          this.paidAmount += Number(element.claimedAmount.replace(',', ''));
+          this.paidAmount += Number(element.paidAmount.replace(',', ''));
         });
       }
 
