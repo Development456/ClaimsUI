@@ -30,9 +30,19 @@ export class AuthServiceService {
   }
 
   changePassword(data: any){
-    return this.http.post(environment.LOGIN + '/user/changepassword', data, httpOptions).pipe(catchError((err:any ) => {
-      this.toastr.error(err.error.message, 'Failed to change password');
-      return of([]);
-      }));
+    return this.http.put(environment.LOGIN + '/user/changepassword', data, httpOptions)
+    .pipe(catchError((err:any ) => { 
+      
+      if(err.error.text.includes("password changed successfully")){
+        this.toastr.success(err.error.text);
+      }else if(err.status.includes("500")){
+        this.toastr.error('somthing went wrong');
+      }
+      else{
+        this.toastr.error(err.error.text, 'Failed to change password');
+       
+      } return of([]);
+    }));  
+   
   }
 }
