@@ -7,36 +7,27 @@
             <span *ngIf="userRole == 'user'">My Claims Application</span>
         </span>
         <span>
-          <span *ngIf="userRole !== 'user'">Hello, Admin!</span>
-          <span *ngIf="userRole == 'user'">Hello, {{userName}}!</span>
-          <span style="margin-left:10px">
-            <button mat-button [matMenuTriggerFor]="menu"><mat-icon>perm_identity</mat-icon></button>
-            <mat-menu #menu="matMenu">
-                <button mat-menu-item class="fs-6 text" (click)="userProfile()"><mat-icon
-                        style="color: rgb(23, 23, 50);">account_circle</mat-icon>My Profile</button>
-                <button mat-menu-item class="fs-6 text" (click)="editInfo()"><mat-icon
-                        style="color: rgb(23, 23, 50)">create</mat-icon>Edit Information</button>
-                <button mat-menu-item class="fs-6 text" (click)="changePassword()"><mat-icon
-                        style="color: rgb(23, 23, 50)">lock</mat-icon>Change Password</button>
-                <button mat-menu-item class="fs-6 text" (click)="role()"><mat-icon
-                        style="color: rgb(23, 23, 50)">supervised_user_circle</mat-icon>Role Assignment</button>
-                       
-            </mat-menu>
+        
+            <span *ngIf="userRole !== 'user'">Hello, Admin!</span>
+            <span *ngIf="userRole == 'user'">Hello, {{userName}}!</span>
+            <span style="margin-left:10px">
+                <button mat-button [matMenuTriggerFor]="menu"><mat-icon>perm_identity</mat-icon></button>
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item class="fs-6 text" (click)="userProfile()"><mat-icon
+                            style="color: rgb(23, 23, 50);">account_circle</mat-icon>My Profile</button>
+                    <button mat-menu-item class="fs-6 text" (click)="editInfo()"><mat-icon
+                            style="color: rgb(23, 23, 50)">create</mat-icon>Edit Information</button>
+                    <button mat-menu-item class="fs-6 text" (click)="changePassword()"><mat-icon
+                            style="color: rgb(23, 23, 50)">lock</mat-icon>Change Password</button>
+                    <button mat-menu-item class="fs-6 text" (click)="role()"><mat-icon
+                            style="color: rgb(23, 23, 50)">supervised_user_circle</mat-icon>Role Assignment</button>
 
-        </span>
-        <span style="margin-left:-15px"><button mat-button (click)="onLogOut()"><mat-icon>logout</mat-icon></button></span>
-                <button mat-menu-item class="fs-6 text"><mat-icon
-                        style="color: rgb(23, 23, 50);">account_circle</mat-icon>My Profile</button>
-                <button mat-menu-item class="fs-6 text"><mat-icon
-                        style="color: rgb(23, 23, 50)">create</mat-icon>Edit Information</button>
-                <button mat-menu-item class="fs-6 text" (click)="changePassword()"><mat-icon
-                        style="color: rgb(23, 23, 50)">lock</mat-icon>Change Password</button>
-                <button mat-menu-item class="fs-6 text"><mat-icon
-                        style="color: rgb(23, 23, 50)">supervised_user_circle</mat-icon>Role Assignment</button>
-            </mat-menu>
+                </mat-menu>
 
-        </span>
-        <span><button mat-button (click)="onLogOut()"><mat-icon>logout</mat-icon></button></span>
+            </span>
+            <span style="margin-left:-15px"><button mat-button
+                    (click)="onLogOut()"><mat-icon>logout</mat-icon></button></span>
+
         </span>
 
     </mat-toolbar>

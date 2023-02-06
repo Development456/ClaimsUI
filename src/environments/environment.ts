@@ -16,10 +16,7 @@ export const environment = {
   CUSTOMER: 'http://localhost:8400',
   LOGIN: 'http://localhost:8300',
   AUTH_URL: 'http://172.174.113.233:9002',
-  CLAIM:'http://localhost:8100',
-  FACILITY:'http://localhost:8200',
-  CUSTOMER:'http://localhost:8400',
-  LOGIN:'http://localhost:8300',
+
   API: 'http://localhost:8500'
 
 };

@@ -5,22 +5,19 @@
             Edit Information
             <button class="dialog-title" mat-icon-button aria-label="close dialog" mat-dialog-close>
                 <mat-icon>close</mat-icon>
-              </button>
+            </button>
         </div>
     </div>
     <br>
 
-    <div>
-        <div class="wrapper frame" style="background-image: url(assets/images/user.png);">
-            <input type="file" class="my_file" placeholder="Update Image"
-                accept="image/png, image/jpeg, image/jpg, image/img" (change)="selectImage($event)">
-        </div>
-    </div>
+
 
     <form [formGroup]="registerForm">
-        <div fxLayout="column" style="margin-top:-6rem">
+        <div fxLayout="column">
 
-            <div fxFlex="100%">
+
+
+            <div fxFlex="100%" style="margin-top:7rem">
                 <mat-form-field appearance="outline" class="form-field">
                     <mat-label>Name</mat-label>
                     <input matInput formControlName="name" name="name" required pattern="[a-zA-Z]*">
@@ -46,6 +43,8 @@
 
                 </mat-form-field>
             </div>
+
+
 
 
             <div fxFlex="100%">
@@ -77,7 +76,19 @@
             </div>
 
 
-            <div fxFlex="100%" style="margin-left:60%">
+            <div style="margin-top:-26.2rem">
+
+                <img src="{{imageurl  === ''? 'assets/images/user.png': imageurl }}" alt=""
+                    style="border-radius: 50%;height: 13rem;width:13rem;margin-left:62%">
+                <input type="file" placeholder="Update Image" class="choosefile"
+                    accept="image/png, image/jpeg, image/jpg, image/img" (change)="selectImage($event)"
+                    formControlName="image" name="image" style="margin-left:60%">
+            </div>
+
+
+
+
+            <div fxFlex="100%" style="margin-left:60%;margin-top:14rem">
                 <button mat-stroked-button color="primary" type="submit" style="width:7rem"
                     [disabled]="!registerForm.valid">Save<mat-icon
                         style="margin-left:1rem">check_circle_outline</mat-icon></button>

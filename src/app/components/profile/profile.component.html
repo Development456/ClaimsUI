@@ -21,7 +21,7 @@
         <p style="margin-top: -6rem;">
             <mat-form-field appearance=outline>
                 <mat-label> Name </mat-label>
-                <input matInput value="John Doe" [readonly]="true">
+                <input matInput value="{{userdata.name}}" [readonly]="true">
                 <!-- <mat-hint> Hint </mat-hint>   -->
             </mat-form-field>
         </p>
@@ -29,7 +29,7 @@
         <p>
             <mat-form-field appearance=outline>
                 <mat-label> Email </mat-label>
-                <input matInput value="johnd@gmail.com" [readonly]="true">
+                <input matInput value="{{userdata.email}}" [readonly]="true">
                 <!-- <mat-hint> Hint </mat-hint>   -->
             </mat-form-field>
         </p>
@@ -37,7 +37,7 @@
         <p>
             <mat-form-field appearance=outline>
                 <mat-label> Phone </mat-label>
-                <input matInput value="(123) 456 7890" [readonly]="true">
+                <input matInput value="{{userdata.phone}}" [readonly]="true">
                 <!-- <mat-hint> Hint </mat-hint>   -->
             </mat-form-field>
         </p>
@@ -45,7 +45,7 @@
         <p>
             <mat-form-field appearance=outline>
                 <mat-label> Username </mat-label>
-                <input matInput value="johnd098" [readonly]="true">
+                <input matInput value="{{userdata.username}}" [readonly]="true">
                 <!-- <mat-hint> Hint </mat-hint>   -->
             </mat-form-field>
         </p>

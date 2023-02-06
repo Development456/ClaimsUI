@@ -12,4 +12,15 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
   }
 
+
+
+  userdata = {
+    "username": "abhi567",
+    "password": "$2a$10$hO8/oCL93IKbezENoaoxRuJIWfpyBapYKODXcwWdQOvY3KWyqINuq",
+    "name": "abhi567",
+    "email": "abhi567@gmail.com",
+    "phone": "2368428248",
+  }
+
+
 }
