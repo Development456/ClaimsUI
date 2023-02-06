@@ -48,30 +48,19 @@ export class ChangePasswordComponent implements OnInit {
 
   public passwordChange(){
     this.submitted = true;
-    console.log(this.changePasswordForm.value, '--formData')
-
-    if(this.changePasswordForm.invalid){
-      return;
-    }console.log('failed to change');
-    // this.authService.changePassword(this.changePasswordForm.value).subscribe(data => {
-    //   console.log(data, "password change")
-    //   this.submitted = true;
-    //   console.log(data, 'true');
-    //   this.toastr.success(data);
-    //   alert(data);
-      
-    //   this.onLogOut();
-
-    // }, err => {
-    //   this.submitted = false;
-    //   console.log(err, 'data');
-
-    // })
+    this.authService.changePassword(this.changePasswordForm.value).subscribe(data => {
+      console.log(data,'test');
+      // this.onLogOut();
+    });
 
   }
 
   public cancelchangePasswordForm(){
     this.submitted = false;
+    this.changePasswordForm.reset();
+  }
+
+  public resetForm(){
     this.changePasswordForm.reset();
   }
 
