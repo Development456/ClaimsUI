@@ -64,8 +64,8 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-  role() {
-    window.alert("working!!")
+  public role(){
+    
   }
 
   changePassword() {

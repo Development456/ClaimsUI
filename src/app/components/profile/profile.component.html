@@ -12,16 +12,16 @@
     <br>
 
     <div>
-        <img src="assets/images/user.png" alt="" class="frame">
+        <img src="{{users.image === ''? 'assets/images/user.png' : users.image}}" alt="" class="frame">
     </div>
 
 
     <div>
 
-        <p style="margin-top: -6rem;">
+        <p style="margin-top: -9rem;">
             <mat-form-field appearance=outline>
                 <mat-label> Name </mat-label>
-                <input matInput value="{{userdata.name}}" [readonly]="true">
+                <input matInput value="{{filterdata.name}}" [readonly]="true">
                 <!-- <mat-hint> Hint </mat-hint>   -->
             </mat-form-field>
         </p>
@@ -29,7 +29,7 @@
         <p>
             <mat-form-field appearance=outline>
                 <mat-label> Email </mat-label>
-                <input matInput value="{{userdata.email}}" [readonly]="true">
+                <input matInput value="{{filterdata.email}}" [readonly]="true">
                 <!-- <mat-hint> Hint </mat-hint>   -->
             </mat-form-field>
         </p>
@@ -37,7 +37,7 @@
         <p>
             <mat-form-field appearance=outline>
                 <mat-label> Phone </mat-label>
-                <input matInput value="{{userdata.phone}}" [readonly]="true">
+                <input matInput value="{{filterdata.phone}}" [readonly]="true">
                 <!-- <mat-hint> Hint </mat-hint>   -->
             </mat-form-field>
         </p>
@@ -45,7 +45,15 @@
         <p>
             <mat-form-field appearance=outline>
                 <mat-label> Username </mat-label>
-                <input matInput value="{{userdata.username}}" [readonly]="true">
+                <input matInput value="{{filterdata.username}}" [readonly]="true">
+                <!-- <mat-hint> Hint </mat-hint>   -->
+            </mat-form-field>
+        </p>
+
+        <p>
+            <mat-form-field appearance=outline>
+                <mat-label> Role </mat-label>
+                <input matInput value="{{filterdata.roles[0].name}}" [readonly]="true">
                 <!-- <mat-hint> Hint </mat-hint>   -->
             </mat-form-field>
         </p>

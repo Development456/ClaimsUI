@@ -1,6 +1,7 @@
 export interface  Claim {
     claimId: string;
     facilityId: string;
+    customerId: string;
     palletQuantity: number;
     documentType: string;
     claimedAmount: string;
@@ -10,9 +11,11 @@ export interface  Claim {
     creatorId: string;
     lastUpdateId: string;
     closedDate: string;
-    createDate: string;
+    createdDate: string;
     lastUpdateDate: string;
+    paidAmount: string;
     _id: string;
+    
 }
 
 export interface LoginDetails{
@@ -22,4 +25,14 @@ export interface LoginDetails{
     roles:string[];
     tokenType:string;
     username:string
+  }
+
+
+  export interface UserDetails{
+    name: string ;
+    email: string;
+    username: string;
+    phone: string;
+    role: string;
+
   }
