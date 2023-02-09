@@ -35,13 +35,16 @@ export class ProfileComponent implements OnInit {
   }
 
   imageurl = localStorage.getItem('image');
-
+  
   ngOnInit(): void {
     this.getuserInfo();
 
     this.users = JSON.parse(sessionStorage.getItem('1') || '[]')
     console.log(this.users);
 
+    this.imageurl = sessionStorage.getItem('imageurl');
+    console.log(this.imageurl);
+    
 
   }
 

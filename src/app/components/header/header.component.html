@@ -27,7 +27,8 @@
             <span *ngIf="userRole == 'user'" style="margin-top: 5px;">Hello, {{userName}}!</span>
             <span style="margin-left: 2vh;">
                 <button mat-button [matMenuTriggerFor]="menu" style="min-width: 40px;line-height: 0px;">
-                    <mat-icon>perm_identity</mat-icon>
+                    <mat-icon>manage_accounts</mat-icon>
+                    <!-- perm_identity -->
                 </button>
                 <mat-menu #menu="matMenu">
                     <button mat-menu-item class="fs-6 text" (click)="userProfile()">

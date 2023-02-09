@@ -2,9 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { AuthServiceService } from 'src/app/Services/auth-service.service';
 import { TokenStorageService } from 'src/app/Services/token-storage.service';
 import { UserDetails } from '../model/claim.model';
+
 
 @Component({
   selector: 'app-edit-information',
@@ -19,9 +21,11 @@ export class EditInformationComponent implements OnInit {
   userdetails: any;
   filterdata: any;
   check: any;
+  errorMessage = '';
+
   
 
-  constructor(private authService: AuthServiceService, private tokenStorage: TokenStorageService, private http : HttpClient, private router: Router) { 
+  constructor(private authService: AuthServiceService, private tokenStorage: TokenStorageService, private http : HttpClient, private router: Router, private toastr: ToastrService,) { 
     this.registerForm = new FormGroup({
       name: new FormControl('', [Validators.pattern("[a-zA-Z]*[0-9]*"), Validators.required, Validators.minLength(3), Validators.maxLength(20)]),
       email: new FormControl('', [Validators.pattern("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$"), Validators.required, Validators.email]),
@@ -48,7 +52,12 @@ export class EditInformationComponent implements OnInit {
 
     console.log(x);
     x["id"] = this.filterdata.id;
-    this.authService.editUser(x).subscribe();
+    this.authService.editUser(x).subscribe(data => {
+      this.toastr.success('Data updated successfully')
+    }, err =>{
+      this.errorMessage = err.error.message;
+    });
+    
   }
 
 
@@ -65,7 +74,7 @@ export class EditInformationComponent implements OnInit {
         this.imageurl = event.target?.result;
         console.log(this.imageurl);
 
-        localStorage.setItem("imageurl", this.imageurl);
+        sessionStorage.setItem("imageurl", this.imageurl);
 
       }
     }
@@ -99,10 +108,9 @@ export class EditInformationComponent implements OnInit {
         email : this.filterdata.email,
         phone : this.filterdata.phone,
         username : this.filterdata.username,
-        image : this.filterdata.image
+        image : this.imageurl
       })
       
-
     })
   }
 
