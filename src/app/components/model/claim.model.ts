@@ -26,3 +26,13 @@ export interface LoginDetails{
     tokenType:string;
     username:string
   }
+
+
+  export interface UserDetails{
+    name: string ;
+    email: string;
+    username: string;
+    phone: string;
+    role: string;
+
+  }

@@ -21,51 +21,75 @@
 
 <mat-list>
     <mat-list-item class="list-group-item-primary">
-        <span matListItemLine>Claim ID : {{claimData['claimId']}}</span>
+        <mat-icon style="margin-left:1.5vh; color: white;">perm_identity</mat-icon>
+        <span matListItemLine style="margin-left:1.8rem">Claim ID : {{claimData['claimId']}}</span>
         <!-- <span matListItemLine></span> -->
     </mat-list-item>
+    
     <mat-divider></mat-divider>
-    <mat-list-item>
-        <span matListItemLine>Facility ID : {{claimData['facilityId']}} </span>
-        <!-- <span matListItemLine></span> -->
-    </mat-list-item>
-    <mat-divider></mat-divider>
-    <mat-list-item>
 
+    <mat-list-item>
+        <mat-icon style="margin-left:1.5vh; color: rgba(208,226,254,255);">account_circle</mat-icon>
+        <span matListItemLine style="margin-left:1.8rem">Facility ID : {{claimData['facilityId']}} </span>
+        <!-- <span matListItemLine></span> -->
+    </mat-list-item>
+
+    <mat-divider></mat-divider>
+
+    <mat-list-item class="list-group-item-primary">
         <!-- <span matListItemTitle > </span> -->
-        <span matListItemLine>Pallet Quantity : {{claimData['palletQuantity']}}</span>
+        <mat-icon style="margin-left:1.5vh; color: white;">shopping_basket</mat-icon>
+        <span matListItemLine style="margin-left:1.8rem">Pallet Quantity : {{claimData['palletQuantity']}}</span>
     </mat-list-item>
-    <mat-divider></mat-divider>
-    <mat-list-item>
 
-        <!-- <span matListItemTitle></span> -->
-        <span matListItemLine>Document Type : {{claimData['documentType']}}</span>
-    </mat-list-item>
     <mat-divider></mat-divider>
-    <mat-list-item class="list-group-item-primary">
-        <!-- <span matListItemTitle></span> -->
-        <mat-icon style="margin-right: 10px; color: white;"> attach_money</mat-icon>
-        <span matListItemLine>Claimed Amount : {{claimData['claimedAmount']}}</span>
-    </mat-list-item>
-    <mat-divider></mat-divider>
+
     <mat-list-item>
         <!-- <span matListItemTitle></span> -->
-        <span matListItemLine>Service Provider Claim ID :  {{claimData['serviceProviderClaimId']}}</span>
+        <mat-icon style="margin-left:1.5vh; color: rgba(208,226,254,255);">insert_drive_file</mat-icon>
+        
+        <span matListItemLine style="margin-left:1.8rem">Document Type : {{claimData['documentType']}}</span>
     </mat-list-item>
+
     <mat-divider></mat-divider>
+
     <mat-list-item class="list-group-item-primary">
         <!-- <span matListItemTitle></span> -->
-        <span matListItemLine>Claim Status : {{claimData['claimStatus']}}</span>
+        <mat-icon style="margin-left:1.5vh; color: white;"> attach_money</mat-icon>
+        <span matListItemLine style="margin-left:1.8rem">Claimed Amount : {{claimData['claimedAmount']}}</span>
     </mat-list-item>
+
     <mat-divider></mat-divider>
+
     <mat-list-item>
-        <span matListItemLine>Claim Type : {{claimData['claimType']}} </span>
+        <!-- <span matListItemTitle></span> -->
+        <mat-icon style="margin-left:1.5vh; color:rgba(208,226,254,255);">pin</mat-icon>
+        <span matListItemLine style="margin-left:1.8rem">Service Provider Claim ID :  {{claimData['serviceProviderClaimId']}}</span>
+    </mat-list-item>
+
+    <mat-divider></mat-divider>
+
+    <mat-list-item class="list-group-item-primary">
+        <!-- <span matListItemTitle></span> -->
+        <mat-icon style="margin-left:1.5vh; color: white;">leaderboard</mat-icon>
+        <span matListItemLine style="margin-left:1.8rem">Claim Status : {{claimData['claimStatus']}}</span>
+    </mat-list-item>
+
+    <mat-divider></mat-divider>
+
+    <mat-list-item>
+        <mat-icon style="margin-left:1.5vh; color: rgba(208,226,254,255);">change_history</mat-icon>
+        <span matListItemLine style="margin-left:1.8rem">Claim Type : {{claimData['claimType']}} </span>
         <!-- <span matListItemLine></span> -->
     </mat-list-item>
+
     <mat-divider></mat-divider>
+
     <mat-list-item class="list-group-item-primary">
         <!-- <span matListItemTitle></span> -->
-        <span matListItemLine>Creation Date : {{claimData['creationDate']}}</span>
+        
+        <mat-icon style="margin-left:1.5vh; color: white;">calendar_today</mat-icon>
+        <span matListItemLine style="margin-left:1.8rem">Created Date : {{claimData['createdDate']}}</span>
     </mat-list-item>
 
 </mat-list>
