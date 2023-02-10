@@ -28,8 +28,7 @@ export class ProfileComponent implements OnInit {
       'username': '',
       'name': '',
       'email': '',
-      'phone': '',
-      'role': ''
+      'phone': ''
     }];
 
   }
