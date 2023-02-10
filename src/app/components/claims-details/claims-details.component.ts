@@ -6,7 +6,7 @@ import { ColumnMode, SelectionType } from '@swimlane/ngx-datatable';
 import { Subscription } from 'rxjs';
 import { ClaimsApiService } from 'src/app/Services/claims-api.service';
 import { Claim } from '../model/claim.model';
-
+import { PaymentData } from '../mock-data/payment-details'
 @Component({
   selector: 'app-claims-details',
   templateUrl: './claims-details.component.html',
@@ -32,6 +32,7 @@ export class ClaimsDetailsComponent implements OnInit, OnDestroy {
   updateCalims: Subscription = new Subscription();
   isLoading: boolean = false;
   editdata:any
+  paymentData : any = [];
 
   constructor(public dialogRef: MatDialogRef<ClaimsDetailsComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any, 
@@ -65,7 +66,9 @@ export class ClaimsDetailsComponent implements OnInit, OnDestroy {
       }) 
     });
 
-
+    this.paymentData = PaymentData[0];
+    console.log(this.paymentData);
+    
   
 
 
@@ -73,7 +76,7 @@ export class ClaimsDetailsComponent implements OnInit, OnDestroy {
       this.ordersList = this.data.orders;
     }, 500)
     this.filteredColumns = [{ "name": "Item", "props": "item", width: 60 }, 
-                            { "name": "Description", props: "des" }, 
+                            { "name": "Description", props: "des"}, 
                             { "name": "Date Code", props: "dateCode" },
                             { "name": "LOT", props: "lot" }, 
                             { "name": "Quantity", props: "quantity" },
@@ -116,17 +119,17 @@ export class ClaimsDetailsComponent implements OnInit, OnDestroy {
     });
 
     this.paymentInformation = this._formBuilder.group({
-      apVendor: ['Vendor', Validators.required], 
-      paidAmount: [this.data.rowData.paidAmount, Validators.required],
-      paymentReference: ['789Sd', Validators.required], 
-      paymentDate: ['12/19/2022', Validators.required],
-      invoiceNumber: ['123', Validators.required], 
-      costCenter: ['Billing team', Validators.required],
-      glCode: ['78usd'], 
-      accuralAmount: ['49', Validators.required],
-      invoiceAmount: ['49'], 
+      apVendor: [this.paymentData.apVendor, Validators.required], 
+      paidAmount: [this.data.rowData.paidAmount.slice(1), Validators.required],
+      paymentReference: [this.paymentData.paymentReference, Validators.required], 
+      paymentDate: [this.paymentData.paymentDate, Validators.required],
+      invoiceNumber: [this.paymentData.invoiceNumber, Validators.required], 
+      costCenter: [this.paymentData.costCenter, Validators.required],
+      glCode: [this.paymentData.glCode], 
+      accuralAmount: [this.paymentData.accuralAmount, Validators.required],
+      invoiceAmount: [this.paymentData.invoiceAmount], 
       claimedAmount: [this.data.rowData.claimedAmount.slice(1), Validators.required],
-      currencyType: ['USD', Validators.required],
+      currencyType: [this.paymentData.currencyType, Validators.required],
 
     });
 
@@ -145,12 +148,15 @@ export class ClaimsDetailsComponent implements OnInit, OnDestroy {
       console.log('Edit succesful!!')
       this.isLoading = false;
       this._snackBar.open("Progress Saved", "Close", {  duration: 5000 });
-      this.dialogRef.close({data: this.claimsUpdatedData});
+      // this.dialogRef.close({data: this.claimsUpdatedData});
     }, 
     (error) => {
       this.isLoading = false;
       this._snackBar.open("Error while Editing", "Close", {  duration: 3000 });
     });
+    
+    console.log(this.paymentInformation);
+    
   }
 
   editServiceCall(firstFormGroup: any, costDetails: any, paymentInformation: any) {
@@ -251,4 +257,8 @@ export class ClaimsDetailsComponent implements OnInit, OnDestroy {
     return [day, month, year].join('-');
   }
 
+  home(){
+    // this.dialogRef.close({data: this.claimsUpdatedData});
+    this.dialogRef.close();
+  }
 }

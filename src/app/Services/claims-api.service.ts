@@ -74,7 +74,7 @@ export class ClaimsApiService {
     .set('content-type', 'application/json')
     .set('Access-Control-Allow-Origin', '*');
 
-    return this.http.post(environment.CLAIM + '/claims', claim,{headers}).pipe(catchError((err:any ) => {
+    return this.http.post(environment.CLAIM + '/claims/addclaims', claim,{headers}).pipe(catchError((err:any ) => {
       this.toastr.error('Api Failure with status code : '+ err.status, 'Post Claims Failed');
       return of([]);
     }));

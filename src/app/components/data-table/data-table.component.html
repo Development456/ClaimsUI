@@ -1,10 +1,11 @@
 <div>
-    <mat-card-header *ngIf="user_Role!=='user'" class="absolute-center text-center"
+   
+    <!-- <mat-card-header *ngIf="user_Role!=='user'" class="absolute-center text-center"
         style="background-color: #efd087;border-radius:4px;">
         <mat-card-subtitle style="margin-top: 10%;">
-            <h1>Claims Details</h1>
+            <h1>Order Details</h1>
         </mat-card-subtitle>
-    </mat-card-header>
+    </mat-card-header> -->
     <mat-card-header *ngIf="user_Role=='user'" class="absolute-center text-center"
         style="background-color: #efd087;border-radius:4px;">
         <mat-card-subtitle style="margin-top: 10%;">
@@ -187,12 +188,13 @@
             <div class="float-end">
                 <button [disabled]="filterForm.errors !== null &&  !campaignOne.dirty" mat-raised-button color="basic"
                     class="save" style="background-color: #00aae7; color: white;" (click)="searchFilter()">
-                    <mat-icon>search</mat-icon>
+                    <!-- <mat-icon>search</mat-icon> -->
                     Search
                 </button>
                 <button [disabled]="filterForm.errors !== null && !campaignOne.dirty" mat-raised-button color="primary"
                     class="reset" (click)="resetFilterApplied()">
-                    <mat-icon>refresh</mat-icon> Reset
+                    <!-- <mat-icon>refresh</mat-icon> -->
+                     Reset
                 </button>
             </div>
         </mat-card>

@@ -5,6 +5,13 @@
 </div> -->
 <mat-card>
 
+<mat-card-header *ngIf="user_Role!=='user'" class="absolute-center text-center"
+style="background-color: #efd087;border-radius:4px;">
+<mat-card-subtitle style="margin-top: 10%;">
+    <h1>Order Details</h1>
+</mat-card-subtitle>
+</mat-card-header>
+
     <app-data-order-table [rows]="ordersDataItems" (newItemEvent)="listItems($event)" [showActions]="true">
     </app-data-order-table>
     <mat-card *ngIf="ordersList.row.length > 0">
