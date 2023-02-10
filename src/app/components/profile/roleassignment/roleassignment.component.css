@@ -1,0 +1,23 @@
+.example-sidenav-content {
+    padding: 2%;
+}
+.headerOption:hover {
+    background-color: rgb(245, 243, 243);
+    border-bottom: 2px solid #0158ff;
+    color: #0158ff;
+}
+
+.align {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    height: 60px;
+  }
+
+  
+.boxMargin {
+    margin: 0 10px;
+  }
+  mat-checkbox{
+    color: black;
+  }

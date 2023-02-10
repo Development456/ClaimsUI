@@ -65,7 +65,7 @@ export class HeaderComponent implements OnInit {
   }
 
   public role(){
-    
+    this.router.navigate(['/roles']);
   }
 
   changePassword() {

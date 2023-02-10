@@ -51,6 +51,7 @@ import { authInterceptorProviders } from './Services/auth.interceptor';
 import { ProfileComponent } from './components/profile/profile.component';
 import { EditInformationComponent } from './components/edit-information/edit-information.component';
 import { ChangePasswordComponent } from './components/profile/change-password/change-password.component';
+import { RoleassignmentComponent, RolesComponent } from './components/profile/roleassignment/roleassignment.component';
 
 
 @NgModule({
@@ -72,7 +73,9 @@ import { ChangePasswordComponent } from './components/profile/change-password/ch
     BottomSheetOverviewExampleSheet,
     ProfileComponent,
     EditInformationComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    RoleassignmentComponent,
+    RolesComponent
   ],
   imports: [
     BrowserModule,
