@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-
 import { ClaimsApiService } from 'src/app/Services/claims-api.service';
 import { Color } from 'ng2-charts';
 import * as moment from 'moment';
@@ -11,6 +10,9 @@ import * as moment from 'moment';
 })
 export class DoughnutChartComponent implements OnInit {
   @Input() claimData: any[] = [];
+  @Input() mobileDevice: any;
+  @Input() tabDevice: any;
+  @Input() desktopDevice: any;
   totalClaims: any = [];
   doughnutclaims: any = [];
   @Input() set facilityId(id: string) {
@@ -22,14 +24,31 @@ export class DoughnutChartComponent implements OnInit {
   public doughnutChartData: any[] = [];
   public doughnutChartType: any = 'doughnut';
   public doughnutOptions: any = {
+    responsive:true,
     segmentShowStroke: false,
     animateScale: true,
     centerText: {
       display: true,
       text: "280"
     },
+    showInLegend: false, 
     legend: {
-      position: 'right'
+      position: 'right',
+      display: true
+    }
+  };
+  public doughnutOptionsMobile: any = {
+    responsive:true,
+    segmentShowStroke: false,
+    animateScale: true,
+    centerText: {
+      display: true,
+      text: "280"
+    },
+    showInLegend: false, 
+    legend: {
+      position: 'right',
+      display: false
     }
   };
   public doughnutChartColor: Color[] = [
@@ -67,6 +86,7 @@ export class DoughnutChartComponent implements OnInit {
   }
   ngOnInit(): void {
     this.isLoading = true;
+
     this.http.getClaims().subscribe((data: any) => {
 
       this.totalClaims = data;
@@ -87,8 +107,8 @@ export class DoughnutChartComponent implements OnInit {
         this.doughnutChartData.push(status[1]);
       })
     })
+   
   }
-
   chartrender(doughnutclaims:any){
 
     if (doughnutclaims.length === 0) 
