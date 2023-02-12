@@ -1,0 +1,74 @@
+<app-header [dashboard]="drawer"></app-header>
+<!-- <mat-drawer-container class="example-container" autosize> -->
+    <mat-drawer #drawer class="example-sidenav" mode="side">
+        <!-- <mat-list>
+            <mat-list-item class="headerOption" (click)="navOptions = 'home'">
+                <mat-icon>home</mat-icon> &nbsp; Claims Home
+            </mat-list-item>
+            <mat-list-item class="headerOption" (click)="navOptions = 'addClaim'">
+                <mat-icon>add</mat-icon> &nbsp; Add Claims
+            </mat-list-item>
+        </mat-list> -->
+    </mat-drawer>
+
+<div class="conatiner">
+    <div class="row">
+        <div class="col">
+            <mat-card>
+                    <!-- <mat-card class="mt-3" style="margin-left: 30px;"> -->
+                        <mat-card-header style="background-color: #d7c18a;border-radius:4px;">
+                            <mat-card-title style="margin-top: 10%;">Roles Assigned</mat-card-title>
+                        </mat-card-header><br>
+                        <mat-card-content>
+                            <section class="align">
+                                <mat-checkbox class="boxMargin" checked="true" disabled="trur">{{roles}}</mat-checkbox>
+                            </section>
+                            <!-- <span>
+                                <p>{{roles}}</p>
+                            </span> -->
+                        </mat-card-content>
+                <!-- </mat-card> -->
+            <!-- </div> -->
+            <br>
+                <mat-card-header style="background-color: #d7c18a;border-radius:4px;">
+                    <mat-card-title style="margin-top: 10%;">Role Assignment</mat-card-title>
+                </mat-card-header><br>
+                <mat-card-content>
+                    <form role="search" align="end">
+                        <span>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Search</mat-label>
+                                <input matInput type="search" aria-label="Search" (keyup)="userListFilter($event)">  
+                            </mat-form-field>
+                            <button mat-icon-button type="submit" style="color:green;">
+                                <mat-icon>search</mat-icon>
+                            </button>     
+                        </span>
+                    </form>
+                <mat-divider style="color: black; height: 3px;"></mat-divider>
+
+                <ngx-datatable class="material" [scrollbarH]="true" [rows]="rows" [columns]="filteredColumns"
+                [selectionType]="SelectionType.checkbox" [columnMode]="ColumnMode.force"
+                [headerHeight]="40" [footerHeight]="40" rowHeight="auto" [limit]="10" [rowHeight]="'auto'">
+                <ngx-datatable-column *ngFor="let col of filteredColumns" [name]="col.name" [prop]="col.props">
+                </ngx-datatable-column>
+                <ngx-datatable-column *ngIf="showActions" [frozenRight]="true" name="Actions" [resizeable]="false"
+                [sortable]="false" [draggable]="false" [canAutoResize]="true">
+                <ng-template let-row="row" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+                        <button mat-button color="primary" (click)="getRole()">
+                            <mat-icon>assignment_ind</mat-icon>&nbsp;
+                            <span>Assign Role</span>
+                        </button>
+                </ng-template>
+            </ngx-datatable-column>
+                </ngx-datatable>
+
+                </mat-card-content>
+
+            </mat-card>
+        </div>
+
+       
+    </div>
+</div>
+<!-- </mat-drawer-container> -->

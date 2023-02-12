@@ -11,43 +11,134 @@
     </div>
     <br>
 
-    <div>
-        <img src="assets/images/user.png" alt="" class="frame">
-    </div>
+    <!-- <div>
+        <img src="{{imageurl === ''? 'assets/images/user.png': imageurl}}" alt="" class="frame">
+    </div> -->
 
 
-    <div>
+    <!-- <div>
 
-        <p style="margin-top: -6rem;">
+        <p style="margin-top: -9rem;">
             <mat-form-field appearance=outline>
                 <mat-label> Name </mat-label>
-                <input matInput value="John Doe" [readonly]="true">
-                <!-- <mat-hint> Hint </mat-hint>   -->
+                <input matInput value="{{filterdata.name}}" [readonly]="read">
             </mat-form-field>
+            
         </p>
+
 
         <p>
             <mat-form-field appearance=outline>
                 <mat-label> Email </mat-label>
-                <input matInput value="johnd@gmail.com" [readonly]="true">
-                <!-- <mat-hint> Hint </mat-hint>   -->
+                <input matInput value="{{filterdata.email}}" [readonly]="read">
             </mat-form-field>
         </p>
 
         <p>
             <mat-form-field appearance=outline>
                 <mat-label> Phone </mat-label>
-                <input matInput value="(123) 456 7890" [readonly]="true">
-                <!-- <mat-hint> Hint </mat-hint>   -->
+                <input matInput value="{{filterdata.phone}}" [readonly]="read">
             </mat-form-field>
         </p>
 
         <p>
             <mat-form-field appearance=outline>
                 <mat-label> Username </mat-label>
-                <input matInput value="johnd098" [readonly]="true">
-                <!-- <mat-hint> Hint </mat-hint>   -->
+                <input matInput value="{{filterdata.username}}" [readonly]="read">
             </mat-form-field>
         </p>
-    </div>
+
+        <p>
+            <mat-form-field appearance=outline>
+                <mat-label> Role </mat-label>
+                <input matInput value="{{filterdata.roles[0].name}}" [readonly]="read">
+            </mat-form-field>
+        </p>
+    </div> -->
+
+
+    <form [formGroup]="registerForm">
+
+        <div fxLayout="column">
+
+            <div fxFlex="100%" style="margin-top:4rem">
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Name</mat-label>
+                    <input matInput value="{{filterdata.username}}" formControlName="name" name="name" required pattern="[a-zA-Z]*[0-9]*" [readonly]="read">
+                    <mat-error *ngIf="registerForm.get('name').hasError('required')">This field is
+                        required</mat-error>
+                </mat-form-field>
+            </div>
+            <br>
+            <div fxFlex="100%">
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Email</mat-label>
+                    <input matInput value="{{filterdata.email}}" formControlName="email" name="email" required
+                        pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" [readonly]="read">
+                    <mat-error *ngIf="registerForm.get('email').hasError('required')">This field is
+                        required</mat-error>
+                    <mat-error *ngIf="registerForm.get('email').hasError('pattern')">Invalid email
+                        address</mat-error>
+
+                </mat-form-field>
+            </div>
+            <br>
+            <div fxFlex="100%">
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Phone</mat-label>
+                    <input matInput formControlName="phone" name="phone" required pattern="[0-9]*" [readonly]="read">
+                    <mat-error *ngIf="registerForm.get('phone').hasError('required')">This field is
+                        required</mat-error>
+                    <mat-error *ngIf="registerForm.get('phone').hasError('pattern')">Invalid phone
+                        number</mat-error>
+                    <!-- <mat-error *ngIf="registerForm.get('phone').hasError('minlength')">Enter minimum 10 characters</mat-error> -->
+                    <!-- <mat-error *ngIf="registerForm.get('phone').hasError('maxlength')">Invalid phone number</mat-error> -->
+
+                </mat-form-field>
+            </div>
+            <br>
+            <div fxFlex="100%">
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Username</mat-label>
+                    <input matInput formControlName="username" name="username" required pattern="[a-z0-9]*" [readonly]="read">
+                    <mat-error *ngIf="registerForm.get('username').hasError('required')">This field is
+                        required</mat-error>
+                    <mat-error *ngIf="registerForm.get('username').hasError('pattern')">Invalid username</mat-error>
+                    <!-- <mat-error *ngIf="registerForm.get('phone').hasError('minlength')">Enter minimum 10 characters</mat-error> -->
+                    <!-- <mat-error *ngIf="registerForm.get('phone').hasError('maxlength')">Invalid phone number</mat-error> -->
+
+                </mat-form-field>
+            </div>
+            <br>
+            <div fxFlex="100%">
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Role</mat-label>
+                    <input matInput value="{{filterdata.roles[0].name}}" [readonly]="true" disabled>
+                </mat-form-field>
+            </div>
+
+            <div style="margin-top:-33rem;margin-left:0.5rem">
+
+                <!-- <img src="{{imageurl1 === ''? 'assets/images/user.png': imageurl1}}" alt="" class="frame"> -->
+                <img src="{{imageurl  === ''? 'assets/images/user.png': imageurl }}" alt=""
+                    style="border-radius: 50%;height: 13rem;width:13rem;margin-left:58%">
+                <input type="file" placeholder="Update Image" class="choosefile"
+                    accept="image/png, image/jpeg, image/jpg, image/img" (change)="selectImage($event)"
+                    formControlName="image" name="image" style="margin-left:59.5%;margin-top:1vh">
+            </div>
+
+            <div fxFlex="100%" style="margin-left:49%;margin-top:18rem">
+                <button mat-stroked-button color="primary" type="button" style="width:6rem" (click)="enable()">Edit
+                <mat-icon style="margin-left:1rem">create</mat-icon></button>
+                <button mat-stroked-button color="primary" type="submit" style="width:6rem;margin-left:1rem"
+                 aria-label="close dialog" mat-dialog-close
+                    [disabled]="!registerForm.valid" (click)="save(registerForm.value)">Save<mat-icon
+                        style="margin-left:1rem">check_circle_outline</mat-icon></button>
+                <button mat-stroked-button color="primary" type="button" style="margin-left:1rem;width:6rem"
+                    (click)="cancel()">Reset<mat-icon style="margin-left:1rem">autorenew</mat-icon></button>
+            </div>
+
+        </div>
+
+    </form>
 </div>
