@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit {
         if (loginDetails.username != loginData.username && loginDetails.password != loginData.accessToken){
           this.loginFlag = false;
         } else {
-          this.tokenStorage.saveToken(loginData.accessToken);
+          this.tokenStorage.saveToken(loginData.accessToken);   
           this.tokenStorage.saveUser(data);
           this.isLoginFailed = false;
           this.isLoggedIn = true
