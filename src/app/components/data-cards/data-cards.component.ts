@@ -11,6 +11,9 @@ import { Notifier } from '../dashboard/dashboard.component';
 })
 export class DataCardsComponent implements OnInit {
   @Input() facilities: any = [];
+  @Input() mobileDevice: any;
+  @Input() tabDevice: any;
+  @Input() desktopDevice: any;
   @Input() customersDropdown: any = []
   @Input() rowData: any[] = [];
   @Input() notify = new Notifier();
