@@ -204,7 +204,7 @@
                 <ngx-datatable-column *ngFor="let col of filteredColumns" [name]="col.name" [prop]="col.props">
                 </ngx-datatable-column>
                 <ngx-datatable-column *ngIf="showActions" [frozenRight]="true" name="Actions" [resizeable]="false"
-                    [sortable]="false" [draggable]="false" [canAutoResize]="true">
+                    [sortable]="false" [draggable]="false" [canAutoResize]="true" [width]="100">
                     <ng-template let-row="row" let-rowIndex="rowIndex" ngx-datatable-cell-template>
                         <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Menu">
                             <mat-icon color="primary">checklist</mat-icon> Actions

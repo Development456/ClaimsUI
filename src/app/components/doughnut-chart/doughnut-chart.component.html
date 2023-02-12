@@ -25,22 +25,10 @@
     </div>
     <div *ngIf="!isLoading">
         <div style="position: relative; height:auto">
-            <div *ngIf="doughnutChartData.length > 0 && (desktopDevice)">
+            <div *ngIf="doughnutChartData.length > 0">
                 <canvas baseChart [data]="doughnutChartData" [labels]="doughnutChartLabels"
                     [chartType]="doughnutChartType" [options]="doughnutOptions" [colors]="doughnutChartColor"
                     height="150px">
-                </canvas>
-            </div>
-            <div *ngIf="doughnutChartData.length > 0 && (mobileDevice)">
-                <canvas baseChart [data]="doughnutChartData" [labels]="doughnutChartLabels"
-                    [chartType]="doughnutChartType" [options]="doughnutOptionsMobile" [colors]="doughnutChartColor"
-                    height="90px">
-                </canvas>
-            </div>
-            <div *ngIf="doughnutChartData.length > 0 && (tabDevice)">
-                <canvas baseChart [data]="doughnutChartData" [labels]="doughnutChartLabels"
-                    [chartType]="doughnutChartType" [options]="doughnutOptionsMobile" [colors]="doughnutChartColor"
-                    height="120px">
                 </canvas>
             </div>
             <div *ngIf="doughnutChartData.length === 0">

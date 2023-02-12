@@ -37,20 +37,6 @@ export class DoughnutChartComponent implements OnInit {
       display: true
     }
   };
-  public doughnutOptionsMobile: any = {
-    responsive:true,
-    segmentShowStroke: false,
-    animateScale: true,
-    centerText: {
-      display: true,
-      text: "280"
-    },
-    showInLegend: false, 
-    legend: {
-      position: 'right',
-      display: false
-    }
-  };
   public doughnutChartColor: Color[] = [
     { backgroundColor: ['#FF9021', '#4BC0C0', '#36A2EB', '#FF6484', '#13FFFF', '#64FF16', '#FFA3B5', '#FFC898', '#FFE0A1', '#A0D0F5', '#9966FF'] },
   ];
