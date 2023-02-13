@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { catchError, of, BehaviorSubject } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { environment } from 'src/environments/environment';
-import { UserDetails, UserRoles } from '../components/model/claim.model';
+import { Data, UserDetails, UserRoles } from '../components/model/claim.model';
 import { TokenStorageService } from './token-storage.service';
 // import { environment } from 'src/environments/environment.prod';
 const httpOptions = {
@@ -33,19 +33,10 @@ export class AuthServiceService {
     }));
   }
 
-  changePassword(data: any){
-    return this.http.put(environment.LOGIN + '/user/changepassword', data, httpOptions)
-    .pipe(catchError((err:any ) => { 
-      
-      if(err.error.text.includes("password changed successfully")){
-        this.toastr.success(err.error.text);
-      }else if(err.status.includes("500")){
-        this.toastr.error('somthing went wrong');
-      }
-      else{
-        this.toastr.error(err.error.text, 'Failed to change password');
-       
-      } return of([]);
+  changePassword(data: any){    
+    return this.http.put(environment.LOGIN + '/user/changepassword', data, httpOptions).pipe(catchError((err:any ) => { 
+     this.toastr.error(err.error.message, 'Failed to change password');
+      return of([]);
     }));  
    
   }

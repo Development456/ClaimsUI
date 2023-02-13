@@ -34,11 +34,12 @@
                 </form>
             </mat-card-content>
             <mat-error *ngIf="!loginFlag">Wrong Username or Password!!</mat-error>
-            <mat-card-actions fxLayoutAlign="end start" class="mb-3">
-                <button mat-flat-button (click)="userSignUp()">Sign-Up</button>
-                <button mat-button color="primary" (click)="userLogin()" type="button"
+            <mat-card-actions class="mb-3">
+                <button mat-button color="primary">Forgot Password?</button>
+                <button mat-flat-button class="float-end" (click)="userSignUp()">Sign-Up</button>
+                <button mat-button class="float-end" color="primary" (click)="userLogin()" type="button"
                     [disabled]="!(loginForm.valid && loginForm.dirty)">Login</button>
-                <button mat-flat-button (click)="onFormReset()">Reset</button>
+                <button mat-flat-button class="float-end" (click)="onFormReset()">Reset</button>
             </mat-card-actions>
         </mat-card>
     </div>
