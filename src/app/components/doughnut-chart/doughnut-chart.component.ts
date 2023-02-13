@@ -2,7 +2,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ClaimsApiService } from 'src/app/Services/claims-api.service';
 import { Color } from 'ng2-charts';
 import * as moment from 'moment';
-
 @Component({
   selector: 'app-doughnut-chart',
   templateUrl: './doughnut-chart.component.html',
@@ -10,15 +9,13 @@ import * as moment from 'moment';
 })
 export class DoughnutChartComponent implements OnInit {
   @Input() claimData: any[] = [];
-  @Input() mobileDevice: any;
-  @Input() tabDevice: any;
-  @Input() desktopDevice: any;
   totalClaims: any = [];
   doughnutclaims: any = [];
   @Input() set facilityId(id: string) {
     this.facilityChange = id;
     this.facilityCheck();
   };
+  constructor(private http: ClaimsApiService) { }
   facilityChange: string = '';
   public doughnutChartLabels: any[] = [];
   public doughnutChartData: any[] = [];
@@ -34,21 +31,11 @@ export class DoughnutChartComponent implements OnInit {
     showInLegend: false, 
     legend: {
       position: 'right',
-      display: true
-    }
-  };
-  public doughnutOptionsMobile: any = {
-    responsive:true,
-    segmentShowStroke: false,
-    animateScale: true,
-    centerText: {
       display: true,
-      text: "280"
-    },
-    showInLegend: false, 
-    legend: {
-      position: 'right',
-      display: false
+      labels: {
+        boxWidth: 10
+    }
+      
     }
   };
   public doughnutChartColor: Color[] = [
@@ -56,7 +43,7 @@ export class DoughnutChartComponent implements OnInit {
   ];
   isLoading: boolean = false;
 
-  constructor(private http: ClaimsApiService) { }
+
 
   facilityCheck(): void {
     if (this.facilityChange) {
@@ -86,7 +73,6 @@ export class DoughnutChartComponent implements OnInit {
   }
   ngOnInit(): void {
     this.isLoading = true;
-
     this.http.getClaims().subscribe((data: any) => {
 
       this.totalClaims = data;

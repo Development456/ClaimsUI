@@ -36,7 +36,7 @@
             </div>
             <div fxFlexFill fxLayoutGap="20px" fxLayout="row" fxLayout.lt-sm="column" fxLayout.lt-md="column">
                 <mat-card fxFlex="50%">
-                    <app-doughnut-chart [mobileDevice]="isMobile" [tabDevice]="isTablet" [desktopDevice]="isMobile" [claimData]="statusData" [facilityId]="facilityId"></app-doughnut-chart>
+                    <app-doughnut-chart [claimData]="statusData" [facilityId]="facilityId"></app-doughnut-chart>
                 </mat-card>
                 <mat-card fxFlex="50%" fxFlexFill fxLayout="column">
                     <mat-card-header class="title">
