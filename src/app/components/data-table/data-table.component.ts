@@ -296,12 +296,13 @@ export class DataTableOrdersComponent implements OnInit {
 			loginService.user_Role.subscribe(role=>{
 				this.user_Role = role;
 			})
+
 	}
 
 	ngOnInit(): void {
 		this.isLoading = true;
 		this.filteredColumns = this.columns.filter(column => column.show === true);
-		this.filteredRows = this.rows;
+		this.filteredRows = this.http.getOrders();
 		let source$ = zip(this.http.getFacility(), this.http.getCustomer());
 		source$.subscribe(([facility, Customer]) => {
 			this.isLoading = false;
