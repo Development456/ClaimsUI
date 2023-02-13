@@ -15,7 +15,6 @@ const httpOptions = {
 })
 export class AuthServiceService {
 
-
   user_Role = new BehaviorSubject("");
   userId = new BehaviorSubject("");
   constructor(private http: HttpClient, private toastr: ToastrService, private token: TokenStorageService) { }
@@ -50,6 +49,7 @@ export class AuthServiceService {
     }));  
    
   }
+}
 
   getUserInfo() {
     var userDetails = window.sessionStorage.getItem('auth-user');

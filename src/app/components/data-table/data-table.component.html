@@ -197,13 +197,13 @@
         </mat-card>
         <br/>
         <div id="print-section">
-            <ngx-datatable class="material" [scrollbarH]="true" [rows]="filteredRows" [columns]="filteredColumns"
+            <ngx-datatable class="material expandable" [scrollbarH]="true" [rows]="filteredRows" [columns]="filteredColumns"
                 [selectionType]="SelectionType.checkbox" id="claims-table" [columnMode]="ColumnMode.force"
                 [headerHeight]="40" [footerHeight]="40" [limit]="10" [rowHeight]="'auto'">
                 <ngx-datatable-column *ngFor="let col of filteredColumns" [name]="col.name" [prop]="col.props">
                 </ngx-datatable-column>
                 <ngx-datatable-column *ngIf="showActions" [frozenRight]="true" name="Actions" [resizeable]="false"
-                    [sortable]="false" [draggable]="false" [canAutoResize]="true">
+                    [sortable]="false" [draggable]="false" [canAutoResize]="true" [width]="100">
                     <ng-template let-row="row" let-rowIndex="rowIndex" ngx-datatable-cell-template>
                         <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Menu">
                             <mat-icon color="primary">checklist</mat-icon> Actions

@@ -1,10 +1,10 @@
+
 <div>
     <mat-card-header class="absolute-center text-center doughnutheader">
-        <mat-card-subtitle class="mb-0">Claims Breakdown by Status</mat-card-subtitle>
+        <mat-card-subtitle class="mb-5">Claims Breakdown by Status</mat-card-subtitle>
     </mat-card-header>
-
-    <div style="margin-top:-0.3vh">
-        <mat-form-field fxLayoutAlign="end start" class="doughnutrange">
+    <div>
+        <mat-form-field fxLayoutAlign="end start" fxLayoutAlign.lt-sm="start" class="doughnutrange">
             <mat-label style="font-weight:500">Select a date range</mat-label>
             <mat-date-range-input [rangePicker]="picker">
                 <input matStartDate placeholder="Start date" #dateRangeStart>
@@ -23,25 +23,17 @@
         </div>
     </div>
     <div *ngIf="!isLoading">
-
         <div style="position: relative; height:auto">
-
             <div *ngIf="doughnutChartData.length > 0">
-
                 <canvas baseChart [data]="doughnutChartData" [labels]="doughnutChartLabels"
                     [chartType]="doughnutChartType" [options]="doughnutOptions" [colors]="doughnutChartColor"
                     height="150px">
                 </canvas>
-
             </div>
             <div *ngIf="doughnutChartData.length === 0">
-
                 <div style="text-align:center;margin-top:3vh">
-
                     <img src="assets/images/nodata.PNG" alt="" width="38%">
-
                 </div>
-
             </div>
         </div>
     </div>

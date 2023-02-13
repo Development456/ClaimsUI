@@ -24,7 +24,7 @@ export class BarChartComponent implements OnChanges {
   public openClaims: any[] = [];
   public closedClaims: any[] = [];
   public barChartOptions: ChartOptions = {
-    responsive: true,
+    // responsive: true,
     // maintainAspectRatio: false,
     animation: {
       animateScale: true
