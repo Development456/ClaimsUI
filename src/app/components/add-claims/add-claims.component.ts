@@ -137,7 +137,6 @@ export class AddClaimComponent implements OnInit,DoCheck {
 
   }
   submitData() {
-    console.log(this.ordersList);
     const confirmDialog = this.dialog.open(DialogBoxComponent, { data: { orders: this.http.getOrders() }, autoFocus: false });
     confirmDialog.afterClosed().subscribe(result => {
       // console.log(result);

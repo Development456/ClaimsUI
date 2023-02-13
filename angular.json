@@ -80,11 +80,7 @@
                             "browserTarget": "claims_Americold:build:development"
                         }
                     },
-                    "defaultConfiguration": "development",
-                    "options":{
-                        "browserTarget": "claims_Americold:build",
-                        "ssl": true
-                    }
+                    "defaultConfiguration": "development"
                 },
                 "extract-i18n": {
                     "builder": "@angular-devkit/build-angular:extract-i18n",
