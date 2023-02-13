@@ -38,3 +38,7 @@ export interface UserRoles{
     roles: any[];
     name: string;
 }
+
+export interface Data{
+    message: string;
+}
