@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 
+import { DeviceDetectorService } from 'ngx-device-detector';
 import { ClaimsMockData } from '../mock-data/claims-list-constant';
 import { MatDrawer } from '@angular/material/sidenav';
 import { ClaimsApiService } from 'src/app/Services/claims-api.service';
@@ -34,7 +35,10 @@ export class DashboardComponent implements OnInit {
   facilityId: string = '';
   totalClaims: any = [];
   barclaims: any = [];
-
+  deviceInfo:any = null;
+  isMobile:any = false;
+  isTablet:any = false;
+  isDesktopDevice:any = false;
   isLoading: boolean = false;
 
   facilities: any;
@@ -43,22 +47,19 @@ export class DashboardComponent implements OnInit {
   customer: any;
 
 
-  constructor(private http: ClaimsApiService) { }
+  constructor(private http: ClaimsApiService, private deviceService: DeviceDetectorService) { }
 
   ngOnInit(): void {
+    this.deviceInfo = this.deviceService.getDeviceInfo();
+    this.isMobile = this.deviceService.isMobile();
+     this.isTablet = this.deviceService.isTablet();
+     this.isDesktopDevice = this.deviceService.isDesktop();
     this.http.getClaims().subscribe((data) => {
       this.totalClaims = data;
       this.initFilter(this.totalClaims)
     })
-    // this.openClaims = this.claims;
-    // this.closedClaims = this.claims;
     this.http.getClaims().subscribe((data) => {
       this.claims = data;
-      // console.log(this.claims);
-      // this.claims = this.claims.map((claim:any)=>{
-      //   claim.paidAmount="$"+claim.paidAmount;
-      //   return claim.paidAmount;
-      // })
       this.tempData = this.claims
     })
     this.http.getFacility().subscribe((data) => {

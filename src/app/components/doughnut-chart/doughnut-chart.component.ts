@@ -1,9 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-
 import { ClaimsApiService } from 'src/app/Services/claims-api.service';
 import { Color } from 'ng2-charts';
 import * as moment from 'moment';
-
 @Component({
   selector: 'app-doughnut-chart',
   templateUrl: './doughnut-chart.component.html',
@@ -17,19 +15,27 @@ export class DoughnutChartComponent implements OnInit {
     this.facilityChange = id;
     this.facilityCheck();
   };
+  constructor(private http: ClaimsApiService) { }
   facilityChange: string = '';
   public doughnutChartLabels: any[] = [];
   public doughnutChartData: any[] = [];
   public doughnutChartType: any = 'doughnut';
   public doughnutOptions: any = {
+    responsive:true,
     segmentShowStroke: false,
     animateScale: true,
     centerText: {
       display: true,
       text: "280"
     },
+    showInLegend: false, 
     legend: {
-      position: 'right'
+      position: 'right',
+      display: true,
+      labels: {
+        boxWidth: 10
+    }
+      
     }
   };
   public doughnutChartColor: Color[] = [
@@ -37,7 +43,7 @@ export class DoughnutChartComponent implements OnInit {
   ];
   isLoading: boolean = false;
 
-  constructor(private http: ClaimsApiService) { }
+
 
   facilityCheck(): void {
     if (this.facilityChange) {
@@ -87,8 +93,8 @@ export class DoughnutChartComponent implements OnInit {
         this.doughnutChartData.push(status[1]);
       })
     })
+   
   }
-
   chartrender(doughnutclaims:any){
 
     if (doughnutclaims.length === 0) 

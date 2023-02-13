@@ -1,5 +1,5 @@
 <p>
-    <mat-toolbar fxLayout="row" fxLayoutAlign="space-between center">
+    <mat-toolbar fxLayout="row" fxLayoutAlign="space-between center" fxLayout.lt-sm="column" fxLayout.gt-md="row" fxLayout.sm="column">
         <span>
             <mat-icon (click)="toggleMenu()">menu</mat-icon>
             &nbsp;
@@ -34,9 +34,9 @@
                     <button mat-menu-item class="fs-6 text" (click)="userProfile()">
                         <mat-icon style="color: rgb(23, 23, 50);">account_circle</mat-icon>My Profile
                     </button>
-                    <button mat-menu-item class="fs-6 text" (click)="editInfo()">
+                    <!-- <button mat-menu-item class="fs-6 text" (click)="editInfo()">
                         <mat-icon style="color: rgb(23, 23, 50)">create</mat-icon>Edit Information
-                    </button>
+                    </button> -->
                     <button mat-menu-item class="fs-6 text" (click)="changePassword()">
                         <mat-icon style="color: rgb(23, 23, 50)">lock</mat-icon>Change Password
                     </button>

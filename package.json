@@ -26,6 +26,7 @@
         "chart.js": "^2.9.4",
         "jquery": "^3.6.1",
         "ng2-charts": "^2.4.2",
+        "ngx-device-detector": "^5.0.1",
         "ngx-print": "^1.2.1",
         "ngx-toastr": "15.2.1",
         "rxjs": "~7.5.0",

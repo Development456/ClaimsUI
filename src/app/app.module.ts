@@ -57,7 +57,6 @@ import { RoleassignmentComponent, RolesComponent } from './components/profile/ro
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardComponent,
     DataTableComponent,
     DoughnutChartComponent,
     BarChartComponent,
@@ -75,7 +74,8 @@ import { RoleassignmentComponent, RolesComponent } from './components/profile/ro
     EditInformationComponent,
     ChangePasswordComponent,
     RoleassignmentComponent,
-    RolesComponent
+    RolesComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

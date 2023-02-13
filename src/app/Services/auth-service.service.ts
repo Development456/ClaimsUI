@@ -15,7 +15,6 @@ const httpOptions = {
 })
 export class AuthServiceService {
 
-
   user_Role = new BehaviorSubject("");
   userId = new BehaviorSubject("");
   constructor(private http: HttpClient, private toastr: ToastrService, private token: TokenStorageService) { }
