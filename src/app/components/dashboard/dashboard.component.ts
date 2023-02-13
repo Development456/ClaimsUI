@@ -58,15 +58,8 @@ export class DashboardComponent implements OnInit {
       this.totalClaims = data;
       this.initFilter(this.totalClaims)
     })
-    // this.openClaims = this.claims;
-    // this.closedClaims = this.claims;
     this.http.getClaims().subscribe((data) => {
       this.claims = data;
-      // console.log(this.claims);
-      // this.claims = this.claims.map((claim:any)=>{
-      //   claim.paidAmount="$"+claim.paidAmount;
-      //   return claim.paidAmount;
-      // })
       this.tempData = this.claims
     })
     this.http.getFacility().subscribe((data) => {

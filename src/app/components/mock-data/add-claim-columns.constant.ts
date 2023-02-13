@@ -1,56 +1,53 @@
 export const AddClaimColumns = [{
-    name: "Item",
-    props: "item",
-    type: "number",
+    name: "Date",
+    props: "createdDate",
+    type: "text",
     show: true
-}, {
-    name: "Description",
-    props: "des",
+},
+// {
+//     name: "Closed Date",
+//     props: "closedDate",
+//     type: "text",
+//     show: true
+// },
+{
+    name: "Status",
+    props: "claimStatus",
     type: "text",
     show: true
 }, {
-    name: "Date Code",
-    props: "dateCode",
-    type: "Date",
-    show: true
-}, {
-    name: "Lot",
-    props: "lot",
+    name: "Document Type",
+    props: "documentType",
     type: "text",
     show: true
-}, {
-    name: "Quantity",
-    props: "quantity",
-    type: "text",
-    show: true
-}, {
-    name: "LPN",
-    props: "LPN",
-    type: "text",
-    show: true
-}, {
-    name: "NET",
-    props: "NET",
-    type: "text",
-    show: true
-}, {
-    name: "Customer Reference",
-    props: "customerReference",
-    type: "text",
-    show: false
-}, {
-    name: "AMC Refenrence",
-    props: "AMCRefenrence",
-    type: "number",
-    show: false
 }, {
     name: "Facility ID",
     props: "facilityId",
     type: "number",
-    show: false
+    show: true
 }, {
-    name: "Customer ID",
-    props: "customerId",
-    type: "number",
-    show: false
+    name: "Amc Claim",
+    props: "claimId",
+    type: "text",
+    show: true
+}, {
+    name: "Claim Type",
+    props: "claimType",
+    type: "text",
+    show: true
+}, {
+    name: "Claimed Amount",
+    props: "claimedAmount",
+    type: "text",
+    show: true
+}, {
+    name: "Paid Amount",
+    props: "paidAmount",
+    type: "text",
+    show: true
+},{
+    name: "Master Account",
+    props: "masterAccount",
+    type: "text",
+    show: true
 }];

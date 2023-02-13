@@ -161,7 +161,6 @@
 
         <mat-card *ngIf="sortingfilters">
             <span *ngFor="let item of filteredColumns">
-
                 <mat-form-field appearance="outline" *ngIf="item.show && item.name == 'Date'">
                     <mat-label>Created Date Range</mat-label>
                     <mat-date-range-input [formGroup]="campaignOne" [rangePicker]="campaignOnePicker">
@@ -200,7 +199,7 @@
         <div id="print-section">
             <ngx-datatable class="material expandable" [scrollbarH]="true" [rows]="filteredRows" [columns]="filteredColumns"
                 [selectionType]="SelectionType.checkbox" id="claims-table" [columnMode]="ColumnMode.force"
-                [headerHeight]="40" [footerHeight]="40" [rowHeight]="rowHeight" [limit]="10" [rowHeight]="'auto'">
+                [headerHeight]="40" [footerHeight]="40" [limit]="10" [rowHeight]="'auto'">
                 <ngx-datatable-column *ngFor="let col of filteredColumns" [name]="col.name" [prop]="col.props">
                 </ngx-datatable-column>
                 <ngx-datatable-column *ngIf="showActions" [frozenRight]="true" name="Actions" [resizeable]="false"

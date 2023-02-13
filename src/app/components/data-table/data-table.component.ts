@@ -111,19 +111,15 @@ export class DataTableComponent implements OnInit {
 	
 	filterColumnsForm() {
 		this.filterForm = this._formBuilder.group({
+			createdDate: [''],
 			claimStatus: [''],
-			masterAcct: [''],
 			documentType: [''],
 			facilityId: [''],
-			account: [''],
-			serviceProviderClaimId: [''],
+			claimId: [''],
 			claimType: [''],
-			category: [''],
-			palletQuantity: [''],
 			claimedAmount: [''],
 			paidAmount: [''],
-			carrier: [''],
-			loadNumber: ['']
+			masterAccount: ['']
 		},  { validators: this.atLeastOneValidator })
 	}
 

@@ -14,22 +14,22 @@ import { ChangePasswordComponent } from '../profile/change-password/change-passw
 })
 export class HeaderComponent implements OnInit {
   @Input() dashboard: any;
-  userName:string = "";
-  userRole:string = "";
-  constructor(private router: Router,private LoginService:AuthServiceService, 
+  userName: string = "";
+  userRole: string = "";
+  constructor(private router: Router, private LoginService: AuthServiceService,
     private tokenStorage: TokenStorageService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
     var userDetails = window.sessionStorage.getItem('auth-user');
     var details = JSON.parse(userDetails || '{}');
     this.userName = details.username;
-    this.userName = this.userName.split(" ").map(([firstChar,...rest])=>firstChar.toUpperCase()+rest.join("").toLowerCase()).join(" ");
-    this.LoginService.user_Role.subscribe(role=>{
+    this.userName = this.userName.split(" ").map(([firstChar, ...rest]) => firstChar.toUpperCase() + rest.join("").toLowerCase()).join(" ");
+    this.LoginService.user_Role.subscribe(role => {
       this.userRole = role;
     })
   }
 
-  toggleMenu(){
+  toggleMenu() {
     console.log(this.dashboard.toggle());
   }
 
@@ -38,10 +38,10 @@ export class HeaderComponent implements OnInit {
     this.tokenStorage.signOut();
     this.router.navigate(['login']);
   }
-  
+
   public userProfile() {
     const dialogRef = this.dialog.open(ProfileComponent, {
-      height: '650px',
+      height: '700px',
       width: '700px'
     });
     dialogRef.afterClosed().subscribe((result: any) => {
@@ -54,8 +54,8 @@ export class HeaderComponent implements OnInit {
   public editInfo() {
     // this.router.navigate(['/edit']);
     const dialogRef = this.dialog.open(EditInformationComponent, {
-      height:'650px', 
-      width:'700px'
+      height: '650px',
+      width: '700px'
     });
     dialogRef.afterClosed().subscribe((result: any) => {
       if (result) {
@@ -65,19 +65,20 @@ export class HeaderComponent implements OnInit {
   }
 
   public role(){
-    
+    this.router.navigate(['/roles']);
   }
+
   changePassword() {
-		const dialogRef = this.dialog.open(ChangePasswordComponent, {
-      height:'450px', width:'700px' 
+    const dialogRef = this.dialog.open(ChangePasswordComponent, {
+      height: '450px', width: '700px'
     });
 
-		dialogRef.afterClosed().subscribe(result => {
-			if (result) {
-				location.reload();
-			}
-		});
-	}
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        location.reload();
+      }
+    });
+  }
 
 
 }
