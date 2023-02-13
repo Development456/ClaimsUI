@@ -49,7 +49,6 @@ export class AuthServiceService {
     }));  
    
   }
-}
 
   getUserInfo() {
     var userDetails = window.sessionStorage.getItem('auth-user');

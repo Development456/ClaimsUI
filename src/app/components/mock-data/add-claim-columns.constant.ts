@@ -3,14 +3,7 @@ export const AddClaimColumns = [{
     props: "createdDate",
     type: "text",
     show: true
-},
-// {
-//     name: "Closed Date",
-//     props: "closedDate",
-//     type: "text",
-//     show: true
-// },
-{
+},{
     name: "Status",
     props: "claimStatus",
     type: "text",
