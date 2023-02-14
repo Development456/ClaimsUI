@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { MatBottomSheet, MatBottomSheetRef } from '@angular/material/bottom-sheet';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ColumnMode } from '@swimlane/ngx-datatable';
+import { AuthServiceService } from 'src/app/Services/auth-service.service';
 import { ClaimsApiService } from 'src/app/Services/claims-api.service';
 import { ClaimsDetailsComponent } from '../claims-details/claims-details.component';
 import { DetailsModalComponent } from '../data-table/details-modal/details-modal.component';
@@ -12,7 +13,8 @@ import { DetailsModalComponent } from '../data-table/details-modal/details-modal
   templateUrl: './add-claims.component.html',
   styleUrls: ['./add-claims.component.css']
 })
-export class AddClaimComponent implements OnInit,DoCheck {
+export class AddClaimComponent implements OnInit {
+  user_Role: any;
   @Input() set selectedDataItems(item: any) {
     this.ordersDataItems = item;
     // if (item.length > 0) {
@@ -31,7 +33,7 @@ export class AddClaimComponent implements OnInit,DoCheck {
     // }
 
   }
-  ordersDataItems:any=[];
+  ordersDataItems: any = [];
   spinner = false;
 
   firstFormGroup = this._formBuilder.group({
@@ -98,26 +100,30 @@ export class AddClaimComponent implements OnInit,DoCheck {
     notes: [''], document: ['']
 
   });
-  totalAmount:any = {};
-  constructor(private _formBuilder: FormBuilder, private http: ClaimsApiService, public dialog: MatDialog,private _bottomSheet: MatBottomSheet) { }
-
-  ngDoCheck(): void {
-    let temp=0;
-    Object.keys(this.totalAmount).forEach(item=>{
-      temp += this.totalAmount[item];
-    })
-      this.costDetails.controls.cost.setValue(temp);
+  totalAmount: any = {};
+  constructor(private _formBuilder: FormBuilder, private http: ClaimsApiService, public dialog: MatDialog, private _bottomSheet: MatBottomSheet, private loginService: AuthServiceService) { 
+    loginService.user_Role.subscribe(role=>{
+			this.user_Role = role;
+		})
   }
+
+  // ngDoCheck(): void {
+  //   let temp = 120;
+  //   Object.keys(this.totalAmount).forEach(item => {
+  //     temp += this.totalAmount[item];
+  //   })
+  //   this.costDetails.controls.cost.setValue(temp);
+  // }
   ngOnInit(): void {
     this.spinner = false;
     this.ordersDataItems = this.http.getOrders();
     setTimeout(() => {
       // this.facilityList = this.http.getFacility().splice(0,1);
-      if(this.facilityList.length==1){
+      if (this.facilityList.length == 1) {
         this.firstFormGroup.controls.facility.setValue(this.facilityList[0]);
       }
       // this.customerList = this.http.getCustomer().splice(0,1);
-      if(this.customerList.length==1){
+      if (this.customerList.length == 1) {
         this.firstFormGroup.controls.customer.setValue(this.customerList[0]);
       }
       this.customerReference = this.http.getCustomerReference();
@@ -136,11 +142,63 @@ export class AddClaimComponent implements OnInit,DoCheck {
     return result;
 
   }
+  formatDate(date: any) {
+    let d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+  
+    // if (month.length < 2) 
+        // month = '0' + month;
+        switch (month){
+          case '1':
+            month = 'JAN';
+            break;
+          case '2':
+            month = 'FEB';
+            break;
+          case '3':
+            month = 'MAR';
+            break;
+          case '4':
+            month = 'APR';
+            break;
+          case '5':
+            month = 'MAY';
+            break;
+          case '6':
+            month = 'JUN';
+            break;
+          case '7':
+            month = 'JUL';
+            break;
+          case '8':
+            month = 'AUG';
+            break;
+          case '9':
+            month = 'SEP';
+            break;
+          case '10':
+            month = 'OCT';
+            break;
+          case '11':
+            month = 'NOV';
+            break;
+          case '12':
+            month = 'DEC';
+            break;
+        }
+    if (day.length < 2) 
+        day = '0' + day;
+        
+    return [day, month, year].join('-');
+  }
   submitData() {
+
     const confirmDialog = this.dialog.open(DialogBoxComponent, { data: { orders: this.http.getOrders() }, autoFocus: false });
     confirmDialog.afterClosed().subscribe(result => {
       // console.log(result);
-      
+
       if (result) {
         let claim = {
           "claimId": "8",
@@ -151,11 +209,11 @@ export class AddClaimComponent implements OnInit,DoCheck {
           "claimStatus": "Open",
           "claimType": "WAREHOUSE",
           "lastUpdateId": "8",
-          "createDate": new Date(),
+          "createdDate": this.formatDate(new Date()),
           "lastUpdateDate": "8"
-          }
-          console.log(claim);
-        this.http.createClaim(claim).subscribe(data=>{
+        }
+        console.log(claim);
+        this.http.createClaim(claim).subscribe(data => {
           location.reload();
         })
         // const dialogRef = this.dialog.open(DetailsModalComponent, { data: { orders: this.http.getOrders() }, autoFocus: false });
@@ -173,17 +231,24 @@ export class AddClaimComponent implements OnInit,DoCheck {
   }
   ColumnMode = ColumnMode;
 
-  filteredColumns = [{ "name": "Item", "props": "item", width: 60 }, { "name": "Description", props: "des" }, { "name": "Date Code", props: "dateCode" }, { "name": "LOT", props: "lot" }, { "name": "Quantity", props: "quantity" }, { "name": "LPN", props: "LPN" }, { "name": "NET", props: "NET" }];
-  ordersList:any = {row:[],formValues:{}};
-  
-  listItems(items:any){
-    this.ordersList = {row:[],formValues:{}};
-    setTimeout(()=>{
-      console.log(items);
-    this.ordersList.row = items;
-    console.log(this.ordersList);
+  filteredColumns = [{ "name": "Item", "props": "item", width: 60 },
+                     { "name": "Description", props: "des" },
+                     { "name": "Date Code", props: "dateCode" },
+                     { "name": "LOT", props: "lot" },
+                     { "name": "Quantity", props: "quantity" },
+                     { "name": "LPN", props: "LPN" },
+                     { "name": "NET", props: "NET" }
+                    ];
+  ordersList: any = { row: [], formValues: {} };
 
-    },500)
+  listItems(items: any) {
+    this.ordersList = { row: [], formValues: {} };
+    setTimeout(() => {
+      console.log(items);
+      this.ordersList.row = items;
+      console.log(this.ordersList);
+
+    }, 500)
     // this.ordersList = items;
   };
   openBottomSheet(): void {
@@ -247,10 +312,11 @@ export class DialogBoxComponent implements OnInit {
 </mat-nav-list>`,
 })
 export class BottomSheetOverviewExampleSheet {
-  constructor(private _bottomSheetRef: MatBottomSheetRef<BottomSheetOverviewExampleSheet>) {}
+  constructor(private _bottomSheetRef: MatBottomSheetRef<BottomSheetOverviewExampleSheet>) { }
 
   openLink(event: MouseEvent): void {
     this._bottomSheetRef.dismiss();
     event.preventDefault();
   }
+ 
 }
