@@ -194,7 +194,7 @@ export class AddClaimComponent implements OnInit {
     return [day, month, year].join('-');
   }
   submitData() {
-    console.log(this.ordersList,this.formatDate(new Date()));
+
     const confirmDialog = this.dialog.open(DialogBoxComponent, { data: { orders: this.http.getOrders() }, autoFocus: false });
     confirmDialog.afterClosed().subscribe(result => {
       // console.log(result);

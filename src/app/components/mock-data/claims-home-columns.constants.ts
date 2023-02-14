@@ -5,12 +5,6 @@ export const ClaimsHomeTableColumns =[{
     type: "text",
     show: true
 },
-// {
-//     name: "Closed Date",
-//     props: "closedDate",
-//     type: "text",
-//     show: true
-// },
 {
     name: "Status",
     props: "claimStatus",

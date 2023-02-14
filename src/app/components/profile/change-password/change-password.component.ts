@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthServiceService } from 'src/app/Services/auth-service.service';
 import { TokenStorageService } from 'src/app/Services/token-storage.service';
+import { Data } from '../../model/claim.model';
 
 @Component({
   selector: 'app-change-password',
@@ -14,9 +15,9 @@ import { TokenStorageService } from 'src/app/Services/token-storage.service';
 export class ChangePasswordComponent implements OnInit {
  
   changePasswordForm: FormGroup = new FormGroup({
-    username: new FormControl(''),
     currentPassword: new FormControl(''),
     newPassword: new FormControl(''),
+    confirmPassword: new FormControl(''),
   });
   submitted = false;
   public hide = true;
@@ -35,10 +36,10 @@ export class ChangePasswordComponent implements OnInit {
 
   private initForm() {
     this.changePasswordForm = this.registerForm.group({
-      username: ['', Validators.required],
       currentPassword: ['',Validators.required,],
       newPassword: ['', [Validators.required,  Validators.minLength(8), Validators.maxLength(12), 
         Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$')]],
+      confirmPassword: ['', Validators.required],
     });
   }
 
@@ -48,30 +49,27 @@ export class ChangePasswordComponent implements OnInit {
 
   public passwordChange(){
     this.submitted = true;
-    console.log(this.changePasswordForm.value, '--formData')
-
-    if(this.changePasswordForm.invalid){
-      return;
-    }console.log('failed to change');
-    // this.authService.changePassword(this.changePasswordForm.value).subscribe(data => {
-    //   console.log(data, "password change")
-    //   this.submitted = true;
-    //   console.log(data, 'true');
-    //   this.toastr.success(data);
-    //   alert(data);
+    this.authService.changePassword(this.changePasswordForm.value).subscribe(data => {
       
-    //   this.onLogOut();
-
-    // }, err => {
-    //   this.submitted = false;
-    //   console.log(err, 'data');
-
-    // })
+      var stringObject:any;
+      stringObject=JSON.stringify(data);
+      stringObject=JSON.parse(stringObject);
+      let res:Data = <Data>stringObject;
+      
+      if(res.message.includes("Password Changed Successfully!")){
+        this.toastr.success(res.message);
+      } 
+      
+    });
 
   }
 
   public cancelchangePasswordForm(){
     this.submitted = false;
+    this.changePasswordForm.reset();
+  }
+
+  public resetForm(){
     this.changePasswordForm.reset();
   }
 

@@ -21,6 +21,7 @@ export class LoginComponent implements OnInit {
   isLoggedIn = false;
   isLoginFailed = false;
   errorMessage = '';
+  id = "";
   public userDetails = {
     username: '',
     password: ''
@@ -43,7 +44,7 @@ export class LoginComponent implements OnInit {
     }
     
       this.loginService.loginValidation(loginDetails).subscribe(data => {
-        
+     
         var stringObject:any;
         stringObject=JSON.stringify(data);
         stringObject=JSON.parse(stringObject);
@@ -52,14 +53,22 @@ export class LoginComponent implements OnInit {
         if (loginDetails.username != loginData.username && loginDetails.password != loginData.accessToken){
           this.loginFlag = false;
         } else {
-
-          this.tokenStorage.saveToken(loginData.accessToken);
+          this.tokenStorage.saveToken(loginData.accessToken);   
           this.tokenStorage.saveUser(data);
           this.isLoginFailed = false;
           this.isLoggedIn = true
           this.loginFlag = true;
           this.roles = this.tokenStorage.getUser().roles;
           this.router.navigate(['/home']);
+          var userDetails = window.sessionStorage.getItem('auth-user');
+          var details = JSON.parse(userDetails || '{}');
+          this.id = details.id;
+          if(this.roles.includes('ROLE_USER')){
+            this.loginService.user_Role.next("user");
+            this.loginService.userId.next(this.id);
+          }else{
+            this.loginService.user_Role.next("admin");
+          }
         }
        }, err => {
           this.errorMessage = err.message;
