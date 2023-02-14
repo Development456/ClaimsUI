@@ -45,9 +45,16 @@ export class DashboardComponent implements OnInit {
   tempData1: any;
   tempData2: any;
   customer: any;
+  user_Role:any;
 
 
-  constructor(private http: ClaimsApiService, private deviceService: DeviceDetectorService) { }
+
+  constructor(private http: ClaimsApiService,private loginService: AuthServiceService,private deviceService: DeviceDetectorService) { 
+    loginService.user_Role.subscribe(role=>{
+			this.user_Role = role;
+		})
+  }
+
 
   ngOnInit(): void {
     this.deviceInfo = this.deviceService.getDeviceInfo();

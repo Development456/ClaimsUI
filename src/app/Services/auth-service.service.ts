@@ -15,9 +15,7 @@ const httpOptions = {
 })
 export class AuthServiceService {
 
-
   id: any
-
   user_Role = new BehaviorSubject("");
   userId = new BehaviorSubject("");
   constructor(private http: HttpClient, private toastr: ToastrService, private token: TokenStorageService) { }
@@ -51,7 +49,6 @@ export class AuthServiceService {
     var details = JSON.parse(userDetails || '{}');
     const id = this.userId.next(details.id);
 
-    // console.log('url', environment.LOGIN + '/user/userinfo/' + details.id)
     return this.http.get<UserDetails[]>(environment.LOGIN + '/user/userinfo/' +details.id, httpOptions).pipe(catchError((err: any) => {
 
       this.toastr.error(err.error.message, 'GetUserInfo Failed');
