@@ -14,20 +14,7 @@
             </mat-card-subtitle>
         </mat-card-header>
     </div>
-    <div *ngIf="tableType == 'order'">
-        <mat-card-header *ngIf="user_Role!=='user'" class="absolute-center text-center"
-            style="background-color: #efd087;border-radius:4px;">
-            <mat-card-subtitle style="margin-top: 10%;">
-                <h1>Order Details</h1>
-            </mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-header *ngIf="user_Role=='user'" class="absolute-center text-center"
-            style="background-color: #efd087;border-radius:4px;">
-            <mat-card-subtitle style="margin-top: 10%;">
-                <h1>My Order Details</h1>
-            </mat-card-subtitle>
-        </mat-card-header>
-    </div>
+
 
     <div *ngIf="isLoading" class="snippet" data-title="dot-revolution">
         <div class="stage">
