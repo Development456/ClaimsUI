@@ -32,7 +32,9 @@
             <div>
                 <app-data-cards [selectedDay]="selectedDay" [rowData]="claims" (year)="getYear($event)"
                     (facilityChange)="facilityChange($event)" [notify]="notifyObj" [facilities]="facilities"
+
                     [customersDropdown]="customer" [mobileDevice]="isMobile" [tabDevice]="isTablet" [desktopDevice]="isMobile"></app-data-cards>
+
             </div>
             <div fxFlexFill fxLayoutGap="20px" fxLayout="row" fxLayout.lt-sm="column" fxLayout.lt-md="column">
                 <mat-card fxFlex="50%">
@@ -77,6 +79,14 @@
             </div>
             <div fxFlexFill fxLayoutGap="100%">
                 <mat-card>
+
+<!--                     <mat-card-header *ngIf="user_Role!=='user'" class="absolute-center text-center"
+                        style="background-color: #efd087;border-radius:4px;">
+                        <mat-card-subtitle style="margin-top: 10%;">
+                            <h1>Claims Details</h1>
+                        </mat-card-subtitle>
+                    </mat-card-header> -->
+
                     <app-data-table [rows]="claims" (newItemEvent)="selectedData($event)" [facilityId]="facilityId"
                         [userRole]="userRole" [showActions]="true"></app-data-table>
                 </mat-card>

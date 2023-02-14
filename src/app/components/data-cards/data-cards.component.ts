@@ -66,10 +66,10 @@ export class DataCardsComponent implements OnInit {
     this.filteredCustomerData = this.customersDropdown
     this.claimAmount = 0;
     this.paidAmount = 0;
-    if (this.selectedDay.text != '') {
+    if (this.selectedDay?.text != '') {
       let a = this.totalClaims.filter((x: any) => {
         let event12 = new Date(x.createdDate);
-        if (event12.getFullYear() == this.selectedDay.text) {
+        if (event12.getFullYear() == this.selectedDay?.text) {
           return true;
         } else {
           return false;
