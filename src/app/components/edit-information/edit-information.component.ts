@@ -39,7 +39,6 @@ export class EditInformationComponent implements OnInit {
       'name': '',
       'email': '',
       'phone': '',
-      'role': ''
     }];
   }
 

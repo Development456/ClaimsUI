@@ -27,12 +27,18 @@ export interface LoginDetails{
     username:string
   }
 
-
-  export interface UserDetails{
-    name: string ;
-    email: string;
+export interface UserDetails{
     username: string;
+    name: string;
+    email: string;
     phone: string;
-    role: string;
+}
 
-  }
+export interface UserRoles{
+    roles: any[];
+    name: string;
+}
+
+export interface Data{
+    message: string;
+}
