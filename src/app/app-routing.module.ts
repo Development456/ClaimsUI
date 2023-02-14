@@ -4,6 +4,7 @@ import { LoginComponent } from "./components/login/login.component";
 import { SignUpComponent } from "./components/login/sign-up/sign-up.component";
 import { DashboardComponent } from "./components/dashboard/dashboard.component"
 import { AuthGuard } from './auth.guard';
+import { RoleassignmentComponent } from './components/profile/roleassignment/roleassignment.component';
 
 const routes: Routes = [
   {
@@ -13,11 +14,13 @@ const routes: Routes = [
 {
   path: 'signUp',
   component: SignUpComponent
-},
-{
+},{
+  path:'roles',
+  component: RoleassignmentComponent
+},{
   path: 'home',
-  component: DashboardComponent, canActivate:[AuthGuard]
-  // component: DashboardComponent
+  // component: DashboardComponent, canActivate:[AuthGuard]
+  component: DashboardComponent
 },{
   path: '**',
   component: LoginComponent
