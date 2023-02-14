@@ -100,7 +100,7 @@
             <div fxFlex="100%">
                 <mat-form-field appearance="outline" class="form-field">
                     <mat-label>Username</mat-label>
-                    <input matInput formControlName="username" name="username" required pattern="[a-z0-9]*" [readonly]="read">
+                    <input matInput formControlName="username" name="username" required pattern="[A-Za-z0-9]*" [readonly]="read">
                     <mat-error *ngIf="registerForm.get('username').hasError('required')">This field is
                         required</mat-error>
                     <mat-error *ngIf="registerForm.get('username').hasError('pattern')">Invalid username</mat-error>
