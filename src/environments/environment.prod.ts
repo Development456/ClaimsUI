@@ -12,5 +12,4 @@ export const environment = {
   CUSTOMER:'http://20.62.171.46:9002',
   LOGIN:'http://20.62.171.46:9003',
   API:'http://20.62.171.46:9090'
-
 };

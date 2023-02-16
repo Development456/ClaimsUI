@@ -1,25 +1,18 @@
 <div class="bar-chart">
-  
-     <div *ngIf="isLoading" class="snippet" data-title="dot-revolution">
-       <div class="stage">
-         <div class="dot-revolution"></div>
-       </div>
+  <div *ngIf="isLoading" class="snippet" data-title="dot-revolution">
+    <div class="stage">
+      <div class="dot-revolution"></div>
     </div>
-    <div *ngIf="!isLoading" style="margin-top:2vh">
-
-      <div *ngIf="barChartData.length > 0">
-  
-        <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
-          [legend]="barChartLegends" [colors]="barChartColor" [chartType]="barChartType" height="130px">
-        </canvas>
-        
-        <p style="text-align: center;color: #666666;">Master Account</p>
-  
-      </div>
-      <div *ngIf="barChartData.length === 0">
-        no data
-      </div>
-  
+  </div>
+  <div *ngIf="!isLoading" style="margin-top:2vh">
+    <div *ngIf="barChartData.length > 0">
+      <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
+        [legend]="barChartLegends" [colors]="barChartColor" [chartType]="barChartType" height="130px">
+      </canvas>
+      <p style="text-align: center;color: #666666;">Master Account</p>
     </div>
-
+    <div *ngIf="barChartData.length === 0">
+      no data
+    </div>
+  </div>
 </div>
