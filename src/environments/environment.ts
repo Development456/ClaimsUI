@@ -5,16 +5,11 @@
 
 export const environment = {
   production: false,
-    CLAIM:'http://20.62.171.46:9000',
-FACILITY:'http://20.62.171.46:9001',
-CUSTOMER:'http://20.62.171.46:9002',
-LOGIN:'http://20.62.171.46:9003',
-API:'http://20.62.171.46:9090',
-  // CLAIM:'http://localhost:8100',
-  // FACILITY:'http://localhost:8200',
-  // CUSTOMER:'http://localhost:8400',
-  // LOGIN:'http://localhost:8300',
-  // API: 'http://localhost:8500'
+  CLAIM:'http://localhost:8100',
+  FACILITY:'http://localhost:8200',
+  CUSTOMER:'http://localhost:8400',
+  LOGIN:'http://localhost:8300',
+  API: 'http://localhost:8500'
 };
 
 /*
