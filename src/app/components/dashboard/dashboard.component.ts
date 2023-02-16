@@ -5,7 +5,7 @@ import { ClaimsMockData } from '../mock-data/claims-list-constant';
 import { MatDrawer } from '@angular/material/sidenav';
 import { ClaimsApiService } from 'src/app/Services/claims-api.service';
 import * as moment from 'moment';
-import { AuthServiceService } from 'src/app/Services/auth-service.service';
+// import { AuthServiceService } from 'src/app/Services/auth-service.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -45,9 +45,16 @@ export class DashboardComponent implements OnInit {
   tempData1: any;
   tempData2: any;
   customer: any;
+  user_Role:any;
 
 
-  constructor(private http: ClaimsApiService, private deviceService: DeviceDetectorService) { }
+
+  constructor(private http: ClaimsApiService,private deviceService: DeviceDetectorService) { 
+//     loginService.user_Role.subscribe(role=>{
+// 			this.user_Role = role;
+// 		})
+  }
+
 
   ngOnInit(): void {
     this.deviceInfo = this.deviceService.getDeviceInfo();

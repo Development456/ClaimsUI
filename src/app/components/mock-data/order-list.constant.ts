@@ -1,8 +1,10 @@
 export const OrderList = [
     {
       "item": 43021,
-      "des": "Order from Walmart.\r\n",
-      "dateCode": "2021-07-01T12:50:46 +04:00",
+
+      "des": "Laborum laboris quis \r\n",
+      "dateCode": "07-01-2021",
+
       "lot": false,
       "quantity": 24,
       "LPN": 27,
@@ -14,8 +16,10 @@ export const OrderList = [
     },
     {
       "item": 77916,
-      "des": "Order from Costco.\r\n",
-      "dateCode": "2014-07-28T09:38:12 +04:00",
+
+      "des": "Veniam sunt culpa \r\n",
+      "dateCode": "07-28-2014",
+
       "lot": true,
       "quantity": 28,
       "LPN": 21,
@@ -27,8 +31,10 @@ export const OrderList = [
     },
     {
       "item": 55767,
-      "des": "Order from Storage.\r\n",
-      "dateCode": "2018-07-26T01:16:49 +04:00",
+
+      "des": "Anim ea cupidatat proident \r\n",
+      "dateCode": "07-26-2018",
+
       "lot": true,
       "quantity": 40,
       "LPN": 28,
@@ -40,8 +46,10 @@ export const OrderList = [
     },
     {
       "item": 51544,
-      "des": "Storage Order.\r\n",
-      "dateCode": "2017-02-25T02:03:44 +05:00",
+
+      "des": "Ipsum mollit anim reprehenderit \r\n",
+      "dateCode": "02-25-2017",
+
       "lot": true,
       "quantity": 24,
       "LPN": 25,
@@ -53,8 +61,10 @@ export const OrderList = [
     },
     {
       "item": 50743,
-      "des": "Claims Order.\r\n",
-      "dateCode": "2018-08-25T01:26:49 +04:00",
+
+      "des": "Et in deserunt esse mollit \r\n",
+      "dateCode": "08-25-2018",
+
       "lot": true,
       "quantity": 26,
       "LPN": 38,
