@@ -46,12 +46,13 @@ import { NgModule } from '@angular/core';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { NgxPrintModule } from 'ngx-print';
 import { ToastrModule } from 'ngx-toastr';
-import { SignUpComponent } from './components/login/sign-up/sign-up.component';
+import { DialogContentExampleDialog, SignUpComponent } from './components/login/sign-up/sign-up.component';
 import { authInterceptorProviders } from './Services/auth.interceptor';
 import { ProfileComponent } from './components/profile/profile.component';
 import { EditInformationComponent } from './components/edit-information/edit-information.component';
 import { ChangePasswordComponent } from './components/profile/change-password/change-password.component';
 import { RoleassignmentComponent, RolesComponent } from './components/profile/roleassignment/roleassignment.component';
+import { UpdatePasswordComponent } from './components/login/update-password/update-password.component';
 
 
 @NgModule({
@@ -75,7 +76,9 @@ import { RoleassignmentComponent, RolesComponent } from './components/profile/ro
     ChangePasswordComponent,
     RoleassignmentComponent,
     RolesComponent,
-    DashboardComponent
+    DashboardComponent,
+    DialogContentExampleDialog,
+    UpdatePasswordComponent
   ],
   imports: [
     BrowserModule,
