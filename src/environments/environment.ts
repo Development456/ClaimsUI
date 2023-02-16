@@ -5,12 +5,12 @@
 
 export const environment = {
   production: false,
-  CLAIM: 'http://localhost:8100',
-  FACILITY: 'http://localhost:8200',
-  CUSTOMER: 'http://localhost:8400',
-  LOGIN: 'http://localhost:8300',
+  
+  CLAIM:'http://localhost:8100',
+  FACILITY:'http://localhost:8200',
+  CUSTOMER:'http://localhost:8400',
+  LOGIN:'http://localhost:8300',
   API: 'http://localhost:8500'
-
 };
 
 /*

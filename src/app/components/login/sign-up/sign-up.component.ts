@@ -106,7 +106,9 @@ private initForm() {
 
 @Component({
   selector: 'dialog-content-example-dialog',
-  template: ` <ul>
+  template: `
+         <button class="float-end" mat-icon-button mat-dialog-close  ><mat-icon>close</mat-icon> </button><br>
+              <ul>
                   <li class="text-danger">Password must contain minimum of 8 characters</li>
                   <li class="text-danger">Atleast 1 uppercase and lowercase letters</li>
                   <li class="text-danger">One or more numerical value.</li>

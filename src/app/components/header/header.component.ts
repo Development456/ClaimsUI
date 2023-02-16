@@ -41,8 +41,8 @@ export class HeaderComponent implements OnInit {
 
   public userProfile() {
     const dialogRef = this.dialog.open(ProfileComponent, {
-      height: '700px',
-      width: '700px'
+      height: '600px',
+      width: '1000px'
     });
     dialogRef.afterClosed().subscribe((result: any) => {
       if (result) {

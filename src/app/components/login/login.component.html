@@ -18,11 +18,12 @@
             </div>
             <mat-card-content fxLayout="column wrap"  style="margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 10px;">
                 <form [formGroup]="loginForm">
+
                     <mat-form-field appearance="outline" fxFlexFill color="primary">
                         <mat-label>Username</mat-label>
-                        <input matInput required formControlName="username">
+                        <input matInput required formControlName="username" type="text">
                     </mat-form-field>
-
+    
                     <mat-form-field appearance="outline" fxFlexFill color="primary" required>
                         <mat-label>Password</mat-label>
                         <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
@@ -35,7 +36,7 @@
             </mat-card-content>
             <mat-error *ngIf="!loginFlag">Wrong Username or Password!!</mat-error>
             <mat-card-actions class="mb-3">
-                <button mat-button color="primary">Forgot Password?</button>
+                <button mat-button color="primary" (click)="updatePasswordDialog()">Forgot Password?</button>
                 <button mat-flat-button class="float-end" (click)="userSignUp()">Sign-Up</button>
                 <button mat-button class="float-end" color="primary" (click)="userLogin()" type="button"
                     [disabled]="!(loginForm.valid && loginForm.dirty)">Login</button>

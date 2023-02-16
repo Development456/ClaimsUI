@@ -79,15 +79,15 @@ export class AuthServiceService {
     }));
   }
 
-  getUserList(){      
-    return this.http.get<UserDetails[]>(environment.LOGIN + '/user/userslist', httpOptions).pipe(catchError((err:any ) => {
+  getUserList(){  
+    return this.http.get<UserDetails[]>(environment.LOGIN + '/user/userslist', httpOptions ).pipe(catchError((err:any ) => {
       this.toastr.error('Somthing went wrong');
       return of([]);
     }));
   }
 
   getRoles(){
-    return this.http.get<UserRoles[]>(environment.LOGIN + '/user/roles').pipe(catchError((err:any) => {
+    return this.http.get<UserRoles[]>(environment.LOGIN + '/user/roles', httpOptions).pipe(catchError((err:any) => {
       this.toastr.error('Somthing went wrong');
       return of ([]);
     }));
@@ -99,7 +99,7 @@ export class AuthServiceService {
     var details = JSON.parse(userDetails || '{}');
     const id = details.id;
     // const id = this.userId.next(details.id);
-    return this.http.get<UserRoles[]>(environment.LOGIN + `/user/roles/${id}`).pipe(catchError((err:any) => {
+    return this.http.get<UserRoles[]>(environment.LOGIN + `/user/roles/${id}`, httpOptions).pipe(catchError((err:any) => {
       this.toastr.error('somthing went wrong');
       return of ([]);
     }));
