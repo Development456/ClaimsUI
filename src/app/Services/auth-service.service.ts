@@ -15,7 +15,7 @@ const httpOptions = {
 })
 export class AuthServiceService {
 
-
+  id: any
   user_Role = new BehaviorSubject("");
   userId = new BehaviorSubject("");
   constructor(private http: HttpClient, private toastr: ToastrService, private token: TokenStorageService) { }
@@ -40,43 +40,46 @@ export class AuthServiceService {
       return of([]);
     }));  
    
+
   }
 
   getUserInfo() {
+
     var userDetails = window.sessionStorage.getItem('auth-user');
     var details = JSON.parse(userDetails || '{}');
     const id = this.userId.next(details.id);
 
-    return this.http.get<UserDetails[]>(environment.LOGIN + `/user/userinfo/${id}`, httpOptions).pipe(catchError((err: any) => {
+    return this.http.get<UserDetails[]>(environment.LOGIN + '/user/userinfo/' +details.id, httpOptions).pipe(catchError((err: any) => {
+
       this.toastr.error(err.error.message, 'GetUserInfo Failed');
       return of([]);
 
     }));
   }
-
-  getAllUsers(){
-    return this.http.get(environment.LOGIN + '/user/userslist').pipe(catchError((err:any)=>{
-      this.toastr.error('Api Failure with status code : '+ err.status, 'Get AllUsers Failed');
+  
+  getAllUsers() {
+    return this.http.get(environment.LOGIN + '/user/userslist').pipe(catchError((err: any) => {
+      this.toastr.error('Api Failure with status code : ' + err.status, 'Get AllUsers Failed');
       return of([]);
     }));
   }
 
-  editUser(data:any){
+  editUser(data: any) {
     return this.http.put(environment.LOGIN + '/user/edituser', data).pipe(catchError((err: any) => {
 
-      if(err.error.text.includes('Updated data')){
+      if (err.error.text.includes('Updated data')) {
         this.toastr.success(err.error.text);
-      }else if(err.status.includes("500")){
+      } else if (err.status.includes("500")) {
         this.toastr.error('Something went wrong');
       }
-      else{
-      this.toastr.error(err.error.message, 'Failed to update data');
+      else {
+        this.toastr.error(err.error.message, 'Failed to update data');
       }
       return of([]);
     }));
   }
 
-  getUserList(){      
+  getUserList(){  
     return this.http.get<UserDetails[]>(environment.LOGIN + '/user/userslist', httpOptions ).pipe(catchError((err:any ) => {
       this.toastr.error('Somthing went wrong');
       return of([]);
