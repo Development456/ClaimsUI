@@ -80,8 +80,7 @@ export class AuthServiceService {
   }
 
   getUserList(){      
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token.getToken()}`)
-    return this.http.get<UserDetails[]>(environment.LOGIN + '/user/userslist',{headers:headers} ).pipe(catchError((err:any ) => {
+    return this.http.get<UserDetails[]>(environment.LOGIN + '/user/userslist', httpOptions).pipe(catchError((err:any ) => {
       this.toastr.error('Somthing went wrong');
       return of([]);
     }));
