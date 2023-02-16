@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import {MatDialog} from '@angular/material/dialog';
 import { AuthServiceService } from 'src/app/Services/auth-service.service';
 import { TokenStorageService } from 'src/app/Services/token-storage.service';
 import { LoginDetails } from '../model/claim.model';
+import { UpdatePasswordComponent } from './update-password/update-password.component';
 
 
 @Component({
@@ -28,7 +29,7 @@ export class LoginComponent implements OnInit {
   }
 
   public roles: string[] = [];
-  constructor(private router: Router, public signUpDialog: MatDialog, private loginService: AuthServiceService, private tokenStorage: TokenStorageService) { }
+  constructor(private router: Router, public dialog: MatDialog, private loginService: AuthServiceService, private tokenStorage: TokenStorageService) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -87,8 +88,12 @@ export class LoginComponent implements OnInit {
   private initForm() {
     this.loginForm = new FormGroup({
       username: new FormControl('', Validators.required),
-      password: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(40)])
+      password: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(12)])
     })
+  }
+
+  get loginFormControl() : { [key: string]: AbstractControl }{
+    return this.loginForm.controls;
   }
 
   private jwToken() {
@@ -100,5 +105,12 @@ export class LoginComponent implements OnInit {
   public onFormReset() {
     this.loginForm.controls['username'].setValue('');
     this.loginForm.controls['password'].setValue('');
+  }
+
+  public updatePasswordDialog(){
+    const dialogRef = this.dialog.open(UpdatePasswordComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    })
   }
 }

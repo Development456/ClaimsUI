@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthServiceService } from 'src/app/Services/auth-service.service';
 import { TokenStorageService } from 'src/app/Services/token-storage.service';
+import { DialogContentExampleDialog } from '../../login/sign-up/sign-up.component';
 import { Data } from '../../model/claim.model';
 
 @Component({
@@ -58,8 +59,9 @@ export class ChangePasswordComponent implements OnInit {
       
       if(res.message.includes("Password Changed Successfully!")){
         this.toastr.success(res.message);
+        this.onLogOut();
       } 
-      
+
     });
 
   }
@@ -82,16 +84,4 @@ export class ChangePasswordComponent implements OnInit {
   }
 
 }
-
-@Component({
-  selector: 'dialog-content-example-dialog',
-  template: ` <ul>
-                        <li class="text-danger">Password must contain minimum of 8 characters</li>
-                        <li class="text-danger">Atleast 1 uppercase and lowercase letters</li>
-                        <li class="text-danger">One or more numerical value.</li>
-                        <li class="text-danger">Atleast 1 special character [!@#$%^&*_=+-]</li>
-              </ul>`
-  
-})
-export class DialogContentExampleDialog {}
 
