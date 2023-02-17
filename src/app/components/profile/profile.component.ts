@@ -30,7 +30,7 @@ export class ProfileComponent implements OnInit {
   imageurl: any = '';
   constructor(private authService: AuthServiceService, private tokenStorage: TokenStorageService, private toastr: ToastrService,) {
     this.registerForm = new FormGroup({
-      name: new FormControl('', [Validators.pattern("[a-zA-Z]*[0-9]*"), Validators.required, Validators.minLength(3), Validators.maxLength(20)]),
+      name: new FormControl('', [Validators.pattern("[a-zA-Z]*"), Validators.required, Validators.minLength(3), Validators.maxLength(20)]),
       email: new FormControl('', [Validators.pattern("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$"), Validators.required, Validators.email]),
       phone: new FormControl('', [Validators.required, Validators.pattern("[0-9]*"), Validators.minLength(10), Validators.maxLength(10)]),
       username: new FormControl('', [Validators.required, Validators.pattern("[A-Za-z0-9]*")]),
